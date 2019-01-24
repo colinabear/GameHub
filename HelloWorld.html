@@ -1,4 +1,15 @@
-<body>
-<h>What up Grant</h>
-<a href="https://www.youtube.com/watch?v=cv6a81Ulx-g">Click Here</a>
-</body>
+import React from "react";
+import ReactDOM from "react-dom";
+
+import "./styles.css";
+
+function App() {
+  return (
+    <div className="App">
+      <h1>Hello Grant</h1>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
