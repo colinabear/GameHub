@@ -41,14 +41,10 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
-<<<<<<< HEAD
     bcrypt (3.1.12)
-=======
->>>>>>> f473e73c47dcbbeceaa2f5496cf7fea297dda399
-    bcrypt (3.1.12-x86-mingw32)
     bindex (0.5.0)
     builder (3.2.3)
-    byebug (10.0.2)
+    byebug (11.0.0)
     capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -76,7 +72,6 @@ GEM
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.10.0)
-    ffi (1.10.0-x86-mingw32)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -100,15 +95,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
-    nokogiri (1.10.1-x86-mingw32)
-      mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
-<<<<<<< HEAD
-=======
-    pg (0.21.0-x86-mingw32)
-    postgresql (1.0.0)
-      pg
->>>>>>> f473e73c47dcbbeceaa2f5496cf7fea297dda399
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.6)
@@ -169,8 +156,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.13)
-    sqlite3 (1.3.13-x86-mingw32)
+    sqlite3 (1.4.0)
     temple (0.8.0)
     thor (0.20.3)
     thread_safe (0.3.6)
@@ -180,8 +166,6 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2018.9)
-      tzinfo (>= 1.0.0)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     warden (1.2.8)
@@ -199,18 +183,13 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
-<<<<<<< HEAD
   devise (~> 4.4, >= 4.4.3)
   haml (~> 5.0, >= 5.0.4)
-=======
-  devise
->>>>>>> f473e73c47dcbbeceaa2f5496cf7fea297dda399
   jbuilder (~> 2.5)
   puma (~> 3.7)
   rails (~> 5.1.6, >= 5.1.6.1)
