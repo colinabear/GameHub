@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'user/new'
+
   root 'pages#home', as: 'home'
 
   get 'account' => 'pages#account', as: 'account'
