@@ -1,5 +1,5 @@
 !!!
-%html 
+%html
 %head
   %title David's Rails Forum
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
@@ -10,18 +10,19 @@
 %body
   %header.main_header.clearfix
     .wrapper
-      #logo 
-        %p= link_to "David's Rails Forum", root_path
+      #logo
+        %p= link_to "Max's Rails Forum", root_path
       #buttons
         - if user_signed_in?
-          = link_to "New Post", new_post_path
+          = link_to "Account", new_post_path
+          = link_to "Browse", index_path
         - else
           = link_to "Sign Up", new_user_registration_path
           = link_to "Sign In", new_user_session_path
 
-  .wrapper    
+  .wrapper
     %p.notice= notice
     %p.alert= alert
 
-  .wrapper  
+  .wrapper
     = yield
