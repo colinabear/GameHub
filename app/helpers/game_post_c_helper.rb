@@ -1,0 +1,2 @@
+module GamePostCHelper
+end
