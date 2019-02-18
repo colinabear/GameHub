@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
 	def new
 		@post = current_user.posts.build
-	end 
+	end
 
 	def create
 		@post = current_user.posts.build(post_params)
@@ -46,6 +46,6 @@ class PostsController < ApplicationController
 	end
 
 	def post_params
-		params.require(:post).permit(:title, :content)
+		params.require(:post).permit(:title, :description, :author, :score, :team_members)
 	end
 end

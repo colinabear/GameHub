@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   get 'index' => 'posts#index', as: 'index'
 
+  get 'account' => 'users#account', as: 'account'
+
 
 end
