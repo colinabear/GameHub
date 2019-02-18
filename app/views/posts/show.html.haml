@@ -1,11 +1,15 @@
-#post_content 
+#post_content
 	%h1= @post.title
-	%p= @post.content
+	Author:
+	%h5= @post.author
+	Team:
+	%h5= @post.team_members
+	%h4= @post.content
 
 	#comments
 		%h2
 			= @post.comments.count
-			Comments 
+			Comments
 		= render @post.comments
 
 		%h3 Reply to thread
@@ -13,7 +17,7 @@
 
 	%br/
 	%hr/
-	%br/	
+	%br/
 
 	= link_to "Edit", edit_post_path(@post), class: "button"
 	= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button"
