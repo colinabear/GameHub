@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :posts do
+  	resources :comments
+  end
 
-  root 'pages#home', as: 'home'
+  root 'pages#home'
 
-  get 'account' => 'pages#account', as: 'account'
+  get 'index' => 'posts#index', as: 'index'
 
-  get 'create_account' => 'pages#create_account', as: 'create_account'
+  get 'account' => 'users#account', as: 'account'
 
-  get 'forum' => 'game_post#forum', as: 'forum'
 
-  get 'new' => 'users#new', as: 'new'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users
-  resources :posts
 end
