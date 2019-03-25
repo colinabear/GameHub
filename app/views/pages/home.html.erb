@@ -6,9 +6,62 @@
 Your browser does not support the HTML5 canvas tag.</canvas>
 
 <script>
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-ctx.moveTo(0,0);
-ctx.lineTo(800,600);
-ctx.stroke();
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext("2d");
+  var toDoX = 0;
+  var toDoY = 40;
+  var inProgX = 200;
+  var inProgY = 40;
+  var recentCompletedX = 400;
+  var recentCompletedY = 40;
+
+
+
+
+  addSquare("recent");
+  addSquare("todo");
+  addSquare("todo");
+  addSquare("todo");
+  addSquare("inProg");
+  addSquare("todo");
+  addSquare("todo");
+  addSquare("inProg");
+  addSquare("inProg");
+  addSquare("recent");
+  addSquare("recent");
+  addSquare("recent");
+
+  ctx.stroke();
+
+
+
+  function addSquare(choice) {
+    if(choice == "todo"){
+      ctx.beginPath();
+      ctx.rect(toDoX,toDoY,200,40);
+      toDoY+=50;
+      ctx.fillStyle = "blue";
+      ctx.fill();
+    }
+    else if(choice == "inProg") {
+      ctx.beginPath();
+      ctx.rect(inProgX,inProgY,200,40);
+      inProgY+=50;
+      ctx.fillStyle = "yellow";
+      ctx.fill();
+    }
+    else if(choice == "recent") {
+      ctx.beginPath();
+      ctx.rect(recentCompletedX,recentCompletedY,200,40);
+      recentCompletedY+=50;
+      ctx.fillStyle = "green";
+      ctx.fill();
+    }
+
+  }
+
+
+
+
+
 </script>
