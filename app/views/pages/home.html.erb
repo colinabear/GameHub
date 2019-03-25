@@ -1,63 +1,68 @@
-#Homepage - Shane
+<h1>Hello!</h1>
 
-<h1>Hello</h1>
-
-<canvas id="myCanvas" width="800" height="600" style="border:1px solid #d3d3d3; margin:10%;">
+Title: <input type="text" id="title" maxlength=15><br>
+Description: <input type="text" id="desc">
+<button onclick="addSquare('todo')">TODO</button>
+<button onclick="addSquare('inProg')">IN PROGRESS</button>
+<button onclick="addSquare('recent')">COMPLETED</button>
+<div id="canvasContainer" style="  width: 800px; height: 600px; overflow: auto; border: 1px solid;  margin:10%;">
+<canvas id="myCanvas" width="790" height="590">
 Your browser does not support the HTML5 canvas tag.</canvas>
+</div>
+
 
 <script>
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
+  ctx.font = "24px Arial";
   var toDoX = 0;
-  var toDoY = 40;
+  var toDoY = 540;
   var inProgX = 200;
   var inProgY = 40;
   var recentCompletedX = 400;
   var recentCompletedY = 40;
 
-
-
-
-  addSquare("recent");
-  addSquare("todo");
-  addSquare("todo");
-  addSquare("todo");
-  addSquare("inProg");
-  addSquare("todo");
-  addSquare("todo");
-  addSquare("inProg");
-  addSquare("inProg");
-  addSquare("recent");
-  addSquare("recent");
-  addSquare("recent");
-
-  ctx.stroke();
-
-
-
   function addSquare(choice) {
+    if(toDoY>=550){
+      var imgData = ctx.getImageData(0, 0, 800, 600);
+      document.getElementById("myCanvas").height = document.getElementById("myCanvas").height+50;
+      ctx.putImageData(imgData, 0, 0);
+      ctx.font = "24px Arial";
+    }
+    var title = document.getElementById("title").value;
+    if(title=="") {
+      alert("Must have title!");
+      return;
+    }
+    var desc = document.getElementById("desc").value;
     if(choice == "todo"){
       ctx.beginPath();
       ctx.rect(toDoX,toDoY,200,40);
-      toDoY+=50;
       ctx.fillStyle = "blue";
       ctx.fill();
+      ctx.fillStyle = "white";
+      ctx.fillText(title,5,toDoY+35);
+      toDoY+=50;
     }
     else if(choice == "inProg") {
       ctx.beginPath();
       ctx.rect(inProgX,inProgY,200,40);
-      inProgY+=50;
-      ctx.fillStyle = "yellow";
+      ctx.fillStyle = "orange";
       ctx.fill();
+      ctx.fillStyle = "white";
+      ctx.fillText(title,205,inProgY+35);
+      inProgY+=50;
     }
     else if(choice == "recent") {
       ctx.beginPath();
       ctx.rect(recentCompletedX,recentCompletedY,200,40);
-      recentCompletedY+=50;
       ctx.fillStyle = "green";
       ctx.fill();
+      ctx.fillStyle = "white";
+      ctx.fillText(title,405,recentCompletedY+35);
+      recentCompletedY+=50;
     }
-
+    document.getElementById("title").value = "";
   }
 
 
