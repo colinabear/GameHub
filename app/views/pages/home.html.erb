@@ -5,8 +5,13 @@ Description: <input type="text" id="desc">
 <button onclick="addSquare('todo')">TODO</button>
 <button onclick="addSquare('inProg')">IN PROGRESS</button>
 <button onclick="addSquare('recent')">COMPLETED</button>
-<div id="canvasContainer" style="  width: 800px; height: 600px; overflow: auto; border: 1px solid;  margin:10%;">
-<canvas id="myCanvas" width="790" height="590">
+<button onclick="addSquare('recent')">ALL</button>
+<button onclick="addSquare('recent')">ART & DESIGN</button>
+<button onclick="addSquare('recent')">PROGRAMMING</button>
+<button onclick="addSquare('recent')">MODELS & ANIMATION</button>
+<button onclick="addSquare('recent')">OTHER</button>
+<div id="canvasContainer" style="width: 908px; height: 600px; overflow: auto;  margin:10%;">
+<canvas id="myCanvas" width="888" height="590">
 Your browser does not support the HTML5 canvas tag.</canvas>
 </div>
 
@@ -15,54 +20,81 @@ Your browser does not support the HTML5 canvas tag.</canvas>
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
   ctx.font = "24px Arial";
+  var canvasWidth = 888;
+  var canvasHeight = 600;
   var toDoX = 0;
-  var toDoY = 540;
-  var inProgX = 200;
+  var toDoY = 40;
+  var inProgX = canvasWidth/3;
   var inProgY = 40;
-  var recentCompletedX = 400;
+  var recentCompletedX = 2*canvasWidth/3;
   var recentCompletedY = 40;
+  var grd = ctx.createLinearGradient(0,0,0,300);
+  initializeKanban();
+
+
+  function initializeKanban() {
+    grd.addColorStop(0,"gray");
+    grd.addColorStop(1,"darkgray");
+    ctx.fillStyle = grd;
+    ctx.fillRect(0,0,canvasWidth,canvasHeight);
+  }
 
   function addSquare(choice) {
-    if(toDoY>=550){
-      var imgData = ctx.getImageData(0, 0, 800, 600);
-      document.getElementById("myCanvas").height = document.getElementById("myCanvas").height+50;
-      ctx.putImageData(imgData, 0, 0);
-      ctx.font = "24px Arial";
-    }
+    checkHeight();
+
     var title = document.getElementById("title").value;
+    var desc = document.getElementById("desc").value;
+
     if(title=="") {
       alert("Must have title!");
       return;
     }
-    var desc = document.getElementById("desc").value;
+
     if(choice == "todo"){
-      ctx.beginPath();
-      ctx.rect(toDoX,toDoY,200,40);
-      ctx.fillStyle = "blue";
-      ctx.fill();
-      ctx.fillStyle = "white";
-      ctx.fillText(title,5,toDoY+35);
+      createRect(toDoX,toDoY,"blue", title);
       toDoY+=50;
     }
     else if(choice == "inProg") {
-      ctx.beginPath();
-      ctx.rect(inProgX,inProgY,200,40);
-      ctx.fillStyle = "orange";
-      ctx.fill();
-      ctx.fillStyle = "white";
-      ctx.fillText(title,205,inProgY+35);
+      createRect(inProgX,inProgY,"salmon", title);
       inProgY+=50;
     }
     else if(choice == "recent") {
-      ctx.beginPath();
-      ctx.rect(recentCompletedX,recentCompletedY,200,40);
-      ctx.fillStyle = "green";
-      ctx.fill();
-      ctx.fillStyle = "white";
-      ctx.fillText(title,405,recentCompletedY+35);
+      createRect(recentCompletedX,recentCompletedY,"green", title);
       recentCompletedY+=50;
     }
     document.getElementById("title").value = "";
+  }
+
+
+  function createRect(x,y,color, title) {
+    ctx.beginPath();
+    ctx.rect(x+5,y,canvasWidth/3-5,40);
+    grd = ctx.createLinearGradient(x,y,x,y+40);
+    grd.addColorStop(0,"light"+color);
+    grd.addColorStop(1,color);
+    ctx.fillStyle = grd;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.rect(x+5,y+40,canvasWidth/3-5,120);
+    ctx.fillStyle = "light"+color;
+    ctx.fill();
+    ctx.fillStyle = "white";
+    ctx.fillText(title, x+10, y+30);
+  }
+
+  function checkHeight() {
+    if(toDoY>=550 || inProgY>=550 || recentCompletedY >=550){
+      var imgData = ctx.getImageData(0, 0, canvasWidth, canvasHeight-10);
+      canvasHeight+=50;
+      document.getElementById("myCanvas").height = canvasHeight;
+      grd = ctx.createLinearGradient(0,0,0,300);
+      grd.addColorStop(0,"gray");
+      grd.addColorStop(1,"darkgray");
+      ctx.fillStyle = grd;
+      ctx.fillRect(0,0,canvasWidth,canvasHeight);
+      ctx.putImageData(imgData, 0, 0);
+      ctx.font = "24px Arial";
+    }
   }
 
 
