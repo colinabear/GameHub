@@ -10,17 +10,21 @@ Description: <input type="text" id="desc">
 <button onclick="addSquare('recent')">PROGRAMMING</button>
 <button onclick="addSquare('recent')">MODELS & ANIMATION</button>
 <button onclick="addSquare('recent')">OTHER</button>
-<div id="canvasContainer" style="width: 908px; height: 600px; overflow: auto;  margin:10%;">
-<canvas id="myCanvas" width="888" height="590">
-Your browser does not support the HTML5 canvas tag.</canvas>
+<div id="canvasContainer" style="position: relative; width: 1120px; height: 610px; overflow: auto;  margin:1%;">
+<canvas id="background" width="1100" height="600"
+   style="position: absolute; z-index: 0;"></canvas>
+ <canvas id="myCanvas" width="1100" height="600"
+   style="position: absolute; z-index: 1;"></canvas>
 </div>
 
 
 <script>
   var c = document.getElementById("myCanvas");
+  var bg = document.getElementById("background");
+  var bgCtx = bg.getContext("2d");
   var ctx = c.getContext("2d");
   ctx.font = "24px Arial";
-  var canvasWidth = 888;
+  var canvasWidth = 1100;
   var canvasHeight = 600;
   var toDoX = 0;
   var toDoY = 40;
@@ -28,19 +32,38 @@ Your browser does not support the HTML5 canvas tag.</canvas>
   var inProgY = 40;
   var recentCompletedX = 2*canvasWidth/3;
   var recentCompletedY = 40;
-  var grd = ctx.createLinearGradient(0,0,0,300);
+  var grd = bgCtx.createLinearGradient(0,0,0,300);
+  var jobArr = [];
   initializeKanban();
 
 
   function initializeKanban() {
-    grd.addColorStop(0,"gray");
-    grd.addColorStop(1,"darkgray");
-    ctx.fillStyle = grd;
-    ctx.fillRect(0,0,canvasWidth,canvasHeight);
+    buildBackGround();
+    ctx.rect(0,0,canvasWidth/3,30);
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("To Do", 10, 22);
+    ctx.beginPath();
+    ctx.rect(canvasWidth/3,0,2*canvasWidth/3,30);
+    ctx.fillStyle = "salmon";
+    ctx.fill();
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("In Progress", canvasWidth/3+10, 22);
+    ctx.beginPath();
+    ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,30);
+    ctx.fillStyle = "green";
+    ctx.fill();
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("Completed", 2*canvasWidth/3+10, 22);
   }
 
-  function addSquare(choice) {
 
+
+  function addSquare(choice) {
     var title = document.getElementById("title").value;
     var desc = document.getElementById("desc").value;
 
@@ -70,14 +93,14 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
   function createRect(x,y,color, title, desc) {
     ctx.beginPath();
-    ctx.rect(x+5,y,canvasWidth/3-5,40);
+    ctx.rect(x+5,y,canvasWidth/3-10,40);
     grd = ctx.createLinearGradient(x,y,x,y+40);
     grd.addColorStop(0,"light"+color);
     grd.addColorStop(1,color);
     ctx.fillStyle = grd;
     ctx.fill();
     ctx.beginPath();
-    ctx.rect(x+5,y+40,canvasWidth/3-5,120);
+    ctx.rect(x+5,y+40,canvasWidth/3-10,120);
     ctx.fillStyle = "light"+color;
     ctx.fill();
     ctx.font = "24px Arial";
@@ -89,17 +112,29 @@ Your browser does not support the HTML5 canvas tag.</canvas>
   }
 
   function checkHeight(current) {
-    if(current>=430){
+    if(current>=canvasHeight-160){
       var imgData = ctx.getImageData(0, 0, canvasWidth, canvasHeight-10);
       canvasHeight+=170;
       document.getElementById("myCanvas").height = canvasHeight;
-      grd = ctx.createLinearGradient(0,0,0,300);
-      grd.addColorStop(0,"gray");
-      grd.addColorStop(1,"darkgray");
-      ctx.fillStyle = grd;
-      ctx.fillRect(0,0,canvasWidth,canvasHeight);
+      document.getElementById("background").height = canvasHeight;
+      buildBackGround();
       ctx.putImageData(imgData, 0, 0);
       ctx.font = "24px Arial";
+    }
+  }
+
+  function buildBackGround() {
+    bgCtx.beginPath();
+    var bgGrd = bgCtx.createLinearGradient(0,0,0,300);
+    bgGrd.addColorStop(0,"gray");
+    bgGrd.addColorStop(1,"darkgray");
+    bgCtx.fillStyle = bgGrd;
+    bgCtx.fillRect(0,0,canvasWidth,canvasHeight);
+    for(var i = 1; i<=2; i++) {
+      bgCtx.beginPath();
+      bgCtx.moveTo(i*canvasWidth/3, 0);
+      bgCtx.lineTo(i*canvasWidth/3, canvasHeight);
+      bgCtx.stroke();
     }
   }
 
