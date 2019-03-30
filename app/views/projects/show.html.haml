@@ -1,0 +1,15 @@
+#project_content
+	%h1= @project.name
+	Author:
+	%h5= @project.author
+	Team:
+	%h5= @project.team_members
+
+	%h4= @project.description
+
+	%br/
+	%hr/
+	%br/
+
+	= link_to "Edit", edit_project_path(@project), class: "button"
+	= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button"

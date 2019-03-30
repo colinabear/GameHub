@@ -4,9 +4,15 @@ Rails.application.routes.draw do
   	resources :comments
   end
 
+  resources :projects do
+    resources :comments
+  end
+
   root 'pages#home'
 
-  get 'index' => 'posts#index', as: 'index'
+  get 'post_index' => 'posts#index', as: 'post_index'
+
+  get 'project_index' => 'projects#index', as: 'project_index'
 
   get 'account' => 'users#account', as: 'account'
 
