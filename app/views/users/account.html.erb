@@ -13,17 +13,17 @@
        style="position: absolute; z-index: 0;"></canvas>
      <canvas id="myCanvas" width="1100" height="600"
        style="position: absolute; z-index: 1;"></canvas>
-    </div>
+    </div hidden>
     <!-- Put tasks in a dummy HTML element. -->
     <% current_user.posts.each do |post| %>
-      <p class="post">
-        <%= link_to post.title, post %>
+      <p class="task">
+        <%= link_to task.title, task %>
       </p>
     <% end %>
 
 
     <script>
-      var posts = document.getElementsByClassName("post");
+      var tasks = document.getElementsByClassName("task");
       var c = document.getElementById("myCanvas");
       var bg = document.getElementById("background");
       var bgCtx = bg.getContext("2d");
@@ -65,7 +65,7 @@
         ctx.font = "20px Arial";
         ctx.fillStyle = "white";
         ctx.fillText("Completed", 2*canvasWidth/3+10, 22);
-        for(var i = 0; i<posts.length; i++) {
+        for(var i = 0; i<tasks.length; i++) {
           addSquare("todo");
           count++;
         }
