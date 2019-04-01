@@ -1,11 +1,15 @@
 #project_content
+	= link_to "Back to Games", project_index_path, class: "button"
 	%h1= @project.name
+
+	%h4= @project.description
+
 	Author:
 	%h5= @project.author
 	Team:
 	%h5= @project.team_members
-
-	%h4= @project.description
+	Progress:
+	%h5= @project.progress
 
 	%br/
 	%hr/
