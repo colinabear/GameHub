@@ -1,0 +1,10 @@
+#projects
+	= link_to "New Project", new_project_path, class: "button"
+	- @projects.each do |project|
+		.project
+			%h2.title= link_to project.name, project
+			%p.date
+				Published
+				= time_ago_in_words(project.created_at)
+				ago by
+				= project.user.email

@@ -1,0 +1,8 @@
+= simple_form_for @project do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :author
+  = f.input :team_members
+  = f.select :progress, options_for_select(["Idea", "In Progress", "Completed"]) 
+
+  = f.submit
