@@ -2,7 +2,6 @@ class TasksController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @task = @project.tasks.create(params[:task].permit(:title, :description, :status))
-    @task.user_id = current_user.id if current_user
     @task.save
 
     if @task.save
@@ -41,5 +40,11 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+  end
+
+  def accept_task
+    @task = Task.find(params[:id])
+    @task.user_id = current_user.id if current_user
+    render task_path(@task)
   end
 end

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get 'account' => 'users#account', as: 'account'
 
+  get 'accept_task' => 'tasks#accept_task', as: 'accept_task'
+
   get 'kanban' => 'users#kanban', as: 'kanban'
 
 end
