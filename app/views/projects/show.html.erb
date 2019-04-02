@@ -21,13 +21,13 @@
   <h3>
     Tasks
   </h3>
-  <% if current_user.id == @project.user_id %>
-    <%= render 'tasks/form' %>
-  <% end %>
-  <br/>
-  <hr/>
-  <br/>
   <% if user_signed_in? %>
+    <% if current_user.id == @project.user_id %>
+      <%= render 'tasks/form' %>
+    <% end %>
+    <br/>
+    <hr/>
+    <br/>
     <% if current_user.id == @project.user_id %>
       <%= link_to "Edit", edit_project_path(@project), class: "button" %>
       <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
