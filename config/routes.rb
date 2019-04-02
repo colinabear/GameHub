@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
+  resources :tasks do
+  end
+
   root 'pages#home'
 
   get 'post_index' => 'posts#index', as: 'post_index'
@@ -20,4 +23,9 @@ Rails.application.routes.draw do
 
   get 'account' => 'users#account', as: 'account'
 
+<<<<<<< HEAD
+=======
+  get 'kanban' => 'users#kanban', as: 'kanban'
+
+>>>>>>> 8739b5169ea697cf068630df20ebff374095f5b2
 end
