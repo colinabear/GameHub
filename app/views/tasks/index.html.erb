@@ -1,4 +1,12 @@
 <div id="tasks">
+  Sort By:
+  <%= link_to 'Newest', :sort => "created_at" %>
+  |
+  <%= link_to 'A-Z', :sort => "name" %>
+  |
+  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  |
+  <%= link_to 'Recently Updated', :sort => "updated_at" %>
   <% @tasks.each do |task| %>
     <div class="task">
       <h2 class="title">

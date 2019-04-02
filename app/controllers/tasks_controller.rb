@@ -36,7 +36,19 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.all.order('created_at DESC')
+    if params[:sort] == 'updated_at'
+      @tasks = Task.all.order("updated_at DESC")
+    elsif params[:sort] == 'created_at'
+      @tasks = Task.all.order("created_at DESC")
+    elsif params[:sort] == 'name'
+      @tasks = Task.all.order("title ASC")
+    elsif params[:sort] == 'name_reverse'
+      @tasks = Task.all.order("title DESC")
+    elsif params[:sort] == 'popularity'
+      @tasks = Task.all.order(cached_votes_score: :desc)
+    else
+      @tasks = Task.all.order("created_at DESC")
+    end
   end
 
   def show
