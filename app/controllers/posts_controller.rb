@@ -48,6 +48,9 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
+		@post.comments.each do |comment|
+			comment.destroy
+		end
 		@post.destroy
 		redirect_to post_index_path
 	end

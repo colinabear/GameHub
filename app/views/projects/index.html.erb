@@ -1,4 +1,5 @@
 <div id="projects">
+  <%= link_to "New Project", new_project_path, class: "button" %>
   <% @projects.each do |project| %>
     <div class="project">
       <h2 class="title">
