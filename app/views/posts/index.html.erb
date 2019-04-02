@@ -1,10 +1,15 @@
 <div id="posts">
+<<<<<<< HEAD
+=======
+  <%= link_to "New Post", new_post_path, class: "button" %>
+>>>>>>> b3e1ea2c699b7b7001b2a4d18248cf550af49edd
   <% @posts.each do |post| %>
     <div class="post">
       <h2 class="title">
         <%= link_to post.title, post %>
       </h2>
       <p class="date">
+<<<<<<< HEAD
         Published at
         <%= time_ago_in_words(post.created_at) %>
         <%= post.user.email %>
@@ -21,5 +26,13 @@
   <%= post.get_downvotes.size %>
 	<% end %>
 
+=======
+        Published
+        <%= time_ago_in_words(post.created_at) %>
+        ago by
+        <%= post.user.email %>
+      </p>
+    </div>
+>>>>>>> b3e1ea2c699b7b7001b2a4d18248cf550af49edd
   <% end %>
 </div>
