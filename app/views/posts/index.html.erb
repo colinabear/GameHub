@@ -1,10 +1,15 @@
 <div id="posts">
   <%= link_to "New Post", new_post_path, class: "button" %>
-
   Sort By:
-  <%= link_to "Newest", :sort => "date" %>
+  <%= link_to 'Newest', :sort => "created_at" %>
   |
-  <%= link_to "Most Popular", :sort => "vote" %>
+  <%= link_to 'Most Popular', :sort => "popularity" %>
+  |
+  <%= link_to 'A-Z', :sort => "name" %>
+  |
+  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  |
+  <%= link_to 'Recently Updated', :sort => "updated_at" %>
 
   <% @posts.each do |post| %>
     <div class="post">
@@ -31,7 +36,7 @@
 	<% end %>
 
   Total Rating:
-  <%= post.get_upvotes.size - post.get_downvotes.size %>
+    <%= post.cached_votes_score %>
 
   <% end %>
 </div>
