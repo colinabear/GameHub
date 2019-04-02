@@ -1,0 +1,29 @@
+<div id="post_content">
+  <%= link_to "Back to forum", post_index_path, class: "button" %>
+  <h1>
+    <%= @post.title %>
+  </h1>
+  <h4>
+    <%= @post.content %>
+  </h4>
+  Author:
+  <h5>
+    <%= @post.author %>
+  </h5>
+  <div id="comments">
+    <h2>
+      <%= @post.comments.count %>
+      Comments
+    </h2>
+    <%= render @post.comments %>
+    <h3>Reply to thread</h3>
+    <%= render "comments/form" %>
+  </div>
+  <br/>
+  <hr/>
+  <br/>
+  <% if current_user.id == @post.user_id %>
+    <%= link_to "Edit", edit_post_path(@post), class: "button" %>
+    <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+  <% end %>
+</div>
