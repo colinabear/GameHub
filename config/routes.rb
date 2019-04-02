@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
-    resources :comments
+    resources :tasks
   end
 
   root 'pages#home'
@@ -19,5 +19,5 @@ Rails.application.routes.draw do
   get 'project_index' => 'projects#index', as: 'project_index'
 
   get 'account' => 'users#account', as: 'account'
-  
+
 end

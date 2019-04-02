@@ -18,6 +18,13 @@
   <h5>
     <%= @project.progress %>
   </h5>
+  <h3>
+    Tasks
+  </h3>
+  <%= render @project.tasks %>
+  <% if current_user.id == @project.user_id %>
+    <%= render 'tasks/form' %>
+  <% end %>
   <br/>
   <hr/>
   <br/>

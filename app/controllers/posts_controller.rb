@@ -39,10 +39,6 @@ class PostsController < ApplicationController
 		redirect_to post_index_path
 	end
 
-	def find_post
-		@post = Post.find(params[:id])
-	end
-
 	def upvote
 		@post = Post.find(params[:id])
 		@post.upvote_by current_user
@@ -56,7 +52,11 @@ class PostsController < ApplicationController
 	end
 
 	private
-	
+
+	def find_post
+		@post = Post.find(params[:id])
+	end
+
 	def post_params
 		params.require(:post).permit(:title, :content, :author, :score)
 	end
