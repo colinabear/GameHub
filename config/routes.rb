@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts do
   	resources :comments
+    member do
+      put "like", to: "posts#upvote"
+      put "dislike", to: "posts#downvote"
+    end
   end
 
   resources :projects do
@@ -15,6 +19,5 @@ Rails.application.routes.draw do
   get 'project_index' => 'projects#index', as: 'project_index'
 
   get 'account' => 'users#account', as: 'account'
-
-
+  
 end
