@@ -1,5 +1,14 @@
 <div id="projects">
   <%= link_to "New Project", new_project_path, class: "button" %>
+  Sort By:
+  <%= link_to 'Newest', :sort => "created_at" %>
+  |
+  <%= link_to 'A-Z', :sort => "name" %>
+  |
+  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  |
+  <%= link_to 'Recently Updated', :sort => "updated_at" %>
+
   <% @projects.each do |project| %>
     <div class="project">
       <h2 class="title">
