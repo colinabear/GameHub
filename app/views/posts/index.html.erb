@@ -1,5 +1,11 @@
 <div id="posts">
   <%= link_to "New Post", new_post_path, class: "button" %>
+
+  Sort By:
+  <%= link_to "Newest", :sort => "date" %>
+  |
+  <%= link_to "Most Popular", :sort => "vote" %>
+
   <% @posts.each do |post| %>
     <div class="post">
       <h2 class="title">
@@ -23,6 +29,9 @@
   <%= image_tag('downvote.png', draggable:"false", id:"drag1") %>
   <%= post.get_downvotes.size  %>&nbsp;</span>
 	<% end %>
+
+  Total Rating:
+  <%= post.get_upvotes.size - post.get_downvotes.size %>
 
   <% end %>
 </div>
