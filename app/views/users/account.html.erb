@@ -3,6 +3,7 @@ Welcome, <%= current_user.email %>!
 <br>
 <% if user_signed_in? %>
   <%= link_to "New Post", new_post_path, class: "button" %>
+  <%= link_to "New Project", new_project_path, class: "button" %>
   <% if params[:status].nil? || params[:status] == Order.statuses[1] %>
     <br>
     <br>
@@ -35,7 +36,7 @@ Welcome, <%= current_user.email %>!
         <%= task.description %>
       </p>
     <% end %>
-    <div>
+    </div>
 
 
     <script>
