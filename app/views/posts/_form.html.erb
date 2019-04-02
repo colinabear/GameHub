@@ -1,7 +1,7 @@
 <%= simple_form_for @post do |f| %>
-<%= render 'shared/post_error_messages' %>
+<%= render 'shared/error_messages' %>
   <%= f.input :title %>
   <%= f.input :content %>
   <%= f.input :author %>
-  <%= f.submit %>
+  <%= f.submit :score %>
 <% end %>
