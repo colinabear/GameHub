@@ -28,6 +28,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.build(post_params)
+		@post.author = current_user.email
 
 		if @post.save
 			redirect_to @post

@@ -10,4 +10,14 @@
   <h5>
     <%= @task.status %>
   </h5>
+  <h5>
+    Assigned to
+    <% if @task.user == nil %>
+      <p> No one, yet </p>
+    <% else %>
+      <p>
+        <%= @task.user.email %>
+      </p>
+    <% end %>
+  </h5>
 </div>

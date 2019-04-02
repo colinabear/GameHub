@@ -19,8 +19,8 @@
       <p class="date">
         Published
         <%= time_ago_in_words(task.created_at) %>
-        ago by
-        <%= task.user.email %>
+        ago to
+        <%= task.project.name %>
       </p>
     </div>
   <% end %>

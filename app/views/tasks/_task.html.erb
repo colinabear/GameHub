@@ -5,7 +5,11 @@
       <%= task.description %>
     </p>
     <p class="comment_author">
-      <%= task.user.email %>
+      <% if task.user == nil%>
+        No one, yet!
+      <% else %>
+        <%= task.user.email %>
+      <% end %>
     </p>
   </div>
   <div class="buttons">

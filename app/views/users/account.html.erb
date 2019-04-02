@@ -1,7 +1,7 @@
-Welcome, <%= current_user.email %>!
-<br>
-<br>
 <% if user_signed_in? %>
+  Welcome, <%= current_user.email %>!
+  <br>
+  <br>
   <%= link_to "New Post", new_post_path, class: "button" %>
   <%= link_to "New Project", new_project_path, class: "button" %>
 <% end %>
