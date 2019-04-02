@@ -1,4 +1,5 @@
 <div id="posts">
+  <%= link_to "New Post", new_post_path, class: "button" %>
   <% @posts.each do |post| %>
     <div class="post">
       <h2 class="title">
