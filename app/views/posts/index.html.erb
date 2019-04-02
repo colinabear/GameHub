@@ -13,13 +13,15 @@
     </div>
 
 	<%= link_to like_post_path(post), method: :put do %>
-  <span style="border-radius:5px; background:green; color:white;" class="v"> <b>&nbsp;↑</b>
-  <%= post.get_upvotes.size  %> </span>
+  <span style="border-radius:5px; background:green; color:white; display: inline-block; height:27px;">
+  <%= image_tag('upvote.png', draggable:"false", id:"drag1") %>
+  <%= post.get_upvotes.size  %>&nbsp;</span>
 	<% end %>
 
 	<%= link_to dislike_post_path(post), method: :put do %>
-  <span style="border-radius:5px; background:red; color:white" class="v"> <b>&nbsp;↓</b>
-  <%= post.get_downvotes.size  %></span>
+  <span style="border-radius:5px; background:red; color:white; display: inline-block; height:27px;">
+  <%= image_tag('downvote.png', draggable:"false", id:"drag1") %>
+  <%= post.get_downvotes.size  %>&nbsp;</span>
 	<% end %>
 
   <% end %>
