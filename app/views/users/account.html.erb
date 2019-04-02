@@ -8,6 +8,11 @@
     <button onclick="addSquare('todo')">TODO</button>
     <button onclick="addSquare('inProg')">IN PROGRESS</button>
     <button onclick="addSquare('recent')">COMPLETED</button>
+    <p>
+      <span style = "background:blue; color:white; border-style: solid; border-color:blue;">To Do</span>
+      <span style = "background:salmon; color:white; border-style: solid; border-color:salmon;">In Progress</span>
+      <span style = "background:green; color:white; border-style: solid; border-color:green;">Complete</span>
+    </p>
     <div id="canvasContainer" style="position: relative; width: 1120px; height: 610px; overflow: auto;">
     <canvas id="background" width="1100" height="600"
        style="position: absolute; z-index: 0;"></canvas>
@@ -20,12 +25,15 @@
       <p class="task">
         <%= task.title %>
       </p>
+      <p class="status">
+        <%= task.progress %>
+      </p>
     <% end %>
     <div>
 
 
     <script>
-      
+
       var tasks = document.getElementsByClassName("task");
       var c = document.getElementById("myCanvas");
       var bg = document.getElementById("background");
