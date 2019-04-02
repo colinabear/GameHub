@@ -1,9 +1,22 @@
 class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!, except: [:index, :show]
+	helper_method :sort_direction
 
 	def index
-		@posts = Post.all.order("created_at DESC")
+		if params[:sort] == 'updated_at'
+      @posts = Post.all.order("updated_at DESC")
+    elsif params[:sort] == 'created_at'
+      @posts = Post.all.order("created_at DESC")
+		elsif params[:sort] == 'name'
+			@posts = Post.all.order("title ASC")
+		elsif params[:sort] == 'name_reverse'
+			@posts = Post.all.order("title DESC")
+		elsif params[:sort] == 'popularity'
+			@posts = Post.all.order(cached_votes_score: :desc)
+		else
+			@posts = Post.all.order("created_at DESC")
+		end
 	end
 
 	def show

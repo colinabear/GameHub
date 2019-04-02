@@ -3,6 +3,7 @@ Welcome, <%= current_user.email %>!
 <br>
 <% if user_signed_in? %>
   <%= link_to "New Post", new_post_path, class: "button" %>
+  <%= link_to "New Project", new_project_path, class: "button" %>
   <% if params[:status].nil? || params[:status] == Order.statuses[1] %>
     <br>
     <br>
@@ -23,7 +24,7 @@ Welcome, <%= current_user.email %>!
        style="position: absolute; z-index: 1;"></canvas>
     </div>
     <!-- Put tasks in a dummy HTML element. -->
-    <div hidden>
+    <div>
     <% current_user.tasks.each do |task| %>
       <p class="task">
         <%= task.title %>
@@ -31,14 +32,18 @@ Welcome, <%= current_user.email %>!
       <p class="status">
         <%= task.status %>
       </p>
+      <p class="desc">
+        <%= task.description %>
+      </p>
     <% end %>
-    <div>
+    </div>
 
 
     <script>
 
       var tasks = document.getElementsByClassName("task");
       var tasksStatus = document.getElementsByClassName("status");
+      var tasksDesc = document.getElementsByClassName("desc");
       var c = document.getElementById("myCanvas");
       var bg = document.getElementById("background");
       var bgCtx = bg.getContext("2d");
@@ -81,7 +86,7 @@ Welcome, <%= current_user.email %>!
         ctx.fillStyle = "white";
         ctx.fillText("Completed", 2*canvasWidth/3+10, 22);
         for(var i = 0; i<tasks.length; i++) {
-          addSquare(tasksStatus[count]);
+          addSquare(tasksStatus[count].innerText);
           count++;
         }
       }
@@ -92,7 +97,8 @@ Welcome, <%= current_user.email %>!
         //var title = document.getElementById("title").value;
         var title = tasks[count].innerText;
         title = title.substring(0,29);
-        var desc = document.getElementById("desc").value;
+        var desc = tasksDesc[count].innerText;
+        desc = desc.substring(0,29);
 
         if(title=="") {
           alert("Must have title!");

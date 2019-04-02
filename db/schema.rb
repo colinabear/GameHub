@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190402044712) do
+ActiveRecord::Schema.define(version: 20190402195626) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20190402044712) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "popularities", force: :cascade do |t|
+    t.integer "columna"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -33,6 +39,20 @@ ActiveRecord::Schema.define(version: 20190402044712) do
     t.integer "user_id"
     t.string "author"
     t.integer "score"
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
+    t.index ["cached_votes_score"], name: "index_posts_on_cached_votes_score"
+    t.index ["cached_votes_total"], name: "index_posts_on_cached_votes_total"
+    t.index ["cached_votes_up"], name: "index_posts_on_cached_votes_up"
+    t.index ["cached_weighted_average"], name: "index_posts_on_cached_weighted_average"
+    t.index ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score"
+    t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
   end
 
   create_table "projects", force: :cascade do |t|
