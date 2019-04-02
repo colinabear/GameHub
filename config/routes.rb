@@ -12,11 +12,15 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
+  resources :tasks
+
   root 'pages#home'
 
   get 'post_index' => 'posts#index', as: 'post_index'
 
   get 'project_index' => 'projects#index', as: 'project_index'
+
+  get 'task_index' => 'tasks#index', as: 'task_index'
 
   get 'account' => 'users#account', as: 'account'
 

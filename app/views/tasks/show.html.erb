@@ -1,0 +1,13 @@
+<div id="task_content">
+  <%= link_to "Back to Jobs", task_index_path, class: "button" %>
+  <h1>
+    <%= @task.title %>
+  </h1>
+  <h4>
+    <%= @task.description %>
+  </h4>
+  Progress:
+  <h5>
+    <%= @task.status %>
+  </h5>
+</div>

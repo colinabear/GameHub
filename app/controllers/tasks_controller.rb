@@ -12,6 +12,9 @@ class TasksController < ApplicationController
     end
   end
 
+  def new
+  end
+
   def edit
     @post = Post.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
@@ -33,5 +36,13 @@ class TasksController < ApplicationController
     @task = @project.tasks.find(params[:id])
     @task.destroy
     redirect_to project_path(@project)
+  end
+
+  def index
+    @tasks = Task.all.order('created_at DESC')
+  end
+
+  def show
+    @task = Task.find(params[:id])
   end
 end
