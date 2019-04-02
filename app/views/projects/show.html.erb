@@ -106,22 +106,16 @@
         for(var i = 0; i<tasks.length; i++) {
             addSquare(tasksStatus[count].innerText);
             count++;
+            alert(tasks.length);
         }
     }
 
 
-
     function addSquare(choice) {
-        //var title = document.getElementById("title").value;
         var title = tasks[count].innerText;
         title = title.substring(0,29);
         var desc = tasksDesc[count].innerText;
         desc = desc.substring(0,29);
-
-        if(title=="") {
-            alert("Must have title!");
-            return;
-        }
 
         if(choice == "todo"){
             checkHeight(toDoY);
@@ -138,7 +132,6 @@
             createRect(recentCompletedX,recentCompletedY,"green", title, desc);
             recentCompletedY+=170;
         }
-        document.getElementById("title").value = "";
     }
 
 
@@ -191,4 +184,3 @@
 
 
 </script>
-
