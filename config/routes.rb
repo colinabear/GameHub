@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :tasks do
+  end
+
   root 'pages#home'
 
   get 'post_index' => 'posts#index', as: 'post_index'
@@ -19,5 +22,7 @@ Rails.application.routes.draw do
   get 'project_index' => 'projects#index', as: 'project_index'
 
   get 'account' => 'users#account', as: 'account'
-  
+
+  get 'kanban' => 'users#kanban', as: 'kanban'
+
 end
