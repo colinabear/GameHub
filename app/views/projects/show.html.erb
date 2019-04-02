@@ -35,11 +35,9 @@
 </div>
 
 
-<div id="canvasContainer" style="position: relative; width: 1120px; height: 610px; overflow: auto;">
-  <canvas id="background" width="1100" height="600"
-          style="position: absolute; z-index: 0;"></canvas>
-  <canvas id="myCanvas" width="1100" height="600"
-          style="position: absolute; z-index: 1;"></canvas>
+<div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
+  <canvas id="background" style="position: absolute; z-index: 0; width:100%;"></canvas>
+  <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
 </div>
 <!-- Put tasks in a dummy HTML element. -->
 <div>
@@ -67,46 +65,48 @@
     var bgCtx = bg.getContext("2d");
     var ctx = c.getContext("2d");
     ctx.font = "24px Arial";
-    var canvasWidth = 1100;
-    var canvasHeight = 600;
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    var canvasWidth = c.width;
+    var canvasHeight = c.height;
+    //alert(canvasWidth);
+    var startingHeight = 50;
     var toDoX = 0;
-    var toDoY = 40;
+    var toDoY = startingHeight;
     var inProgX = canvasWidth/3;
-    var inProgY = 40;
+    var inProgY = startingHeight;
     var recentCompletedX = 2*canvasWidth/3;
-    var recentCompletedY = 40;
+    var recentCompletedY = startingHeight;
     var grd = bgCtx.createLinearGradient(0,0,0,300);
-    var jobArr = [];
     var count = 0;
     initializeKanban();
 
 
     function initializeKanban() {
         buildBackGround();
-        ctx.rect(0,0,canvasWidth/3,30);
+        ctx.rect(0,0,canvasWidth/3,40);
         ctx.fillStyle = "blue";
         ctx.fill();
-        ctx.font = "20px Arial";
+        ctx.font = "30px Arial";
         ctx.fillStyle = "white";
-        ctx.fillText("To Do", 10, 22);
+        ctx.fillText("To Do", 10, 30);
         ctx.beginPath();
-        ctx.rect(canvasWidth/3,0,2*canvasWidth/3,30);
+        ctx.rect(canvasWidth/3,0,2*canvasWidth/3,40);
         ctx.fillStyle = "salmon";
         ctx.fill();
-        ctx.font = "20px Arial";
+        ctx.font = "30px Arial";
         ctx.fillStyle = "white";
-        ctx.fillText("In Progress", canvasWidth/3+10, 22);
+        ctx.fillText("In Progress", canvasWidth/3+10, 30);
         ctx.beginPath();
-        ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,30);
+        ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,40);
         ctx.fillStyle = "green";
         ctx.fill();
-        ctx.font = "20px Arial";
+        ctx.font = "30px Arial";
         ctx.fillStyle = "white";
-        ctx.fillText("Completed", 2*canvasWidth/3+10, 22);
+        ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
         for(var i = 0; i<tasks.length; i++) {
             addSquare(tasksStatus[count].innerText);
             count++;
-            alert(tasks.length);
         }
     }
 
@@ -150,7 +150,7 @@
         ctx.font = "24px Arial";
         ctx.fillStyle = "white";
         ctx.fillText(title, x+10, y+30);
-        ctx.font = "14px Arial";
+        ctx.font = "24px Arial";
         ctx.fillStyle = "black";
         ctx.fillText(desc, x+10, y+60);
     }
