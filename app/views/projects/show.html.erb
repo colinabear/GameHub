@@ -41,7 +41,7 @@
   <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
 </div>
 <!-- Put tasks in a dummy HTML element. -->
-<div>
+<div style= "font-size: 0px">
   <% @project.tasks.each do |task| %>
     <p class="task">
       <%= task.title %>
