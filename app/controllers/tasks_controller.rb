@@ -12,9 +12,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def new
-  end
-
   def edit
     @post = Post.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
