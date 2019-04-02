@@ -12,9 +12,6 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
-  resources :tasks do
-  end
-
   root 'pages#home'
 
   get 'post_index' => 'posts#index', as: 'post_index'

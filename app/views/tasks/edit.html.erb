@@ -1,6 +1,5 @@
-<%= simple_form_for ([@project, @project.tasks.build]) do |f| %>
-
-  <%= render 'shared/projects_error_messages' %>
+<h1>Edit this task</h1>
+<%= simple_form_for([@project, @task]) do |f|  %>
 
   <%= f.input :title %>
 
