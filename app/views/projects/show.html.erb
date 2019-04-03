@@ -181,8 +181,8 @@
         ctx.font = "24px Arial";
         ctx.fillStyle = "black";
         var lineMove = 0;
-        for(var i = 0; i<desc.length; i+=45) {
-          var line = desc.substring(i,i+45);
+        for(var i = 0; i<desc.length; i+=40) {
+          var line = desc.substring(i,i+40);
           //alert(line);
           ctx.fillText(line, x+10, y+60+lineMove);
           lineMove+=25;

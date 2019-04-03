@@ -25,9 +25,9 @@
     <br>
     <% current_user.tasks.each do |task| %>
       <% if task.accepted %>
-        <%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> )
+        > <%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> )
+        <br>
       <% end %>
-      <br>
     <% end %>
   </div>
 
