@@ -1,0 +1,21 @@
+<div class="comment clearfix">
+  <div class="content">
+    <p class="comment_content">
+      <%= task.title %>
+      <%= task.description %>
+    </p>
+    <p class="comment_author">
+      <% if task.user == nil%>
+        No one, yet!
+      <% else %>
+        <%= task.user.email %>
+      <% end %>
+    </p>
+  </div>
+  <div class="buttons">
+    <% if current_user == task.user %>
+      <%= link_to "Edit", edit_project_task_path(task.project, task) %>
+      <%= link_to "Delete", [task.project, task], method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+</div>

@@ -1,9 +1,28 @@
 class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!, except: [:index, :show]
+	helper_method :sort_direction
 
 	def index
-		@posts = Post.all.order("created_at DESC")
+		if params[:sort] == 'updated_at'
+      @posts = Post.all.order("updated_at DESC")
+    elsif params[:sort] == 'created_at'
+      @posts = Post.all.order("created_at DESC")
+		elsif params[:sort] == 'name'
+			@posts = Post.all.order("title ASC")
+		elsif params[:sort] == 'name_reverse'
+			@posts = Post.all.order("title DESC")
+		elsif params[:sort] == 'popularity'
+			@posts = Post.all.order(cached_votes_score: :desc)
+		elsif params[:title_search]
+	    @posts = Post.where('title LIKE ?', "%#{params[:title_search]}%")
+		elsif params[:body_search]
+			@posts = Post.where('content LIKE ?', "%#{params[:body_search]}%")
+		elsif params[:author_search]
+			@posts = Post.where('author LIKE ?', "%#{params[:author_search]}%")
+		else
+			@posts = Post.all
+		end
 	end
 
 	def show
@@ -15,6 +34,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.build(post_params)
+		@post.author = current_user.email
 
 		if @post.save
 			redirect_to @post
@@ -35,8 +55,23 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
+		@post.comments.each do |comment|
+			comment.destroy
+		end
 		@post.destroy
-		redirect_to root_path
+		redirect_to post_index_path
+	end
+
+	def upvote
+		@post = Post.find(params[:id])
+		@post.upvote_by current_user
+		redirect_to post_index_path
+	end
+
+	def downvote
+		@post = Post.find(params[:id])
+		@post.downvote_by current_user
+		redirect_to post_index_path
 	end
 
 	private
@@ -46,6 +81,7 @@ class PostsController < ApplicationController
 	end
 
 	def post_params
-		params.require(:post).permit(:title, :content, :author, :score, :team_members)
+		params.require(:post).permit(:title, :content, :author, :search)
 	end
+
 end
