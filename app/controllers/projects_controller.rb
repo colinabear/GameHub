@@ -43,6 +43,12 @@ class ProjectsController < ApplicationController
     redirect_to project_index_path
   end
 
+  def upvote
+    @project = Project.find(params[:id])
+    @project.upvote_by current_user
+    redirect_to project_index_path
+  end
+
   private
 
   def find_project

@@ -12,32 +12,32 @@
   <%= link_to 'Recently Updated', :sort => "updated_at" %>
 
   <% @posts.each do |post| %>
-    <div class="post">
-      <h2 class="title">
-        <%= link_to post.title, post %>
-      </h2>
-      <p class="date">
-        Published
-        <%= time_ago_in_words(post.created_at) %>
-        ago by
-        <%= post.user.email %>
-      </p>
-    </div>
+			<div class="post">
+				<h2 class="title">
+					<%= link_to post.title, post %>
+				</h2>
+				<p class="date">
+					Published
+					<%= time_ago_in_words(post.created_at) %>
+					ago by
+					<%= post.user.email %>
+				</p>
+			</div>
 
-	<%= link_to like_post_path(post), method: :put do %>
-  <span style="border-radius:5px; background:green; color:white; display: inline-block; height:27px;">
-  <%= image_tag('upvote.png', draggable:"false", id:"drag1") %>
-  <%= post.get_upvotes.size  %>&nbsp;</span>
-	<% end %>
+		<%= link_to like_post_path(post), method: :put do %>
+		<span style="border-radius:5px; background:green; color:white; display: inline-block; height:27px;">
+		<%= image_tag('upvote.png', draggable:"false", id:"drag1") %>
+		<%= post.get_upvotes.size  %>&nbsp;</span>
+		<% end %>
 
-	<%= link_to dislike_post_path(post), method: :put do %>
-  <span style="border-radius:5px; background:red; color:white; display: inline-block; height:27px;">
-  <%= image_tag('downvote.png', draggable:"false", id:"drag1") %>
-  <%= post.get_downvotes.size  %>&nbsp;</span>
-	<% end %>
+		<%= link_to dislike_post_path(post), method: :put do %>
+		<span style="border-radius:5px; background:red; color:white; display: inline-block; height:27px;">
+		<%= image_tag('downvote.png', draggable:"false", id:"drag1") %>
+		<%= post.get_downvotes.size  %>&nbsp;</span>
+		<% end %>
 
-  Total Rating:
-    <%= post.cached_votes_score %>
+		Total Rating:
+			<%= post.cached_votes_score %>
 
   <% end %>
 </div>

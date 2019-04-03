@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks
+    member do
+      put "like", to: "projects#upvote"
+    end
   end
 
   resources :tasks
