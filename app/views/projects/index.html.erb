@@ -9,6 +9,11 @@
   |
   <%= link_to 'Recently Updated', :sort => "updated_at" %>
 
+  <%= form_tag(project_index_path, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag 'Search Title' %>
+  <% end %>
+
   <% @projects.each do |project| %>
     <div class="project">
       <h2 class="title">

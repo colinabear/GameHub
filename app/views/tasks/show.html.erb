@@ -10,16 +10,16 @@
   <h5>
     <%= @task.status %>
   </h5>
+  Assigned to:
   <h5>
-    Assigned to
     <% if !@task.accepted %>
-      <p> No one, yet </p>
-      <%= @task.id %>
+      No one, yet
       <%= link_to "Accept Task", task_accept_task_path(@task), method: :put, class: "button" %>
     <% else %>
-      <p>
         <%= @task.user.email %>
-      </p>
+        <% if @task.user == current_user %>
+          <%= link_to "Drop", task_drop_task_path(@task), method: :put, class: "button" %>
+        <% end %>
     <% end %>
   </h5>
 </div>

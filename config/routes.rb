@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :tasks do
     put 'accept_task', to: 'tasks#accept_task'
+    put 'drop_task', to: 'tasks#drop_task'
   end
 
   root 'pages#home'
