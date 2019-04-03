@@ -4,6 +4,20 @@
   <br>
   <%= link_to "New Post", new_post_path, class: "button" %>
   <%= link_to "New Project", new_project_path, class: "button" %>
+<br>
+<br>
+<div style="background:lightgray; border-radius:5px; padding:10px;">
+ Liked Posts:
+  <br>
+  <% Post.all.each do |post| %>
+    <% if current_user.voted_up_for? post %>
+      >
+      <%= link_to post.title, post %>
+      <br>
+    <% end %>
+  <% end %>
+  </div>
+
 <% end %>
 <% if !user_signed_in? %>
   <%= link_to "Sign Up", new_user_registration_path, class: "button" %>
