@@ -63,4 +63,11 @@ class TasksController < ApplicationController
     current_user.tasks << @task
     redirect_to @task
   end
+
+  def drop_task
+    @task = Task.find(params[:task_id])
+    @task.user_id = @task.project.user_id
+    @task.update_attribute(:accepted, false)
+    redirect_to @task
+  end
 end
