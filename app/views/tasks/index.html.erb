@@ -1,4 +1,5 @@
-<div id="projects">
+<div id="tasks">
+  <h1> Tasks </h1>
   Sort By:
   <%= link_to 'Newest', :sort => "created_at" %>
   |
@@ -8,9 +9,7 @@
   |
   <%= link_to 'Recently Updated', :sort => "updated_at" %>
   <% @tasks.each do |task| %>
-
-<div id="project">
-    <div class="project">
+    <div class="task">
       <h2 class="title">
         <%= link_to task.title, task %>
       </h2>
@@ -22,6 +21,4 @@
       </p>
     </div>
   <% end %>
-</div>
-
 </div>

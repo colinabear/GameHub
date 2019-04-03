@@ -142,9 +142,8 @@
 
     function addSquare(choice) {
         var title = tasks[count].innerText;
-        title = title.substring(0,29);
+        title = title.substring(0,40);
         var desc = tasksDesc[count].innerText;
-        desc = desc.substring(0,29);
 
         if(choice == "todo"){
             checkHeight(toDoY);
@@ -181,7 +180,13 @@
         ctx.fillText(title, x+10, y+30);
         ctx.font = "24px Arial";
         ctx.fillStyle = "black";
-        ctx.fillText(desc, x+10, y+60);
+        var lineMove = 0;
+        for(var i = 0; i<desc.length; i+=45) {
+          var line = desc.substring(i,i+45);
+          //alert(line);
+          ctx.fillText(line, x+10, y+60+lineMove);
+          lineMove+=25;
+        }
         ctx.font = "20px Arial";
         ctx.fillStyle = "black";
         ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
