@@ -9,10 +9,25 @@
   |
   <%= link_to 'Recently Updated', :sort => "updated_at" %>
 
-  <%= form_tag(project_index_path, method: :get) do %>
-    <%= text_field_tag :search %>
-    <%= submit_tag 'Search Title' %>
-  <% end %>
+  <br>
+  <br>
+    <%= form_tag project_index_path, :method => 'get' do %>
+      <%= text_field_tag :title_search, params[:title_search], class: "form-control", placeholder: "Search Title" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
+      <%= link_to 'Clear Search', project_index_path, class: "button" %>
+    <% end %>
+
+    <%= form_tag project_index_path, :method => 'get' do %>
+       <%= text_field_tag :body_search, params[:body_search], class: "form-control", placeholder: "Search Body" %>
+       <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
+       <%= link_to 'Clear Search', project_index_path, class: "button" %>
+    <% end %>
+
+    <%= form_tag project_index_path, :method => 'get' do %>
+      <%= text_field_tag :author_search, params[:author_search], class: "form-control", placeholder: "Search Author" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
+      <%= link_to 'Clear Search', project_index_path, class: "button" %>
+    <% end %>
 
   <% @projects.each do |project| %>
     <div class="project">

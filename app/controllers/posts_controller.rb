@@ -14,8 +14,12 @@ class PostsController < ApplicationController
 			@posts = Post.all.order("title DESC")
 		elsif params[:sort] == 'popularity'
 			@posts = Post.all.order(cached_votes_score: :desc)
-		elsif params[:search]
-	    @posts = Post.where('title LIKE ?', "%#{params[:search]}%")
+		elsif params[:title_search]
+	    @posts = Post.where('title LIKE ?', "%#{params[:title_search]}%")
+		elsif params[:body_search]
+			@posts = Post.where('content LIKE ?', "%#{params[:body_search]}%")
+		elsif params[:author_search]
+			@posts = Post.where('author LIKE ?', "%#{params[:author_search]}%")
 		else
 			@posts = Post.all
 		end
