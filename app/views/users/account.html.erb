@@ -18,6 +18,15 @@
     <% end %>
   <% end %>
   </div>
+<br>
+  <div style="background:lightgray; border-radius:5px; padding:10px;">
+   Current Tasks:
+    <br>
+    <% current_user.tasks.each do |task| %>
+      <%= link_to task.title, task %>
+      <br>
+    <% end %>
+  </div>
 
 <% end %>
 <% if !user_signed_in? %>
