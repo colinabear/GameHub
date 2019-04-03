@@ -14,7 +14,8 @@
     <% if current_user.voted_up_for? post %>
       >
       <%= link_to post.title, post %>
-      <br>
+       by
+      <%= post.user.email %><br>
     <% end %>
   <% end %>
   </div>
@@ -24,7 +25,7 @@
     <br>
     <% current_user.tasks.each do |task| %>
       <% if task.accepted %>
-        <%= link_to task.title, task %>
+        <%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> )
       <% end %>
       <br>
     <% end %>
