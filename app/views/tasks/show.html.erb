@@ -1,5 +1,6 @@
 <div id="task_content">
   <%= link_to "Back to Jobs", task_index_path, class: "button" %>
+  <%= link_to "See game for this job", @task.project, class: "button" %>
   <h1>
     <%= @task.title %>
   </h1>
