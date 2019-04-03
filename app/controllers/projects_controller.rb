@@ -3,7 +3,17 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @projects = Project.all.order("created_at DESC")
+    if params[:sort] == 'updated_at'
+      @projects = Project.all.order("updated_at DESC")
+    elsif params[:sort] == 'created_at'
+      @projects = Project.all.order("created_at DESC")
+    elsif params[:sort] == 'name'
+      @projects = Project.all.order("name ASC")
+    elsif params[:sort] == 'name_reverse'
+      @projects = Project.all.order("name DESC")
+    else
+      @projects = Project.all.order("created_at DESC")
+    end
   end
 
   def show
@@ -40,6 +50,12 @@ class ProjectsController < ApplicationController
       task.destroy
     end
     @project.destroy
+    redirect_to project_index_path
+  end
+
+  def upvote
+    @project = Project.find(params[:id])
+    @project.upvote_by current_user
     redirect_to project_index_path
   end
 
