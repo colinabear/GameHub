@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :status, presence: true
-  validates :user_id, presence: false
+  validates :user_id, presence: true
   belongs_to :project
   belongs_to :user
 end

@@ -11,6 +11,8 @@ class ProjectsController < ApplicationController
       @projects = Project.all.order("name ASC")
     elsif params[:sort] == 'name_reverse'
       @projects = Project.all.order("name DESC")
+    elsif params[:search]
+      @projects = Project.where('name LIKE ?', "%#{params[:search]}%")
     else
       @projects = Project.all.order("created_at DESC")
     end
@@ -66,7 +68,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :author, :team_members, :progress)
+    params.require(:project).permit(:name, :description, :author, :team_members, :progress, :search)
   end
 
 end

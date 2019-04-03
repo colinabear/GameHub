@@ -11,6 +11,11 @@
   |
   <%= link_to 'Recently Updated', :sort => "updated_at" %>
 
+  <%= form_tag(post_index_path, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag 'Search Title' %>
+  <% end %>
+
   <% @posts.each do |post| %>
     <div class="post">
       <div style="display: inline-block;">

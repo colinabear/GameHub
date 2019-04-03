@@ -15,7 +15,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks
+  resources :tasks do
+    put 'accept_task', to: 'tasks#accept_task'
+    put 'drop_task', to: 'tasks#drop_task'
+  end
 
   root 'pages#home'
 
@@ -26,8 +29,6 @@ Rails.application.routes.draw do
   get 'task_index' => 'tasks#index', as: 'task_index'
 
   get 'account' => 'users#account', as: 'account'
-
-  get 'accept_task' => 'tasks#accept_task', as: 'accept_task'
 
   get 'kanban' => 'users#kanban', as: 'kanban'
 
