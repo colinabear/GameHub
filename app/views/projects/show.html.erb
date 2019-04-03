@@ -1,3 +1,16 @@
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    #rcorners2 {
+      border-radius: 25px;
+      border: 1px solid #397CAC;
+      padding: 20px;
+      width: 100%;
+    }
+</style>
+
+
 <div id="project_content">
   <%= link_to "Back to Games", project_index_path, class: "button" %>
   <h1>
@@ -6,21 +19,28 @@
   <h4>
     <%= @project.description %>
   </h4>
-  Author:
-  <h5>
-    <%= @project.author %>
-  </h5>
-  Team:
-  <h5>
-    <%= @project.team_members %>
-  </h5>
-  Progress:
-  <h5>
-    <%= @project.progress %>
-  </h5>
-  <h3>
+
+  <div id="rcorners2">
+    <label>Author:</label>
+    <h5><%= @project.author %></h5>
+  </div>
+<p></p>
+
+  <div id="rcorners2">
+    <label>Team:<label>
+    <h5><%= @project.team_members %></h5>
+  </div>
+  <p></p>
+
+  <div id="rcorners2">
+    <label>Progress:<label>
+    <h5><%= @project.progress %></h5>
+  </div>
+  <p></p>
+
+  <h2>
     Tasks
-  </h3>
+  </h2>
   <% if user_signed_in? %>
     <% if current_user.id == @project.user_id %>
       <%= render 'tasks/form' %>
