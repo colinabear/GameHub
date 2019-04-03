@@ -5,3 +5,8 @@
   <%= link_to "New Post", new_post_path, class: "button" %>
   <%= link_to "New Project", new_project_path, class: "button" %>
 <% end %>
+<% if !user_signed_in? %>
+  <%= link_to "Sign Up", new_user_registration_path, class: "button" %>
+  <span> or &nbsp;&nbsp;&nbsp;</span>
+  <%= link_to "Sign In!", new_user_session_path, class: "button" %>
+<% end %>
