@@ -15,14 +15,10 @@
         <%= link_to task.title, task %>
       </h2>
       <p class="date">
-        For
-        <%= task.project.name %>
-      </p>
-      <p class="date">
         Published
         <%= time_ago_in_words(task.created_at) %>
         ago to
-        <%= task.project.name %>
+        <%= link_to task.project.name, task.project %>
       </p>
     </div>
   <% end %>
