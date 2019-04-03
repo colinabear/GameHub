@@ -12,8 +12,10 @@
   </h5>
   <h5>
     Assigned to
-    <% if @task.user == nil %>
+    <% if !@task.accepted %>
       <p> No one, yet </p>
+      <%= @task.id %>
+      <%= link_to "Accept Task", task_accept_task_path(@task), method: :put, class: "button" %>
     <% else %>
       <p>
         <%= @task.user.email %>
