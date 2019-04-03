@@ -19,6 +19,16 @@ body {
 	background: #EDEFF0;
 }
 
+a:link, a:visited {
+	color: #397CAC;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #265373;
+	text-decoration: none;
+}
+
 .wrapper {
 	width: 60%;
 	max-width: 1140px;
