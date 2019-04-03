@@ -1,0 +1,28 @@
+<%= simple_form_for(resource, url: registration_path(resource_name)) do |f| %>
+<%= f.error_notification %>
+
+<body>
+  <div class="form-inputs">
+    <h1>Register</h1>
+      <p>Please fill in this form to create an account.</p>
+    <hr>
+
+      <label for="email"><b>Email</b></label>
+      <p><%= f.text_field :email %></p>
+
+      <label for="psw"><b>Password</b></label>
+        <p>Password must be six characters long</p>
+        <p><%= f.password_field :password %></p>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+        <p><%= f.password_field :password_confirmation %></p>
+    <hr>
+
+    <div class="form-actions">
+        <button type="sessions">Register</button>
+    </div>
+  </div>
+</body>
+
+<%= render "devise/shared/links" %>
+<% end %>
