@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
-  Welcome, <%= current_user.email %>!
+<h2>Welcome, <%= current_user.email %>!</h2>
+<p> What would you like to do now?</p>
   <br>
   <br>
   <%= link_to "New Post", new_post_path, class: "button" %>
