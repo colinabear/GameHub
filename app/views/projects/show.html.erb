@@ -52,6 +52,13 @@
     <p class="desc">
       <%= task.description %>
     </p>
+    <p class="user">
+      <% if task.accepted %>
+        <%= task.user.try(:email) %>
+      <% else %>
+        [Still Available]
+      <% end %>
+    </p>
   <% end %>
 </div>
 
@@ -61,6 +68,7 @@
     var tasks = document.getElementsByClassName("task");
     var tasksStatus = document.getElementsByClassName("status");
     var tasksDesc = document.getElementsByClassName("desc");
+    var tasksUsers = document.getElementsByClassName("user");
     var c = document.getElementById("myCanvas");
     var bg = document.getElementById("background");
     var bgCtx = bg.getContext("2d");
@@ -154,6 +162,9 @@
         ctx.font = "24px Arial";
         ctx.fillStyle = "black";
         ctx.fillText(desc, x+10, y+60);
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
     }
 
     function checkHeight(current) {

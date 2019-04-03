@@ -9,12 +9,12 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to project_path(@project)
     else
-      render 'new'
+
     end
   end
 
   def edit
-    @post = Post.find(params[:project_id])
+    @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
   end
 
