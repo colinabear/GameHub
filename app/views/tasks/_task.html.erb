@@ -1,19 +1,26 @@
 <div class="comment clearfix">
   <div class="content">
-    <p class="comment_content">
-      <%= task.title %>
+    <p class="task">
+      <%= link_to task.title, task %>
+    </p>
+    <p class="desc">
       <%= task.description %>
     </p>
-    <p class="comment_author">
-      <% if task.user == nil%>
-        No one, yet!
+    <p class="status">
+      <%= task.status %>
+    </p>
+    <p class="user">
+      <% if task.accepted %>
+          <%= task.user.try(:email) %>
+        <% if task.user == current_user %>
+        <% end %>
       <% else %>
-        <%= task.user.email %>
+        [Still Available]
       <% end %>
     </p>
   </div>
   <div class="buttons">
-    <% if current_user == task.user %>
+    <% if current_user == task.project.user %>
       <%= link_to "Edit", edit_project_task_path(task.project, task) %>
       <%= link_to "Delete", [task.project, task], method: :delete, data: { confirm: "Are you sure?" } %>
     <% end %>
