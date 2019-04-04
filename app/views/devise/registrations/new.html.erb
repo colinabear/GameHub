@@ -3,26 +3,25 @@
 
 <body>
   <div class="form-inputs">
-    <h1>Register</h1>
+    <h2>Register</h2>
       <p>Please fill in this form to create an account.</p>
-    <hr>
+    <div class="container">
+      <label for="uname"><b>Email</b></label>
+      <p><%= f.text_field :email, autocomplete: 'off' %></p>
 
-      <label for="email"><b>Email</b></label>
-      <p><%= f.text_field :email %></p>
-
-      <label for="psw"><b>Password</b></label>
-        <p>Password must be six characters long</p>
+      <label for="psw">
+        <p><b>Password</b> | <i>Password must be at least 6 characters</i></p>
+      </label>
         <p><%= f.password_field :password %></p>
 
-      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <label for="psw-repeat"><b>Password Confirmation</b></label>
         <p><%= f.password_field :password_confirmation %></p>
-    <hr>
 
-    <div class="form-actions">
-        <button type="sessions">Register</button>
+      <div class="form-actions">
+          <%= f.submit "Register", class: "button" %>
+      </div>
+      <%= render "devise/shared/links" %>
+      <% end %>
     </div>
   </div>
 </body>
-
-<%= render "devise/shared/links" %>
-<% end %>
