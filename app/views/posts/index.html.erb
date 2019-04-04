@@ -14,19 +14,7 @@
 <br>
 <br>
   <%= form_tag post_index_path, :method => 'get' do %>
-    <%= text_field_tag :title_search, params[:title_search], class: "form-control", placeholder: "Search Title" %>
-    <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
-    <%= link_to 'Clear Search', post_index_path, class: "button" %>
-  <% end %>
-
-  <%= form_tag post_index_path, :method => 'get' do %>
-     <%= text_field_tag :body_search, params[:body_search], class: "form-control", placeholder: "Search Body" %>
-     <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
-     <%= link_to 'Clear Search', post_index_path, class: "button" %>
-  <% end %>
-
-  <%= form_tag post_index_path, :method => 'get' do %>
-    <%= text_field_tag :author_search, params[:author_search], class: "form-control", placeholder: "Search Author" %>
+    <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search for Title, Content, or Author" %>
     <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
     <%= link_to 'Clear Search', post_index_path, class: "button" %>
   <% end %>

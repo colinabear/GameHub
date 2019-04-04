@@ -11,12 +11,8 @@ class ProjectsController < ApplicationController
       @projects = Project.all.order("name ASC")
     elsif params[:sort] == 'name_reverse'
       @projects = Project.all.order("name DESC")
-    elsif params[:title_search]
-      @projects = Project.where('name LIKE ?', "%#{params[:title_search]}%")
-    elsif params[:body_search]
-      @projects = Project.where('description LIKE ?', "%#{params[:body_search]}%")
-    elsif params[:author_search]
-      @projects = Project.where('author LIKE ?', "%#{params[:author_search]}%")
+    elsif params[:search]
+      @projects = Project.where('name LIKE ?', "%#{params[:search]}%") + Project.where('description LIKE ?', "%#{params[:search]}%") + Project.where('author LIKE ?', "%#{params[:search]}%")
     else
       @projects = Project.all.order("created_at DESC")
     end
