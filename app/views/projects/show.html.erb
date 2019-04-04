@@ -42,10 +42,11 @@
   </div>
   <p></p>
 
+  <% if user_signed_in? %>
   <h2>
     Tasks
   </h2>
-  <% if user_signed_in? %>
+    <%= render @project.tasks %>
     <% if current_user.id == @project.user_id %>
       <%= render 'tasks/form' %>
     <% end %>
@@ -59,169 +60,150 @@
   <% end %>
 </div>
 
+<% @project.tasks.each do |task| %>
+  <% if task.user == current_user || @project.user == current_user %>
+    <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
+      <canvas id="background" style="position: absolute; z-index: 0; width:100%;"></canvas>
+      <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
+    </div>
+    <!-- Put tasks in a dummy HTML element. -->
+    <script>
 
-<div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
-  <canvas id="background" style="position: absolute; z-index: 0; width:100%;"></canvas>
-  <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
-</div>
-<!-- Put tasks in a dummy HTML element. -->
-<div style= "font-size: 0px">
-  <% @project.tasks.each do |task| %>
-    <p class="task">
-      <%= task.title %>
-    </p>
-    <p class="status">
-      <%= task.status %>
-    </p>
-    <p class="desc">
-      <%= task.description %>
-    </p>
-    <p class="user">
-      <% if task.accepted %>
-        <%= task.user.try(:email) %>
-      <% else %>
-        [Still Available]
-      <% end %>
-    </p>
-  <% end %>
-</div>
-
-
-<script>
-
-    var tasks = document.getElementsByClassName("task");
-    var tasksStatus = document.getElementsByClassName("status");
-    var tasksDesc = document.getElementsByClassName("desc");
-    var tasksUsers = document.getElementsByClassName("user");
-    var c = document.getElementById("myCanvas");
-    var bg = document.getElementById("background");
-    var bgCtx = bg.getContext("2d");
-    var ctx = c.getContext("2d");
-    ctx.font = "24px Arial";
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
-    var canvasWidth = c.width;
-    var canvasHeight = c.height;
-    //alert(canvasWidth);
-    var startingHeight = 50;
-    var toDoX = 0;
-    var toDoY = startingHeight;
-    var inProgX = canvasWidth/3;
-    var inProgY = startingHeight;
-    var recentCompletedX = 2*canvasWidth/3;
-    var recentCompletedY = startingHeight;
-    var grd = bgCtx.createLinearGradient(0,0,0,300);
-    var count = 0;
-    initializeKanban();
-
-
-    function initializeKanban() {
-        buildBackGround();
-        ctx.rect(0,0,canvasWidth/3,40);
-        ctx.fillStyle = "blue";
-        ctx.fill();
-        ctx.font = "30px Arial";
-        ctx.fillStyle = "white";
-        ctx.fillText("To Do", 10, 30);
-        ctx.beginPath();
-        ctx.rect(canvasWidth/3,0,2*canvasWidth/3,40);
-        ctx.fillStyle = "salmon";
-        ctx.fill();
-        ctx.font = "30px Arial";
-        ctx.fillStyle = "white";
-        ctx.fillText("In Progress", canvasWidth/3+10, 30);
-        ctx.beginPath();
-        ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,40);
-        ctx.fillStyle = "green";
-        ctx.fill();
-        ctx.font = "30px Arial";
-        ctx.fillStyle = "white";
-        ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
-        for(var i = 0; i<tasks.length; i++) {
-            addSquare(tasksStatus[count].innerText);
-            count++;
-        }
-    }
-
-
-    function addSquare(choice) {
-        var title = tasks[count].innerText;
-        title = title.substring(0,40);
-        var desc = tasksDesc[count].innerText;
-
-        if(choice == "todo"){
-            checkHeight(toDoY);
-            createRect(toDoX,toDoY,"blue", title, desc);
-            toDoY+=170;
-        }
-        else if(choice == "inProg") {
-            checkHeight(inProgY);
-            createRect(inProgX,inProgY,"salmon", title, desc);
-            inProgY+=170;
-        }
-        else if(choice == "recent") {
-            checkHeight(recentCompletedY);
-            createRect(recentCompletedX,recentCompletedY,"green", title, desc);
-            recentCompletedY+=170;
-        }
-    }
-
-
-    function createRect(x,y,color, title, desc) {
-        ctx.beginPath();
-        ctx.rect(x+5,y,canvasWidth/3-10,40);
-        grd = ctx.createLinearGradient(x,y,x,y+40);
-        grd.addColorStop(0,"light"+color);
-        grd.addColorStop(1,color);
-        ctx.fillStyle = grd;
-        ctx.fill();
-        ctx.beginPath();
-        ctx.rect(x+5,y+40,canvasWidth/3-10,120);
-        ctx.fillStyle = "light"+color;
-        ctx.fill();
+        var tasks = document.getElementsByClassName("task");
+        var tasksStatus = document.getElementsByClassName("status");
+        var tasksDesc = document.getElementsByClassName("desc");
+        var tasksUsers = document.getElementsByClassName("user");
+        var c = document.getElementById("myCanvas");
+        var bg = document.getElementById("background");
+        var bgCtx = bg.getContext("2d");
+        var ctx = c.getContext("2d");
         ctx.font = "24px Arial";
-        ctx.fillStyle = "white";
-        ctx.fillText(title, x+10, y+30);
-        ctx.font = "24px Arial";
-        ctx.fillStyle = "black";
-        var lineMove = 0;
-        for(var i = 0; i<desc.length; i+=40) {
-          var line = desc.substring(i,i+40);
-          //alert(line);
-          ctx.fillText(line, x+10, y+60+lineMove);
-          lineMove+=25;
-        }
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
-    }
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+        var canvasWidth = c.width;
+        var canvasHeight = c.height;
+        //alert(canvasWidth);
+        var startingHeight = 50;
+        var toDoX = 0;
+        var toDoY = startingHeight;
+        var inProgX = canvasWidth/3;
+        var inProgY = startingHeight;
+        var recentCompletedX = 2*canvasWidth/3;
+        var recentCompletedY = startingHeight;
+        var grd = bgCtx.createLinearGradient(0,0,0,300);
+        var count = 0;
+        initializeKanban();
 
-    function checkHeight(current) {
-        if(current>=canvasHeight-160){
-            var imgData = ctx.getImageData(0, 0, canvasWidth, canvasHeight-10);
-            canvasHeight += 170;
-            document.getElementById("myCanvas").height = canvasHeight;
-            document.getElementById("background").height = canvasHeight;
+
+        function initializeKanban() {
             buildBackGround();
-            ctx.putImageData(imgData, 0, 0);
+            ctx.rect(0,0,canvasWidth/3,40);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "white";
+            ctx.fillText("To Do", 10, 30);
+            ctx.beginPath();
+            ctx.rect(canvasWidth/3,0,2*canvasWidth/3,40);
+            ctx.fillStyle = "salmon";
+            ctx.fill();
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "white";
+            ctx.fillText("In Progress", canvasWidth/3+10, 30);
+            ctx.beginPath();
+            ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,40);
+            ctx.fillStyle = "green";
+            ctx.fill();
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "white";
+            ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
+            for(var i = 0; i<tasks.length; i++) {
+                addSquare(tasksStatus[count].innerText);
+                count++;
+            }
+        }
+
+
+        function addSquare(choice) {
+            var title = tasks[count].innerText;
+            title = title.substring(0,40);
+            var desc = tasksDesc[count].innerText;
+
+            if(choice == "todo"){
+                checkHeight(toDoY);
+                createRect(toDoX,toDoY,"blue", title, desc);
+                toDoY+=170;
+            }
+            else if(choice == "inProg") {
+                checkHeight(inProgY);
+                createRect(inProgX,inProgY,"salmon", title, desc);
+                inProgY+=170;
+            }
+            else if(choice == "recent") {
+                checkHeight(recentCompletedY);
+                createRect(recentCompletedX,recentCompletedY,"green", title, desc);
+                recentCompletedY+=170;
+            }
+        }
+
+
+        function createRect(x,y,color, title, desc) {
+            ctx.beginPath();
+            ctx.rect(x+5,y,canvasWidth/3-10,40);
+            grd = ctx.createLinearGradient(x,y,x,y+40);
+            grd.addColorStop(0,"light"+color);
+            grd.addColorStop(1,color);
+            ctx.fillStyle = grd;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(x+5,y+40,canvasWidth/3-10,120);
+            ctx.fillStyle = "light"+color;
+            ctx.fill();
             ctx.font = "24px Arial";
+            ctx.fillStyle = "white";
+            ctx.fillText(title, x+10, y+30);
+            ctx.font = "24px Arial";
+            ctx.fillStyle = "black";
+            var lineMove = 0;
+            for(var i = 0; i<desc.length; i+=40) {
+              var line = desc.substring(i,i+40);
+              //alert(line);
+              ctx.fillText(line, x+10, y+60+lineMove);
+              lineMove+=25;
+            }
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
         }
-    }
 
-    function buildBackGround() {
-        bgCtx.beginPath();
-        var bgGrd = bgCtx.createLinearGradient(0,0,0,300);
-        bgGrd.addColorStop(0,"gray");
-        bgGrd.addColorStop(1,"darkgray");
-        bgCtx.fillStyle = bgGrd;
-        bgCtx.fillRect(0,0,canvasWidth,canvasHeight);
-        for(var i = 1; i<=2; i++) {
+        function checkHeight(current) {
+            if(current>=canvasHeight-160){
+                var imgData = ctx.getImageData(0, 0, canvasWidth, canvasHeight-10);
+                canvasHeight += 170;
+                document.getElementById("myCanvas").height = canvasHeight;
+                document.getElementById("background").height = canvasHeight;
+                buildBackGround();
+                ctx.putImageData(imgData, 0, 0);
+                ctx.font = "24px Arial";
+            }
+        }
+
+        function buildBackGround() {
             bgCtx.beginPath();
-            bgCtx.moveTo(i*canvasWidth/3, 0);
-            bgCtx.lineTo(i*canvasWidth/3, canvasHeight);
-            bgCtx.stroke();
+            var bgGrd = bgCtx.createLinearGradient(0,0,0,300);
+            bgGrd.addColorStop(0,"gray");
+            bgGrd.addColorStop(1,"darkgray");
+            bgCtx.fillStyle = bgGrd;
+            bgCtx.fillRect(0,0,canvasWidth,canvasHeight);
+            for(var i = 1; i<=2; i++) {
+                bgCtx.beginPath();
+                bgCtx.moveTo(i*canvasWidth/3, 0);
+                bgCtx.lineTo(i*canvasWidth/3, canvasHeight);
+                bgCtx.stroke();
+            }
         }
-    }
 
 
-</script>
+    </script>
+  <% end %>
+<% end %>

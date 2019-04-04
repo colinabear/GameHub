@@ -23,4 +23,8 @@
         <% end %>
     <% end %>
   </h5>
+  <% if @task.project.user == current_user %>
+  <%= link_to "Edit", edit_task_path(@task.project), class: "button" %>
+  <%= link_to "Delete", task_path(@task.project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+  <% end %>
 </div>
