@@ -22,13 +22,17 @@
 
   <div id="rcorners2">
     <label>Author:</label>
-    <h5><%= @project.author %></h5>
+    <h5><%= @project.user.email %></h5>
   </div>
 <p></p>
 
   <div id="rcorners2">
-    <label>Team:<label>
-    <h5><%= @project.team_members %></h5>
+    <label>Team:</label>
+      <% @project.tasks.each do |task| %>
+        <% if task.accepted %>
+          <h5><%= task.user.email %></h5>
+        <% end %>
+      <% end %>
   </div>
   <p></p>
 
