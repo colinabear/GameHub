@@ -19,6 +19,9 @@ Rails.application.configure do
   # `config/secrets.yml.key`.
   config.read_encrypted_secrets = true
 
+  # The log told me to do this, so here it is.
+  config.secret_key = '3ed355310c0c2668d0661284e95590ba528cb59cbc7e838ba594140ce590a3f522ab438fd94996a14883e2407810973843b3a320945ad88cad3e4d7bd84a9628'
+
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
