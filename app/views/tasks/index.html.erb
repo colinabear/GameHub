@@ -8,6 +8,13 @@
   <%= link_to 'Z-A', :sort => "name_reverse" %>
   |
   <%= link_to 'Recently Updated', :sort => "updated_at" %>
+
+  <br>
+  <br>
+  <%= form_tag task_index_path, :method => 'get' do %>
+    <%= text_field_tag :project_search, params[:project_search], autocomplete: "off", class: "form-control", placeholder: "Search Project" %>
+  <% end %>
+
   <% @tasks.each do |task| %>
     <div class="project">
       <h2 class="title">

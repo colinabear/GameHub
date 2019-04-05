@@ -68,26 +68,21 @@
 <% @project.tasks.each do |task| %>
   <% if task.user == current_user || @project.user == current_user %>
     <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
-      <canvas id="background" style="position: absolute; z-index: 0; width:100%;"></canvas>
       <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
     </div>
     <!-- Put tasks in a dummy HTML element. -->
     <script>
-
         var tasks = document.getElementsByClassName("task");
         var tasksStatus = document.getElementsByClassName("status");
         var tasksDesc = document.getElementsByClassName("desc");
         var tasksUsers = document.getElementsByClassName("user");
         var c = document.getElementById("myCanvas");
-        var bg = document.getElementById("background");
-        var bgCtx = bg.getContext("2d");
         var ctx = c.getContext("2d");
         ctx.font = "24px Arial";
         c.width = window.innerWidth;
         c.height = window.innerHeight;
         var canvasWidth = c.width;
         var canvasHeight = c.height;
-        //alert(canvasWidth);
         var startingHeight = 50;
         var toDoX = 0;
         var toDoY = startingHeight;
@@ -95,12 +90,14 @@
         var inProgY = startingHeight;
         var recentCompletedX = 2*canvasWidth/3;
         var recentCompletedY = startingHeight;
-        var grd = bgCtx.createLinearGradient(0,0,0,300);
+        var grd = ctx.createLinearGradient(0,0,0,300);
         var count = 0;
         initializeKanban();
 
 
         function initializeKanban() {
+            ctx.clearRect(0, 0, c.width, c.height);
+            checkHeight();
             buildBackGround();
             ctx.rect(0,0,canvasWidth/3,40);
             ctx.fillStyle = "blue";
@@ -135,17 +132,14 @@
             var desc = tasksDesc[count].innerText;
 
             if(choice == "todo"){
-                checkHeight(toDoY);
                 createRect(toDoX,toDoY,"blue", title, desc);
                 toDoY+=170;
             }
             else if(choice == "inProg") {
-                checkHeight(inProgY);
                 createRect(inProgX,inProgY,"salmon", title, desc);
                 inProgY+=170;
             }
             else if(choice == "recent") {
-                checkHeight(recentCompletedY);
                 createRect(recentCompletedX,recentCompletedY,"green", title, desc);
                 recentCompletedY+=170;
             }
@@ -181,30 +175,24 @@
             ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
         }
 
-        function checkHeight(current) {
-            if(current>=canvasHeight-160){
-                var imgData = ctx.getImageData(0, 0, canvasWidth, canvasHeight-10);
-                canvasHeight += 170;
-                document.getElementById("myCanvas").height = canvasHeight;
-                document.getElementById("background").height = canvasHeight;
-                buildBackGround();
-                ctx.putImageData(imgData, 0, 0);
-                ctx.font = "24px Arial";
+        function checkHeight() {
+            if(tasks.length>5) {
+              document.getElementById("myCanvas").height = tasks.length*200;
             }
         }
 
         function buildBackGround() {
-            bgCtx.beginPath();
-            var bgGrd = bgCtx.createLinearGradient(0,0,0,300);
+            ctx.beginPath();
+            var bgGrd = ctx.createLinearGradient(0,0,0,300);
             bgGrd.addColorStop(0,"gray");
             bgGrd.addColorStop(1,"darkgray");
-            bgCtx.fillStyle = bgGrd;
-            bgCtx.fillRect(0,0,canvasWidth,canvasHeight);
+            ctx.fillStyle = bgGrd;
+            ctx.fillRect(0,0,c.width,c.height);
             for(var i = 1; i<=2; i++) {
-                bgCtx.beginPath();
-                bgCtx.moveTo(i*canvasWidth/3, 0);
-                bgCtx.lineTo(i*canvasWidth/3, canvasHeight);
-                bgCtx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(i*c.width/3, 0);
+                ctx.lineTo(i*c.width/3, c.height);
+                ctx.stroke();
             }
         }
 
