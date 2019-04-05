@@ -7,6 +7,7 @@ form {border: 3px solid #f1f1f1;}
 }
 
 input[type=text], input[type=password] {
+  color: #E5E5E5;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -14,6 +15,10 @@ input[type=text], input[type=password] {
   border: none;
   background-color: #3F516B;
   box-sizing: border-box;
+}
+
+input[type=text]::placeholder{
+  color: #E5E5E5;
 }
 
 input[type=checkbox] {
