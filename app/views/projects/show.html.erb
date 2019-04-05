@@ -46,7 +46,10 @@
   <h2>
     Tasks
   </h2>
-    <%= render @project.tasks %>
+    <% @project.tasks.each do |task| %>
+      <%= render task %>
+      <%= link_to "Advance Status", task_progress_task_path(task), method: :put %>
+    <% end %>
     <% if current_user.id == @project.user_id %>
       <%= render 'tasks/form' %>
     <% end %>

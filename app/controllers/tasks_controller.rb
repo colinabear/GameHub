@@ -56,6 +56,18 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
+  def progress_task
+    @task = Task.find(params[:task_id])
+    if @task.status == "todo"
+      @task.update_attribute(:status, "inProg")
+    elsif @task.status == "inProg"
+      @task.update_attribute(:status, "recent")
+    elsif @task.status == "recent"
+      @task.update_attribute(:status, "todo")
+    end
+    redirect_to @task.project
+  end
+
   def accept_task
     @task = Task.find(params[:task_id])
     @task.user_id = current_user.id if current_user
