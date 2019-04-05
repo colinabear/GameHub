@@ -4,6 +4,7 @@ class TasksController < ApplicationController
     @task = @project.tasks.create(params[:task].permit(:title, :description, :status))
     @task.user_id = current_user.id if current_user
     @task.accepted = false
+    @task.status = "todo"
     @task.save
 
     if @task.save
@@ -58,13 +59,7 @@ class TasksController < ApplicationController
 
   def progress_task
     @task = Task.find(params[:task_id])
-    if @task.status == "todo"
-      @task.update_attribute(:status, "inProg")
-    elsif @task.status == "inProg"
-      @task.update_attribute(:status, "recent")
-    elsif @task.status == "recent"
-      @task.update_attribute(:status, "todo")
-    end
+    @task.update_attribute(:status, "recent")
     redirect_to @task.project
   end
 
@@ -72,6 +67,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:task_id])
     @task.user_id = current_user.id if current_user
     @task.accepted = true
+    @task.status = "inProg"
     current_user.tasks << @task
     redirect_to @task
   end

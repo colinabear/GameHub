@@ -24,8 +24,8 @@
       <% end %>
     </p>
     <p>
-    <% if current_user == task.user && task.accepted %>
-      <%= link_to "Advance Status", task_progress_task_path(task), method: :put %>
+    <% if current_user == task.user && task.status == "inProg" %>
+      <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
     <% end %>
     <% if current_user == task.project.user %>
       <%= link_to "Edit", edit_project_task_path(task.project, task) %>
