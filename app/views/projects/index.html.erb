@@ -4,6 +4,8 @@
   Sort By:
   <%= link_to 'Newest', :sort => "created_at", :search => params[:search] %>
   |
+  <%= link_to 'Most Popular', :sort => "popularity", :search => params[:search] %>
+  |
   <%= link_to 'A-Z', :sort => "name", :search => params[:search] %>
   |
   <%= link_to 'Z-A', :sort => "name_reverse", :search => params[:search] %>
@@ -24,9 +26,6 @@
           <%= image_tag('upvote.png', draggable:"false", id:"drag1") %>
           <%= project.get_upvotes.size  %>&nbsp;</span>
         <% end %>
-        <span style="border-radius: 5px; display: inline-block; width:40px; background: lightgray; text-align: center;">
-          <%= project.cached_votes_score %>
-        </span>
       </div>
       <div style="display: inline-block;">
         <h2 class="title">
