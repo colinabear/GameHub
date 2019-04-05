@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks
+    put 'progress_task', to: 'tasks#progress_task'
     member do
       put "like", to: "projects#upvote"
     end
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   resources :tasks do
     put 'accept_task', to: 'tasks#accept_task'
     put 'drop_task', to: 'tasks#drop_task'
+    put 'progress_task', to: 'tasks#progress_task'
   end
 
   root 'pages#home'

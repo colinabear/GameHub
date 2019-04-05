@@ -41,13 +41,16 @@
     <h5><%= @project.progress %></h5>
   </div>
   <p></p>
-    <% if user_signed_in? %>
-    <h2>
-      Tasks
-    </h2>
-    <div style="overflow: auto; height: 200px">
-      <%= render @project.tasks %>
-    </div>
+
+  <% if user_signed_in? %>
+  <h2>
+    Tasks
+  </h2>
+  <div style="overflow: auto; height: 275px">
+    <% @project.tasks.each do |task| %>
+      <%= render task %>
+    <% end %>
+  </div>
     <br/>
       <% if current_user.id == @project.user_id %>
         <%= render 'tasks/form' %>

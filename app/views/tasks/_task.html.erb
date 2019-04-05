@@ -24,6 +24,9 @@
       <% end %>
     </p>
     <p>
+    <% if current_user == task.user && task.accepted %>
+      <%= link_to "Advance Status", task_progress_task_path(task), method: :put %>
+    <% end %>
     <% if current_user == task.project.user %>
       <%= link_to "Edit", edit_project_task_path(task.project, task) %>
       <%= link_to "Delete", [task.project, task], method: :delete, data: { confirm: "Are you sure?" } %>
