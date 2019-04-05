@@ -46,21 +46,23 @@
   <h2>
     Tasks
   </h2>
+  <div style="overflow: auto; height: 275px">
     <% @project.tasks.each do |task| %>
       <%= render task %>
-      <%= link_to "Advance Status", task_progress_task_path(task), method: :put %>
     <% end %>
-    <% if current_user.id == @project.user_id %>
-      <%= render 'tasks/form' %>
-    <% end %>
+  </div>
     <br/>
-    <hr/>
-    <br/>
-    <% if current_user.id == @project.user_id %>
-      <%= link_to "Edit", edit_project_path(@project), class: "button" %>
-      <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+      <% if current_user.id == @project.user_id %>
+        <%= render 'tasks/form' %>
+      <% end %>
+      <br/>
+      <hr/>
+      <br/>
+      <% if current_user.id == @project.user_id %>
+        <%= link_to "Edit", edit_project_path(@project), class: "button" %>
+        <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+      <% end %>
     <% end %>
-  <% end %>
 </div>
 
 <% @project.tasks.each do |task| %>

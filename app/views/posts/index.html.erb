@@ -1,6 +1,18 @@
 <div id="posts">
-  <h1> Posts </h1>
+  <h1> <font color=#E5E5E5>Posts</font> </h1>
   <%= link_to "New Post", new_post_path, class: "button" %>
+<<<<<<< HEAD
+  <font color=#E5E5E5>Sort By: </font>
+  <%= link_to 'Newest', :sort => "created_at" %>
+  <font color=#E5E5E5> | </font>
+  <%= link_to 'Most Popular', :sort => "popularity" %>
+  <font color=#E5E5E5> | </font>
+  <%= link_to 'A-Z', :sort => "name" %>
+  <font color=#E5E5E5> | </font>
+  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  <font color=#E5E5E5> | </font>
+  <%= link_to 'Recently Updated', :sort => "updated_at" %>
+=======
   Sort By:
   <%= link_to 'Newest', :sort => "created_at", :search => params[:search] %>
   |
@@ -11,6 +23,7 @@
   <%= link_to 'Z-A', :sort => "name_reverse", :search => params[:search] %>
   |
   <%= link_to 'Recently Updated', :sort => "updated_at", :search => params[:search] %>
+>>>>>>> 3bf7e1acf9ee222eaf3d46399325094daa51ffc3
 <br>
 <br>
   <%= form_tag post_index_path, :method => 'get' do %>
