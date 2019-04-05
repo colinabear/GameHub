@@ -3,19 +3,35 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    if params[:sort] == 'updated_at'
-      @projects = Project.all.order("updated_at DESC")
-    elsif params[:sort] == 'created_at'
-      @projects = Project.all.order("created_at DESC")
-    elsif params[:sort] == 'name'
-      @projects = Project.all.order("name ASC")
-    elsif params[:sort] == 'name_reverse'
-      @projects = Project.all.order("name DESC")
-    elsif params[:search]
-      @projects = Project.where('name LIKE ?', "%#{params[:search]}%") + Project.where('description LIKE ?', "%#{params[:search]}%") + Project.where('author LIKE ?', "%#{params[:search]}%")
-    else
-      @projects = Project.all.order("created_at DESC")
-    end
+    if params[:search]
+  			if params[:sort] == 'updated_at'
+		      @projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("updated_at DESC")
+		    elsif params[:sort] == 'created_at'
+		      @projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("created_at DESC")
+				elsif params[:sort] == 'name'
+					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("name ASC")
+				elsif params[:sort] == 'name_reverse'
+					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("name DESC")
+				elsif params[:sort] == 'popularity'
+					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order(cached_votes_score: :desc)
+				else
+					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("created_at DESC")
+				end
+		else
+				if params[:sort] == 'updated_at'
+					@projects = Project.order("updated_at DESC")
+				elsif params[:sort] == 'created_at'
+					@projects = Project.all.order("created_at DESC")
+				elsif params[:sort] == 'name'
+					@projects = Project.all.order("name ASC")
+				elsif params[:sort] == 'name_reverse'
+					@projects = Project.all.order("name DESC")
+				elsif params[:sort] == 'popularity'
+					@projects = Project.all.order(cached_votes_score: :desc)
+				else
+					@projects = Project.all
+				end
+		end
   end
 
   def show

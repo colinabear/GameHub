@@ -2,13 +2,13 @@
   <h1> Projects </h1>
   <%= link_to "New Project", new_project_path, class: "button" %>
   Sort By:
-  <%= link_to 'Newest', :sort => "created_at" %>
+  <%= link_to 'Newest', :sort => "created_at", :search => params[:search] %>
   |
-  <%= link_to 'A-Z', :sort => "name" %>
+  <%= link_to 'A-Z', :sort => "name", :search => params[:search] %>
   |
-  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  <%= link_to 'Z-A', :sort => "name_reverse", :search => params[:search] %>
   |
-  <%= link_to 'Recently Updated', :sort => "updated_at" %>
+  <%= link_to 'Recently Updated', :sort => "updated_at", :search => params[:search] %>
 
   <br>
   <br>
