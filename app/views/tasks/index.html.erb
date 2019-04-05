@@ -1,19 +1,30 @@
 <div id="projects">
   <h1> Tasks </h1>
   Sort By:
-  <%= link_to 'Newest', :sort => "created_at", class: "link" %>
+  <%= link_to 'Newest', :sort => "created_at", :sorttype => params[:sorttype] %>
   |
-  <%= link_to 'A-Z', :sort => "name" %>
+  <%= link_to 'A-Z', :sort => "name", :sorttype => params[:sorttype]  %>
   |
-  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  <%= link_to 'Z-A', :sort => "name_reverse", :sorttype => params[:sorttype] %>
   |
-  <%= link_to 'Recently Updated', :sort => "updated_at" %>
-
+  <%= link_to 'Recently Updated', :sort => "updated_at", :sorttype => params[:sorttype] %>
   <br>
-  <br>
-  <%= form_tag task_index_path, :method => 'get' do %>
-    <%= text_field_tag :project_search, params[:project_search], autocomplete: "off", class: "form-control", placeholder: "Search Project" %>
-  <% end %>
+  Type:
+  <%= link_to 'Programming', :sorttype => "programming", :sort => params[:sort] %>
+  |
+  <%= link_to 'Music', :sorttype => "music", :sort => params[:sort] %>
+  |
+  <%= link_to 'Art', :sorttype => "art", :sort => params[:sort] %>
+  |
+  <%= link_to 'Story', :sorttype => "story", :sort => params[:sort] %>
+  |
+  <%= link_to 'Level Design', :sorttype => "level", :sort => params[:sort] %>
+  |
+  <%= link_to 'Puzzles', :sorttype => "puzzles", :sort => params[:sort] %>
+  |
+  <%= link_to 'Miscellaneous', :sorttype => "misc", :sort => params[:sort] %>
+  |
+  <%= link_to 'Clear Search', task_index_path %>
 
   <% @tasks.each do |task| %>
     <div class="project">
