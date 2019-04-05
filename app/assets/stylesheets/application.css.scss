@@ -16,11 +16,11 @@
 
 body {
 	font-family: 'Lato', sans-serif;
-	background: #EDEFF0;
+	background: #131c29;
 }
 
 a:link, a:visited {
-	color: #397CAC;
+	color: #37AD4E;
 	text-decoration: none;
 }
 
@@ -73,10 +73,20 @@ a:hover {
 	}
 }
 
+form{
+	border: none;
+}
+
 #posts {
-	background: white;
+	background: #192231;
 	padding: 2em 5%;
 	border-radius: .5em;
+
+	.button{
+		color: #E5E5E5;
+		background-color: #37AD4E;
+		border: none;
+	}
 	.post {
 		margin: 1em 0;
 		padding: 1em 0;
@@ -196,7 +206,7 @@ a:hover {
 }
 
 #projects {
-				background: white;
+				background: #192231;
 				padding: 2em 5%;
 				border-radius: .5em;
 				.project {
