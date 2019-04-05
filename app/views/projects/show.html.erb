@@ -10,7 +10,6 @@
     }
 </style>
 
-
 <div id="project_content">
   <%= link_to "Back to Games", project_index_path, class: "button" %>
   <h1>
@@ -71,132 +70,151 @@
       <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
     </div>
     <!-- Put tasks in a dummy HTML element. -->
-    <script>
-        var tasks = document.getElementsByClassName("task");
-        var tasksStatus = document.getElementsByClassName("status");
-        var tasksDesc = document.getElementsByClassName("desc");
-        var tasksUsers = document.getElementsByClassName("user");
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-        ctx.font = "24px Arial";
-        c.width = window.innerWidth;
-        c.height = window.innerHeight;
-        var canvasWidth = c.width;
-        var canvasHeight = c.height;
-        var startingHeight = 50;
-        var toDoX = 0;
-        var toDoY = startingHeight;
-        var inProgX = canvasWidth/3;
-        var inProgY = startingHeight;
-        var recentCompletedX = 2*canvasWidth/3;
-        var recentCompletedY = startingHeight;
-        var grd = ctx.createLinearGradient(0,0,0,300);
-        var count = 0;
-        initializeKanban();
 
-
-        function initializeKanban() {
-            ctx.clearRect(0, 0, c.width, c.height);
-            checkHeight();
-            buildBackGround();
-            ctx.rect(0,0,canvasWidth/3,40);
-            ctx.fillStyle = "blue";
-            ctx.fill();
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "white";
-            ctx.fillText("To Do", 10, 30);
-            ctx.beginPath();
-            ctx.rect(canvasWidth/3,0,2*canvasWidth/3,40);
-            ctx.fillStyle = "salmon";
-            ctx.fill();
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "white";
-            ctx.fillText("In Progress", canvasWidth/3+10, 30);
-            ctx.beginPath();
-            ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,40);
-            ctx.fillStyle = "green";
-            ctx.fill();
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "white";
-            ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
-            for(var i = 0; i<tasks.length; i++) {
-                addSquare(tasksStatus[count].innerText);
-                count++;
-            }
-        }
-
-
-        function addSquare(choice) {
-            var title = tasks[count].innerText;
-            title = title.substring(0,40);
-            var desc = tasksDesc[count].innerText;
-
-            if(choice == "todo"){
-                createRect(toDoX,toDoY,"blue", title, desc);
-                toDoY+=170;
-            }
-            else if(choice == "inProg") {
-                createRect(inProgX,inProgY,"salmon", title, desc);
-                inProgY+=170;
-            }
-            else if(choice == "recent") {
-                createRect(recentCompletedX,recentCompletedY,"green", title, desc);
-                recentCompletedY+=170;
-            }
-        }
-
-
-        function createRect(x,y,color, title, desc) {
-            ctx.beginPath();
-            ctx.rect(x+5,y,canvasWidth/3-10,40);
-            grd = ctx.createLinearGradient(x,y,x,y+40);
-            grd.addColorStop(0,"light"+color);
-            grd.addColorStop(1,color);
-            ctx.fillStyle = grd;
-            ctx.fill();
-            ctx.beginPath();
-            ctx.rect(x+5,y+40,canvasWidth/3-10,120);
-            ctx.fillStyle = "light"+color;
-            ctx.fill();
-            ctx.font = "24px Arial";
-            ctx.fillStyle = "white";
-            ctx.fillText(title, x+10, y+30);
-            ctx.font = "24px Arial";
-            ctx.fillStyle = "black";
-            var lineMove = 0;
-            for(var i = 0; i<desc.length; i+=40) {
-              var line = desc.substring(i,i+40);
-              //alert(line);
-              ctx.fillText(line, x+10, y+60+lineMove);
-              lineMove+=25;
-            }
-            ctx.font = "20px Arial";
-            ctx.fillStyle = "black";
-            ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
-        }
-
-        function checkHeight() {
-            if(tasks.length>5) {
-              document.getElementById("myCanvas").height = tasks.length*200;
-            }
-        }
-
-        function buildBackGround() {
-            ctx.beginPath();
-            var bgGrd = ctx.createLinearGradient(0,0,0,300);
-            bgGrd.addColorStop(0,"gray");
-            bgGrd.addColorStop(1,"darkgray");
-            ctx.fillStyle = bgGrd;
-            ctx.fillRect(0,0,c.width,c.height);
-            for(var i = 1; i<=2; i++) {
-                ctx.beginPath();
-                ctx.moveTo(i*c.width/3, 0);
-                ctx.lineTo(i*c.width/3, c.height);
-                ctx.stroke();
-            }
-        }
-
-
-    </script>
   <% end %>
 <% end %>
+<script>
+    var rects = [];
+    var tasks = document.getElementsByClassName("task");
+    var tasksStatus = document.getElementsByClassName("status");
+    var tasksDesc = document.getElementsByClassName("desc");
+    var tasksUsers = document.getElementsByClassName("user");
+    var c = document.getElementById("myCanvas");
+    c.addEventListener("mousedown", doMouseDown, false);
+    var ctx = c.getContext("2d");
+    ctx.font = "24px Arial";
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    var canvasWidth = c.width;
+    var canvasHeight = c.height;
+    var startingHeight = 50;
+    var toDoX = 0;
+    var toDoY = startingHeight;
+    var inProgX = canvasWidth/3;
+    var inProgY = startingHeight;
+    var recentCompletedX = 2*canvasWidth/3;
+    var recentCompletedY = startingHeight;
+    var grd = ctx.createLinearGradient(0,0,0,300);
+    var count = 0;
+    initializeKanban();
+
+
+    function initializeKanban() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        checkHeight();
+        buildBackGround();
+        ctx.rect(0,0,canvasWidth/3,40);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText("To Do", 10, 30);
+        ctx.beginPath();
+        ctx.rect(canvasWidth/3,0,2*canvasWidth/3,40);
+        ctx.fillStyle = "salmon";
+        ctx.fill();
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText("In Progress", canvasWidth/3+10, 30);
+        ctx.beginPath();
+        ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,40);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
+        for(var i = 0; i<tasks.length; i++) {
+            addSquare(tasksStatus[count].innerText);
+            count++;
+        }
+    }
+
+
+    function addSquare(choice) {
+        var title = tasks[count].innerText;
+        title = title.substring(0,40);
+        var desc = tasksDesc[count].innerText;
+        rects.push(title+" "+desc+" "+toDoX+" "+toDoY+" "+choice);
+        if(choice == "todo"){
+            createRect(toDoX,toDoY,"blue", title, desc);
+            toDoY+=170;
+        }
+        else if(choice == "inProg") {
+            createRect(inProgX,inProgY,"salmon", title, desc);
+            inProgY+=170;
+        }
+        else if(choice == "recent") {
+            createRect(recentCompletedX,recentCompletedY,"green", title, desc);
+            recentCompletedY+=170;
+        }
+    }
+
+
+    function createRect(x,y,color, title, desc) {
+        ctx.beginPath();
+        ctx.rect(x+5,y,canvasWidth/3-10,40);
+        grd = ctx.createLinearGradient(x,y,x,y+40);
+        grd.addColorStop(0,"light"+color);
+        grd.addColorStop(1,color);
+        ctx.fillStyle = grd;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.rect(x+5,y+40,canvasWidth/3-10,120);
+        ctx.fillStyle = "light"+color;
+        ctx.fill();
+        ctx.font = "24px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText(title, x+10, y+30);
+        ctx.font = "24px Arial";
+        ctx.fillStyle = "black";
+        var lineMove = 0;
+        for(var i = 0; i<desc.length; i+=40) {
+          var line = desc.substring(i,i+40);
+          ctx.fillText(line, x+10, y+60+lineMove);
+          lineMove+=25;
+        }
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
+    }
+
+    function checkHeight() {
+        if(tasks.length>5) {
+          document.getElementById("myCanvas").height = tasks.length*200;
+        }
+    }
+
+    function buildBackGround() {
+        ctx.beginPath();
+        var bgGrd = ctx.createLinearGradient(0,0,0,300);
+        bgGrd.addColorStop(0,"gray");
+        bgGrd.addColorStop(1,"darkgray");
+        ctx.fillStyle = bgGrd;
+        ctx.fillRect(0,0,c.width,c.height);
+        for(var i = 1; i<=2; i++) {
+            ctx.beginPath();
+            ctx.moveTo(i*c.width/3, 0);
+            ctx.lineTo(i*c.width/3, c.height);
+            ctx.stroke();
+        }
+    }
+
+    function doMouseDown(event) {
+      canvas_x = event.pageX;
+      canvas_y = event.pageY;
+      //alert("x = "+canvas_x+", y = "+canvas_y);
+      acceptTask(canvas_x,canvas_y);
+    }
+
+    function acceptTask(x,y) {
+      if(x>310 && x<415 && y>1536 && y<1550) {
+        alert("Hello");
+        var linkText="http://localhost:3000";
+        window.location = linkText;
+      }
+    }
+
+
+
+
+</script>
