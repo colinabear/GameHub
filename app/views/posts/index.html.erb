@@ -14,9 +14,7 @@
 <br>
 <br>
   <%= form_tag post_index_path, :method => 'get' do %>
-    <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search for Title, Content, or Author" %>
-    <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
-    <%= link_to 'Clear Search', post_index_path, class: "button" %>
+    <%= text_field_tag :search, params[:search], autocomplete: "off", class: "form-control", placeholder: "Search for Title, Content, or Author" %>
   <% end %>
 
   <% @posts.each do |post| %>
