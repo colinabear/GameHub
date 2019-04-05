@@ -2,21 +2,19 @@
   <h1> Posts </h1>
   <%= link_to "New Post", new_post_path, class: "button" %>
   Sort By:
-  <%= link_to 'Newest', :sort => "created_at" %>
+  <%= link_to 'Newest', :sort => "created_at", :search => params[:search] %>
   |
-  <%= link_to 'Most Popular', :sort => "popularity" %>
+  <%= link_to 'Most Popular', :sort => "popularity", :search => params[:search] %>
   |
-  <%= link_to 'A-Z', :sort => "name" %>
+  <%= link_to 'A-Z', :sort => "name", :search => params[:search] %>
   |
-  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  <%= link_to 'Z-A', :sort => "name_reverse", :search => params[:search] %>
   |
-  <%= link_to 'Recently Updated', :sort => "updated_at" %>
+  <%= link_to 'Recently Updated', :sort => "updated_at", :search => params[:search] %>
 <br>
 <br>
   <%= form_tag post_index_path, :method => 'get' do %>
-    <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search for Title, Content, or Author" %>
-    <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
-    <%= link_to 'Clear Search', post_index_path, class: "button" %>
+    <%= text_field_tag :search, params[:search], autocomplete: "off", class: "form-control", placeholder: "Search for Title, Content, or Author" %>
   <% end %>
 
   <% @posts.each do |post| %>

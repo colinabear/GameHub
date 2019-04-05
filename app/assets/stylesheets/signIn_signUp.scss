@@ -11,14 +11,9 @@ input[type=text], input[type=password] {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border:2px solid #397CAC;
-  background-color: white;
+  border: none;
+  background-color: #3F516B;
   box-sizing: border-box;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-  border: 2px solid #265373;
-	background-color: white;
 }
 
 input[type=checkbox] {
@@ -36,8 +31,8 @@ label[for=psw] {
 }
 
 input[type=text]:focus, input[type=password]:focus {
-  border: 2px solid #265373;
-	background-color: white;
+  border: none;
+	background-color: #3F516B;
 }
 
 label[for=psw] {
