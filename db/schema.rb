@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190406000917) do
+ActiveRecord::Schema.define(version: 20190406043822) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -72,6 +72,11 @@ ActiveRecord::Schema.define(version: 20190406000917) do
     t.index ["cached_weighted_average"], name: "index_projects_on_cached_weighted_average"
     t.index ["cached_weighted_score"], name: "index_projects_on_cached_weighted_score"
     t.index ["cached_weighted_total"], name: "index_projects_on_cached_weighted_total"
+  end
+
+  create_table "resumes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
