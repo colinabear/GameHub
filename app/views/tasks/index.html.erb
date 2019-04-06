@@ -23,7 +23,7 @@
   <%= link_to 'Puzzles', :sorttype => "puzzles", :sort => params[:sort] %>
   |
   <%= link_to 'Miscellaneous', :sorttype => "misc", :sort => params[:sort] %>
-  |
+  <br>
   <%= link_to 'Clear Search', task_index_path %>
 
   <% @tasks.each do |task| %>
