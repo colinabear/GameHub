@@ -31,7 +31,7 @@
     <% if !@task.accepted %>
       <% @task.pending_users.each do |id| %>
         <% @user = User.find(id) %>
-        <%= @user.email %>
+        <%= link_to @user.email, user_resume_search_path(@user) %>
         <%= link_to "Accept", task_accept_user_path(:task_id => @task.id, :user_id => id), method: :put, class: "button" %>
       <% end %>
     <% end %>

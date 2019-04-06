@@ -1,21 +1,37 @@
 <div id="projects">
 
-  <%= current_user.email %>
+  <%= @user.email %>
+
+  <% @count = 0 %>
+  <% @user.tasks.each do |task| %>
+    <% if task.status == "recent" %>
+      <% @count = @count + 1 %>
+    <% end %>
+  <% end %>
 
   <div style="background:lightgray; border-radius:5px; padding:10px;">
    Account created on
-   <%= current_user.created_at.strftime("%m/%d/%Y") %>
+   <%= @user.created_at.strftime("%m/%d/%Y") %>
    <br>
-   Completed Tasks:
+   <br>
+   Completed Tasks (
+   <%= @count %>
+   ):
     <br>
-    <% @count = 0 %>
-    <% current_user.tasks.each do |task| %>
+    <% @user.tasks.each do |task| %>
       <% if task.status == "recent" %>
         > <%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> ) - <%= task.job_type %>
-        <% @count = @count + 1 %>
         <br>
       <% end %>
     <% end %>
-    Total Number of Completed Tasks:
-    <%= @count %>
+    <br>
+    Current Tasks:
+    <br>
+    <% @user.tasks.each do |task| %>
+      <% if task.status == "inProg" %>
+        > <%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> ) - <%= task.job_type %>
+        <br>
+      <% end %>
+    <% end %>
+    <br>
 </div>
