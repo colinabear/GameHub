@@ -10,6 +10,8 @@
   <%= link_to 'Recently Updated', :sort => "updated_at", :sorttype => params[:sorttype] %>
   <br>
   Type:
+  <%= link_to 'All', task_index_path %>
+  |
   <%= link_to 'Programming', :sorttype => "programming", :sort => params[:sort] %>
   |
   <%= link_to 'Music', :sorttype => "music", :sort => params[:sort] %>
@@ -24,7 +26,6 @@
   |
   <%= link_to 'Miscellaneous', :sorttype => "misc", :sort => params[:sort] %>
   <br>
-  <%= link_to 'Clear Search', task_index_path %>
 
   <% @tasks.each do |task| %>
     <div class="project">
