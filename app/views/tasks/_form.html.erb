@@ -19,6 +19,6 @@
   }
   </style>
 
-  <%= f.select :job_type, options_for_select([nil, "Programming", "Music", "Art", "Story", "Level Design", "Puzzles", "Miscellaneous"]), selected: :job_type  %>
+  <%= f.select :job_type, options_for_select(["Programming", "Music", "Art", "Story", "Level Design", "Puzzles", "Miscellaneous"]), prompt: "-select-"  %>
   <%= f.submit %>
 <% end %>

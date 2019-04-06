@@ -23,6 +23,11 @@
         [Still Available]
       <% end %>
     </p>
+    <p style="display: inline-block; margin: 0;">|</p>
+    <p style="display: inline-block; margin: 0;">Task type:</p>
+    <p style="display: inline-block; margin: 0;" class="status">
+      <%= task.job_type %>
+    </p>
     <p>
     <% if current_user == task.user && task.status == "inProg" %>
       <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>

@@ -18,7 +18,7 @@
   }
   </style>
 
-  <%= f.select :progress, options_for_select([nil, "Idea", "In Progress", "Completed"]), selected: nil  %>
+  <%= f.select :progress, options_for_select(["Idea", "In Progress", "Completed"]), prompt: "-select-"  %>
 
   <%= f.submit %>
 <% end %>

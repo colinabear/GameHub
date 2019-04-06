@@ -42,10 +42,12 @@
   <p></p>
 
   <% if user_signed_in? %>
-  <h2>
-    Tasks
-  </h2>
-  <div style="overflow: auto; height: 275px">
+  <% if @project.tasks.count != 0 %>
+    <h2>
+      Tasks
+    </h2>
+  <% end %>
+  <div style="overflow: auto; height: auto; max-height: 225px">
     <% @project.tasks.each do |task| %>
       <%= render task %>
     <% end %>
