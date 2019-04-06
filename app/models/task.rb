@@ -6,4 +6,5 @@ class Task < ApplicationRecord
   validates :job_type, presence: true
   belongs_to :project
   belongs_to :user
+  serialize :pending_users, Array
 end

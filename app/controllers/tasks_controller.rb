@@ -131,12 +131,21 @@ class TasksController < ApplicationController
     redirect_to @task.project
   end
 
-  def accept_task
+  def request_task
     @task = Task.find(params[:task_id])
-    @task.user_id = current_user.id if current_user
+    @array = @task.pending_users
+    @array << current_user.id
+    @task.update_attribute(:pending_users, @array)
+    redirect_to @task
+  end
+
+  def accept_user
+    @task = Task.find(params[:task_id])
+    @user = User.find(params[:user_id])
+    @task.user_id = @user.id
     @task.accepted = true
     @task.status = "inProg"
-    current_user.tasks << @task
+    @user.tasks << @task
     redirect_to @task
   end
 
@@ -145,6 +154,9 @@ class TasksController < ApplicationController
     @task.user_id = @task.project.user_id
     @task.update_attribute(:accepted, false)
     @task.update_attribute(:status, "todo")
+    @array = @task.pending_users
+    @array.delete(current_user.id)
+    @task.update_attribute(:pending_users, @array)
     redirect_to @task
   end
 end

@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   end
 
   resources :tasks do
-    put 'accept_task', to: 'tasks#accept_task'
+    put 'request_task', to: 'tasks#request_task'
+    put 'accept_user', to: 'tasks#accept_user'
     put 'drop_task', to: 'tasks#drop_task'
     put 'progress_task', to: 'tasks#progress_task'
   end
