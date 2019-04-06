@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     put 'progress_task', to: 'tasks#progress_task'
   end
 
+  resources :user do
+    get 'resume_search', to: 'users#resume_search'
+  end
+
   root 'pages#home'
 
   get 'post_index' => 'posts#index', as: 'post_index'
@@ -36,6 +40,4 @@ Rails.application.routes.draw do
   get 'kanban' => 'users#kanban', as: 'kanban'
 
   get 'resume_index' => 'resume#index', as: 'resume_index'
-
-  get 'resume_search' => 'resume#search', as: 'resume_search'
 end

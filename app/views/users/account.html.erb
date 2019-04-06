@@ -5,15 +5,9 @@
   <br>
   <%= link_to "New Post", new_post_path, class: "button" %>
   <%= link_to "New Project", new_project_path, class: "button" %>
-  <%= link_to "Your Resume", resume_index_path, class: "button" %>
+  <%= link_to "Your Resume", user_resume_search_path(current_user), class: "button" %>
   <br>
   <br>
-  <%= form_tag resume_search_path, :method => 'get' do %>
-    <%= text_field_tag :user_search, params[:user_search], autocomplete: "off", class: "form-control", placeholder: "Search for Users" %>
-  <% end %>
-
-<br>
-<br>
 <div style="background:lightgray; border-radius:5px; padding:10px;">
  Liked Posts:
   <br>
