@@ -35,4 +35,7 @@ Rails.application.routes.draw do
 
   get 'kanban' => 'users#kanban', as: 'kanban'
 
+  get 'resume_index' => 'resume#index', as: 'resume_index'
+
+  get 'resume_search' => 'resume#search', as: 'resume_search'
 end

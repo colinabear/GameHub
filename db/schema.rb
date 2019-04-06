@@ -74,6 +74,11 @@ ActiveRecord::Schema.define(version: 20190406042117) do
     t.index ["cached_weighted_total"], name: "index_projects_on_cached_weighted_total"
   end
 
+  create_table "resumes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.text "description"
