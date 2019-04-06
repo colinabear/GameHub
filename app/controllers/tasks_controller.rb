@@ -151,12 +151,12 @@ class TasksController < ApplicationController
 
   def drop_task
     @task = Task.find(params[:task_id])
+    @array = @task.pending_users
+    @array.delete(@task.user.id)
+    @task.update_attribute(:pending_users, @array)
     @task.user_id = @task.project.user_id
     @task.update_attribute(:accepted, false)
     @task.update_attribute(:status, "todo")
-    @array = @task.pending_users
-    @array.delete(current_user.id)
-    @task.update_attribute(:pending_users, @array)
     redirect_to @task
   end
 end
