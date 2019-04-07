@@ -1,14 +1,4 @@
-<style>
-    * {
-      box-sizing: border-box;
-    }
-    #rcorners2 {
-      border-radius: 25px;
-      border: 1px solid #59a86a;
-      padding: 20px;
-      width: 100%;
-    }
-</style>
+
 <script>
   function renderTaskForm() {
     var x = document.getElementById("taskForm");
@@ -53,7 +43,7 @@
   <% if user_signed_in? %>
   <% if @project.tasks.count != 0 %>
     <h2>
-      Tasks
+      <font color="#E5E5E5">Tasks</font>
     </h2>
   <% end %>
   <div style="overflow: auto; height: auto; max-height: 230px">
