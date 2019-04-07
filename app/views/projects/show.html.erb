@@ -52,9 +52,9 @@
 
   <% if user_signed_in? %>
   <% if @project.tasks.count != 0 %>
-    <h3>
+    <h2>
       Tasks
-    </h3>
+    </h2>
   <% end %>
   <div style="overflow: auto; height: auto; max-height: 230px">
     <% @project.tasks.each do |task| %>
