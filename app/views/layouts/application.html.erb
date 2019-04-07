@@ -21,7 +21,7 @@
 
         <div id="buttons">
           <% if user_signed_in? %>
-            <%= link_to "Account", account_path %>
+            <%= link_to "Account", user_resume_search_path(current_user) %>
             <%= link_to "Forum", post_index_path %>
             <%= link_to "Games", project_index_path %>
             <%= link_to "Jobs", task_index_path %>
@@ -36,12 +36,6 @@
   </div>
 
   <div class="wrapper">
-    <!-- <p class="notice">
-      <%= notice %>
-    </p>
-    <p class="alert">
-      <%= alert %>
-    </p> -->
     <%= yield %>
   </div>
 </body>

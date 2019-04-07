@@ -5,6 +5,6 @@ class UsersController < ApplicationController
 
   def resume_search
     @user = User.find(params[:user_id])
-    render 'resume/index'
+    render 'users/account'
   end
 end

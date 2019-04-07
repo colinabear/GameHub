@@ -39,6 +39,13 @@
     <% else %>
         <%= @task.user.email %>
         <% if @task.user == current_user || @task.project.user == current_user %>
+          <% if @task.user == current_user %>
+          <% if @task.status == "inProg" %>
+            <%= link_to "Mark as complete", task_progress_task_path(@task), method: :put, class: "button" %>
+          <% elsif @task.status == "recent" %>
+            <%= link_to "Undo completed", task_regress_task_path(@task), method: :put, class: "button" %>
+          <% end %>
+        <% end %>
           <%= link_to "Drop", task_drop_task_path(@task), method: :put, class: "button" %>
         <% end %>
     <% end %>

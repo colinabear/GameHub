@@ -33,7 +33,7 @@
       <% if task.status == "inProg" %>
         <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
         |
-      <% else %>
+      <% elsif task.status == "recent" %>
         <%= link_to "Undo completed", task_regress_task_path(task), method: :put %>
         |
       <% end %>

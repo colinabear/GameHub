@@ -54,9 +54,9 @@ class TasksController < ApplicationController
       elsif params[:sort] == 'name'
         @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title DESC").page params[:page].page params[:page].page params[:page]
+        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("created_at DESC").page params[:page].page params[:page]
+        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("created_at DESC").page params[:page]
       end
     elsif params[:sorttype] == 'art'
       if params[:sort] == 'updated_at'
@@ -66,7 +66,7 @@ class TasksController < ApplicationController
       elsif params[:sort] == 'name_reverse'
         @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("created_at DESC").page params[:page].page params[:page]
+        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("created_at DESC").page params[:page]
       end
     elsif params[:sorttype] == 'story'
       if params[:sort] == 'updated_at'

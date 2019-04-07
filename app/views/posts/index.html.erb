@@ -41,7 +41,7 @@
         Published
         <%= time_ago_in_words(post.created_at) %>
         ago by
-        <%= post.user.email %>
+        <%= link_to post.user.email, user_resume_search_path(post.user) %>
       </p>
       </div>
     </div>

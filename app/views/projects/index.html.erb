@@ -36,7 +36,7 @@
           Published
           <%= time_ago_in_words(project.created_at) %>
           ago by
-          <%= project.user.email %>
+          <%= link_to project.user.email, user_resume_search_path(project.user) %>
         </p>
       </div>
     </div>
