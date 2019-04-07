@@ -9,8 +9,8 @@
     }
   }
 </script>
-  <%= render 'sidebar' %>
 <div id="project_content">
+  <%= link_to "Back to Games", project_index_path, class: "button" %>
   <h1>
     <%= @project.name %>
   </h1>
@@ -67,12 +67,13 @@
       <% end %>
     <% end %>
 </div>
-
+<p style="display: inline-block; font-size: 0px;" id="username"><%= current_user.email %></p>
 <% @project.tasks.each do |task| %>
   <% if task.user == current_user || @project.user == current_user %>
     <button style="inline-block; color:black;" onclick="initializeKanban()">Show only:</button>
     <select style="inline-block" selected="All" id="category">
         <option value="All">All</option>
+        <option value="MyTasks">My Tasks</option>
         <option value="Programming">Programming</option>
         <option value="Music">Music</option>
         <option value="Art">Art</option>
@@ -150,6 +151,9 @@
         ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
         for(var i = 0; i<tasks.length; i++) {
             if(category === tasksCategories[count].innerText || category==="All"){
+              addSquare(tasksStatus[count].innerText);
+            }
+            if(category === "MyTasks" && tasksUsers[count].innerText === document.getElementById("username").innerText){
               addSquare(tasksStatus[count].innerText);
             }
             count++;
