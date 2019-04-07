@@ -1,5 +1,5 @@
 <%= simple_form_for ([@project, @project.tasks.build]) do |f| %>
-
+  <br/>
   <%= render 'shared/projects_error_messages' %>
 <label>Title</label>
   <%= f.text_field :title %>
@@ -18,7 +18,10 @@
     resize: none;
   }
   </style>
+  <br/>
 
   <%= f.select :job_type, options_for_select(["Programming", "Music", "Art", "Story", "Level Design", "Puzzles", "Miscellaneous"]), prompt: "-select-"  %>
+  <br/>
+  <br/>
   <%= f.submit %>
 <% end %>

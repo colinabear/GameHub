@@ -3,7 +3,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 <body>
-
+  <p class="notice">
+    <%= notice %>
+  </p>
+  <p class="alert">
+    <%= alert %>
+  </p>
     <%= form_for(resource, :url => session_path(resource_name)) do |f| %>
     <h2>Login Form</h2>
     <div class="imgcontainer">
