@@ -5,6 +5,9 @@
     </p>
     <p class="comment_author">
       <%= comment.user.email %>
+      |
+      <%= time_ago_in_words(comment.created_at) %>
+      ago
     </p>
   </div>
   <div class="buttons">
