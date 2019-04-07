@@ -19,7 +19,7 @@
   </style>
   <br/>
 
-  <%= f.select :progress, options_for_select(["Idea", "In Progress", "Completed"]), prompt: "-select-"  %>
+  <%= f.select :progress, options_for_select(["Idea", "In Progress", "Completed"], @project.progress), prompt: "-select-"  %>
 
   <%= f.submit %>
 <% end %>

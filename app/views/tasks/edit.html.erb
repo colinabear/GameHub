@@ -5,6 +5,7 @@
 
   <%= f.input :description %>
 
-  <%= f.select :job_type, options_for_select(["Programming", "Music", "Art", "Story", "Level Design", "Puzzles", "Miscellaneous"])  %>
+  <%= f.select :job_type, options_for_select(["Programming", "Music", "Art", "Story", "Level Design", "Puzzles", "Miscellaneous"], @task.job_type)  %>
   <%= f.submit %>
 <% end %>
+<%= link_to "Cancel", @project %>
