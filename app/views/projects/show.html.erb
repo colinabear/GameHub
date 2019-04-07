@@ -70,6 +70,17 @@
 
 <% @project.tasks.each do |task| %>
   <% if task.user == current_user || @project.user == current_user %>
+    <button style="inline-block; color:black;" onclick="initializeKanban()">Show only:</button>
+    <select style="inline-block" selected="All" id="category">
+        <option value="All">All</option>
+        <option value="Programming">Programming</option>
+        <option value="Music">Music</option>
+        <option value="Art">Art</option>
+        <option value="Story">Story</option>
+        <option value="Level Design">Level Design</option>
+        <option value="Puzzles">Puzzles</option>
+        <option value="Miscellaneous">Miscellaneous</option>
+      </select>
     <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
       <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
     </div>
@@ -83,6 +94,7 @@
     var tasksStatus = document.getElementsByClassName("status");
     var tasksDesc = document.getElementsByClassName("desc");
     var tasksUsers = document.getElementsByClassName("user");
+    var tasksCategories = document.getElementsByClassName("job_type");
     var c = document.getElementById("myCanvas");
     c.addEventListener("mousedown", doMouseDown, false);
     var ctx = c.getContext("2d");
@@ -104,6 +116,15 @@
 
 
     function initializeKanban() {
+        toDoX = 0;
+        toDoY = startingHeight;
+        inProgX = canvasWidth/3;
+        inProgY = startingHeight;
+        recentCompletedX = 2*canvasWidth/3;
+        recentCompletedY = startingHeight;
+        count = 0;
+        var e = document.getElementById("category");
+        var category = e.options[e.selectedIndex].value;
         ctx.clearRect(0, 0, c.width, c.height);
         checkHeight();
         buildBackGround();
@@ -128,9 +149,12 @@
         ctx.fillStyle = "white";
         ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
         for(var i = 0; i<tasks.length; i++) {
-            addSquare(tasksStatus[count].innerText);
+            if(category === tasksCategories[count].innerText || category==="All"){
+              addSquare(tasksStatus[count].innerText);
+            }
             count++;
         }
+        count = 0;
     }
 
 
