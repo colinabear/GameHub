@@ -7,4 +7,5 @@ class Project < ApplicationRecord
   has_many :comments
   has_many :tasks
   acts_as_votable
+  paginates_per 10
 end

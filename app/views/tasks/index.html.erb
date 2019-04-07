@@ -27,6 +27,8 @@
   |
   <%= link_to 'Miscellaneous', :sorttype => "misc", :sort => params[:sort] %>
   <br>
+  <br>
+  <%= paginate @tasks %>
 
   <% @tasks.each do |task| %>
     <div class="project">

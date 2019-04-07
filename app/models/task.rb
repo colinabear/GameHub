@@ -7,4 +7,5 @@ class Task < ApplicationRecord
   belongs_to :project
   belongs_to :user
   serialize :pending_users, Array
+  paginates_per 10
 end
