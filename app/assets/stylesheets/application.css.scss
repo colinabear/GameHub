@@ -16,6 +16,7 @@
 
 body {
 	font-family: 'Lato', sans-serif;
+	color:#E5E5E5;
 	background: #131c29;
 }
 
@@ -26,7 +27,7 @@ header {
 }
 
 a:link, a:visited {
-	color: #37AD4E;
+	color: #59a86a;
 	text-decoration: none;
 }
 
@@ -71,10 +72,8 @@ a:hover {
 		float: right;
 		a {
 			line-height: 60px;
-			background: #59a86a;
 			padding: .5em 1em;
-			border-radius: 0.2em;
-			color: white;
+			color: #59a86a;
 			text-decoration: none;
 			font-weight: 100;
 		}
@@ -90,11 +89,11 @@ form{
 	padding: 2em 5%;
 	border-radius: .5em;
 
-	.button{
-		color: #E5E5E5;
-		background-color: #37AD4E;
-		border: none;
-	}
+	// .button{
+	// 	color: #E5E5E5;
+	// 	background-color: #37AD4E;
+	// 	border: none;
+	// }
 	.post {
 		margin: 1em 0;
 		padding: 1em 0;
@@ -116,9 +115,10 @@ form{
 	}
 }
 
-.button {
-	color: #397CAC;
-	border: 1px solid #397CAC;
+a.button {
+	color: white;
+	border: none;
+	background-color:#59a86a;
 	padding: .5em 1em;
 	border-radius: 0.2em;
 	text-decoration: none;
@@ -126,7 +126,7 @@ form{
 }
 
 #post_content {
-	background: white;
+	background: #192231;
 	padding: 4em 5%;
 	border-radius: 1em;
 	h1 {
@@ -144,7 +144,7 @@ form{
 	}
 	button {
 		color: #E5E5E5;
-		background-color: #37AD4E;
+		background-color: #59a86a;
 		border: none;
 		padding: .5em 1em;
 		border-radius: 0.2em;
@@ -160,21 +160,21 @@ form{
 			width: 75%;
 			float: left;
 			}
-			.buttons {
-				width: 25%;
-				float: left;
-				font-size: 0.8em;
-				text-align: right;
-				padding-top: 1.5em;
-				 a {
-					color: #397CAC;
-					border: 1px solid #397CAC;
-					padding: .5em 1em;
-					border-radius: 0.2em;
-					text-decoration: none;
-					margin-right: 2%;
-				 }
-			}
+			// .buttons {
+			// 	width: 25%;
+			// 	float: left;
+			// 	font-size: 0.8em;
+			// 	text-align: right;
+			// 	padding-top: 1.5em;
+			// 	 a {
+			// 		color: #397CAC;
+			// 		border: 1px solid #397CAC;
+			// 		padding: .5em 1em;
+			// 		border-radius: 0.2em;
+			// 		text-decoration: none;
+			// 		margin-right: 2%;
+			// 	 }
+			// }
 			.comment_content {
 				margin: 0;
 				padding: 0;
@@ -204,15 +204,18 @@ form{
 	}
 }
 #project_content {
-	background: white;
+	background: #192231;
 	padding: 2em 5%;
 	border-radius: .5em;
 	h1 {
 		font-weight: 100;
 		font-size: 2em;
 		padding-top: .5em;
-		color: #397CAC;
+		color: #59a86a;
 		margin-top: 0;
+	}
+	h2{
+		color: #59a86a;
 	}
 	p {
 		color: #B2BAC2;
@@ -222,7 +225,7 @@ form{
 	}
 	button {
 		color: #E5E5E5;
-		background-color: #37AD4E;
+		background-color: #59a86a;
 		border: none;
 		padding: .5em 1em;
 		border-radius: 0.2em;

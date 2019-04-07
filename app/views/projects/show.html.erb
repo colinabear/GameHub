@@ -4,7 +4,7 @@
     }
     #rcorners2 {
       border-radius: 25px;
-      border: 1px solid #397CAC;
+      border: 1px solid #59a86a;
       padding: 20px;
       width: 100%;
     }
@@ -52,9 +52,9 @@
 
   <% if user_signed_in? %>
   <% if @project.tasks.count != 0 %>
-    <h2>
+    <h3>
       Tasks
-    </h2>
+    </h3>
   <% end %>
   <div style="overflow: auto; height: auto; max-height: 230px">
     <% @project.tasks.each do |task| %>

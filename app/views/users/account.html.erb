@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
-<h2>Welcome, <%= current_user.email %>!</h2>
-<p> What would you like to do now?</p>
+<h2><font color="#E5E5E5">Welcome, <%= current_user.email %>!</font></h2>
+<p><font color="#E5E5E5">What would you like to do now?</font></p>
   <br>
   <br>
   <%= link_to "New Post", new_post_path, class: "button" %>
@@ -8,7 +8,7 @@
   <%= link_to "Your Resume", user_resume_search_path(current_user), class: "button" %>
   <br>
   <br>
-<div style="background:lightgray; border-radius:5px; padding:10px;">
+<div style="background:#192231; border-radius:5px; padding:10px;">
  Liked Posts:
   <br>
   <% Post.all.each do |post| %>
@@ -21,7 +21,7 @@
   <% end %>
   </div>
 <br>
-  <div style="background:lightgray; border-radius:5px; padding:10px;">
+  <div style="background:#192231; border-radius:5px; padding:10px;">
    Current Tasks:
     <br>
     <% current_user.tasks.each do |task| %>
