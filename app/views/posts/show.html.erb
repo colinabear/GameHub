@@ -13,17 +13,24 @@
   <h1>
     <%= @post.title %>
   </h1>
+
   <h4>
     <%= @post.content %>
   </h4>
+
+  <div id="rcorners2">
   Author:
   <h5>
     <%= @post.author %>
   </h5>
+  </div>
+
   <div id="comments">
     <h2>
+        <font color="#E5E5E5">
       <%= @post.comments.count %>
-      Comments
+      Comments:
+        </font>
     </h2>
     <div style="overflow: auto; height: auto; max-height: 420px">
       <%= render @post.comments %>

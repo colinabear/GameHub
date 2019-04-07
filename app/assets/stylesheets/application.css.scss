@@ -169,7 +169,7 @@ a.button {
 	}
 	#comments {
 		.comment {
-			border-bottom: 1px solid #d1d1d1;
+			border-bottom: 1px solid #E5E5E5;
 			padding-bottom: 1em;
 			margin-bottom: 1em;
 			.content {
@@ -189,7 +189,7 @@ a.button {
 			}
 		}
 		input[type="submit"] {
-			background: #397CAC;
+			background: #59a86a;
 			border: none;
 			color: white;
 			font-weight: 100;
@@ -269,3 +269,11 @@ select{
 input[type=submit]{
 	background: #59a86a;
 }
+
+    #rcorners2 {
+			box-sizing: border-box;
+      border-radius: 25px;
+      border: 1px solid #397CAC;
+      padding: 20px;
+      width: 100%;
+    }

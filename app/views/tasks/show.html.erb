@@ -1,4 +1,4 @@
-<div id="task_content">
+<div id="projects">
   <%= link_to "Back to Jobs", task_index_path, class: "button" %>
   <%= link_to "See game for this job", @task.project, class: "button" %>
   <h1>
@@ -7,14 +7,22 @@
   <h4>
     <%= @task.description %>
   </h4>
+
+  <div id="rcorners2">
   Progress:
   <h5>
     <%= @task.status %>
   </h5>
+  </div>
+<br>
+  <div id="rcorners2">
   Job Type:
   <h5>
     <%= @task.job_type %>
   </h5>
+  </div>
+<br>
+  <div id="rcorners2">
   Assigned to:
   <h5>
     <% if !@task.accepted %>
@@ -35,6 +43,10 @@
         <% end %>
     <% end %>
   </h5>
+  </div>
+  <br>
+  <br>
+
   <% if @task.project.user == current_user %>
     <% if !@task.accepted %>
       <% @task.pending_users.each do |id| %>

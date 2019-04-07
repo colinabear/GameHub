@@ -128,6 +128,7 @@ class TasksController < ApplicationController
   def progress_task
     @task = Task.find(params[:task_id])
     @task.update_attribute(:status, "recent")
+    # Review
     redirect_to @task.project
   end
 
