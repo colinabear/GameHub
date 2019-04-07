@@ -31,7 +31,9 @@
   <% if user_signed_in? %>
     <button onclick="renderCommentForm()">Reply to Post</button>
     <div id="commentForm" style="display: none">
+      <div id="postForm">
       <%= render "comments/form" %>
+      </div>
     </div>
   </div>
   <br/>
