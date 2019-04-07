@@ -16,7 +16,7 @@
   <%= form_tag post_index_path, :method => 'get' do %>
     <%= text_field_tag :search, params[:search], autocomplete: "off", class: "form-control", placeholder: "Search for Title, Content, or Author" %>
   <% end %>
-
+<br>
   <%= paginate @posts %>
   <% @posts.each do |post| %>
     <div class="post">
