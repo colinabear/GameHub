@@ -153,6 +153,11 @@ class TasksController < ApplicationController
     @task.accepted = true
     @task.status = "inProg"
     @user.tasks << @task
+    @array = @task.project.team_members
+    if !@array.include? @user.email
+      @array << @user.email
+      @task.project.update_attribute(:team_members, @array)
+    end
     redirect_to @task
   end
 
@@ -161,6 +166,19 @@ class TasksController < ApplicationController
     @array = @task.pending_users
     @array.delete(@task.user.id)
     @task.update_attribute(:pending_users, @array)
+    @included = false
+    @task.project.tasks.each do |task|
+      if task.id != @task.id
+        if task.user_id == @task.user_id
+          @included = true
+        end
+      end
+    end
+    if !@included
+      @array = @task.project.team_members
+      @array.delete(User.find(@task.user_id).email)
+      @task.project.update_attribute(:team_members, @array)
+    end
     @task.user_id = @task.project.user_id
     @task.update_attribute(:accepted, false)
     @task.update_attribute(:status, "todo")

@@ -101,5 +101,7 @@
   <br/>
   <button onclick="renderTasks()">Available Tasks</button>
   <br/>
-  <button onclick="renderHub()"><%= "#{@project.name}'s Hub" %></button>
+  <% if @project.team_members.include? current_user.email %>
+    <button onclick="renderHub()"><%= "#{@project.name}'s Hub" %></button>
+  <% end %>
 </div>

@@ -44,6 +44,40 @@ label[for=psw] {
   align-items: flex-start;
 }
 
+input:-webkit-autofill {
+    -webkit-text-fill-color: #E5E5E5;
+    -webkit-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+input:-moz-autofill {
+    -moz-text-fill-color: #E5E5E5;
+    -moz-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+input:-o-autofill {
+    -o-text-fill-color: #E5E5E5;
+    -o-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+input:-khtml-autofill {
+    -khtml-text-fill-color: #E5E5E5;
+    -khtml-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+
+input:focus:-webkit-autofill {
+    -webkit-text-fill-color: #E5E5E5;
+    -webkit-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+input:focus:-moz-autofill {
+    -moz-text-fill-color: #E5E5E5;
+    -moz-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+input:focus:-o-autofill {
+    -o-text-fill-color: #E5E5E5;
+    -o-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+input:focus:-khtml-autofill {
+    -khtml-text-fill-color: #E5E5E5;
+    -khtml-box-shadow: 0 0 0px 1000px #3F516B inset;
+}
+
 .cancelbtn {
   width: auto;
   padding: 10px 18px;

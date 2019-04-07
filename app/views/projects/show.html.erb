@@ -26,10 +26,8 @@
 
     <div id="rcorners2">
       <label>Team:</label>
-        <% @project.tasks.each do |task| %>
-          <% if task.accepted %>
-            <h5><%= task.user.email %></h5>
-          <% end %>
+        <% @project.team_members.each do |member| %>
+          <h5><%= member %></h5>
         <% end %>
     </div>
     <p></p>
