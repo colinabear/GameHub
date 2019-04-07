@@ -13,10 +13,19 @@
   <br>
   <% Post.all.each do |post| %>
     <% if current_user.voted_up_for? post %>
-      >
-      <%= link_to post.title, post %>
-       by
-      <%= post.user.email %><br>
+    <div class="post">
+      <div style="display: inline-block; padding-left: 20px">
+      <h3 class="title">
+        <%= link_to post.title, post %>
+      </h3>
+      <p class="date">
+        Published
+        <%= time_ago_in_words(post.created_at) %>
+        ago by
+        <%= post.user.email %>
+      </p>
+      </div>
+    </div>
     <% end %>
   <% end %>
   </div>
