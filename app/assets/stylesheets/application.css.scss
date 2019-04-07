@@ -143,8 +143,17 @@ a.button {
 
 #post_content {
 	background: #192231;
-	padding: 4em 5%;
+	padding: 10px;
 	border-radius: 1em;
+	width: 100%;
+	min-height: 200px;
+	textarea {
+		width: 100%;
+		min-height: 200px;
+		border: 1px solid #d1d1d1;
+		border-radius: .2em;
+		margin: 1em 0;
+	}
 	h1 {
 		font-weight: 100;
 		font-size: 2em;
