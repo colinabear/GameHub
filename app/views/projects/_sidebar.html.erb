@@ -1,0 +1,38 @@
+<style>
+  .sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 175px; /* Set the width of the sidebar */
+  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
+  top: 1;
+  left: 0;
+  background-color: #131c29; /* Black */
+  padding-top: 10px;
+  }
+
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    background-color: #192231;
+    margin-right: 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+  }
+
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #59a86a;
+  }
+</style>
+<div class="sidenav">
+  <%= link_to "Back to Games", project_index_path %>
+  <br/>
+  <%= link_to "Info", '#' %>
+  <br/>
+  <%= link_to "Available Tasks", '#' %>
+  <br/>
+  <%= link_to "#{@project.name} Hub", '#' %>
+</div>

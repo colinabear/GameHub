@@ -32,13 +32,20 @@ a:link, a:visited {
 }
 
 a:hover {
-	color: #265373;
+	color: #3e764a;
 	text-decoration: none;
 }
 
+.header_wrapper {
+	width: 100%;
+	margin: 0 auto;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
 .wrapper {
-	width: 60%;
-	max-width: 1140px;
+	width: 100%;
+	max-width: 1000px;
 	margin: 0 auto;
 }
 
@@ -54,10 +61,10 @@ a:hover {
 .main_header {
 	font-family: 'Lato', sans-serif;
 	width: 100%;
-	margin: 0 auto;
 	background: #0A1627;
 	#logo {
 		float: left;
+		padding-top: 2px;
 		a {
 			font-family: 'Lato', sans-serif;
 			text-transform: uppercase;
