@@ -1,5 +1,3 @@
-<% @user = current_user%>
-
 <% @count = 0 %>
 <% @user.tasks.each do |task| %>
   <% if task.status == "recent" %>
@@ -129,7 +127,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
 
 <br>
-
+  <% if @user == current_user %>
       <div style="background:#192231; border-radius:5px; padding:10px;">
        Liked Posts:
         <br>
@@ -164,7 +162,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <% end %>
           <% end %>
         </div>
-
+    <% end %>
 
     <!-- End Right Column -->
     </div>
