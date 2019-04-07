@@ -18,6 +18,7 @@
       <%= text_field_tag :search, params[:search], autocomplete: "off", class: "form-control", placeholder: "Search for Title, Content, or Author" %>
     <% end %>
 
+  <%= paginate @projects %>
   <% @projects.each do |project| %>
     <div class="project">
       <div style="display: inline-block;">

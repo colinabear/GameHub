@@ -40,83 +40,83 @@ class TasksController < ApplicationController
   def index
     if params[:sorttype] == 'programming'
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("title ASC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("title DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("created_at DESC").page params[:page]
       end
     elsif params[:sorttype] == 'music'
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title ASC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title DESC").page params[:page].page params[:page].page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("created_at DESC").page params[:page].page params[:page]
       end
     elsif params[:sorttype] == 'art'
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("title ASC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("title DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("created_at DESC").page params[:page].page params[:page]
       end
     elsif params[:sorttype] == 'story'
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("title ASC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("title DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("created_at DESC").page params[:page]
       end
     elsif params[:sorttype] == 'level'
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("title ASC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("title DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("created_at DESC").page params[:page]
       end
     elsif params[:sorttype] == 'puzzles'
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("title ASC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("title DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("created_at DESC").page params[:page]
       end
     elsif params[:sorttype] == 'misc'
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("title ASC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("title DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("created_at DESC").page params[:page]
       end
     else
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").order("updated_at DESC")
+        @tasks = Task.where(:status => "todo").order("updated_at DESC").page params[:page]
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").order("title ASC")
+        @tasks = Task.where(:status => "todo").order("title ASC").page params[:page]
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").order("title DESC")
+        @tasks = Task.where(:status => "todo").order("title DESC").page params[:page]
       else
-        @tasks = Task.where(:status => "todo").order("created_at DESC")
+        @tasks = Task.where(:status => "todo").order("created_at DESC").page params[:page]
       end
     end
   end

@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :comments
   has_one :resume
   acts_as_voter
+  paginates_per 10
 end

@@ -17,6 +17,7 @@
     <%= text_field_tag :search, params[:search], autocomplete: "off", class: "form-control", placeholder: "Search for Title, Content, or Author" %>
   <% end %>
 
+  <%= paginate @posts %>
   <% @posts.each do |post| %>
     <div class="post">
       <div style="display: inline-block;">
@@ -44,8 +45,6 @@
       </p>
       </div>
     </div>
-
-
 
   <% end %>
 </div>
