@@ -131,6 +131,12 @@ class TasksController < ApplicationController
     redirect_to @task.project
   end
 
+  def regress_task
+    @task = Task.find(params[:task_id])
+    @task.update_attribute(:status, "inProg")
+    redirect_to @task.project
+  end
+
   def request_task
     @task = Task.find(params[:task_id])
     @array = @task.pending_users

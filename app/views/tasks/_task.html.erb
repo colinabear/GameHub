@@ -17,20 +17,24 @@
     <p style="display: inline-block; margin: 0;" class="user">
       <% if task.accepted %>
           <%= task.user.try(:email) %>
-        <% if task.user == current_user %>
-        <% end %>
+      <% elsif task.pending_users.include? current_user.id %>
+        [Requested]
       <% else %>
         [Still Available]
       <% end %>
     </p>
     <p style="display: inline-block; margin: 0;">|</p>
     <p style="display: inline-block; margin: 0;">Task type:</p>
-    <p style="display: inline-block; margin: 0;" class="status">
+    <p style="display: inline-block; margin: 0;" class="job_type">
       <%= task.job_type %>
     </p>
     <p>
-    <% if current_user == task.user && task.status == "inProg" %>
-      <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
+    <% if current_user == task.user %>
+      <% if task.status == "inProg" %>
+        <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
+      <% else %>
+        <%= link_to "Undo completed", task_regress_task_path(task), method: :put %>
+      <% end %>
     <% end %>
     <% if current_user == task.project.user %>
       <%= link_to "Edit", edit_project_task_path(task.project, task) %>
