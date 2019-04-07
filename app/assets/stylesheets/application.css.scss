@@ -51,25 +51,27 @@ a:hover {
 }
 
 .main_header {
+	font-family: 'Lato', sans-serif;
 	width: 100%;
 	margin: 0 auto;
-	background: white;
+	background: #0A1627;
 	#logo {
 		float: left;
 		a {
+			font-family: 'Lato', sans-serif;
 			text-transform: uppercase;
 			font-weight: 700;
 			letter-spacing: -1px;
 			font-size: 1.2rem;
 			text-decoration: none;
-			color: #397CAC;
+			color: #59a86a;
 		}
 	}
 	#buttons {
 		float: right;
 		a {
 			line-height: 60px;
-			background: #397CAC;
+			background: #59a86a;
 			padding: .5em 1em;
 			border-radius: 0.2em;
 			color: white;
