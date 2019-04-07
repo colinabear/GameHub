@@ -1,3 +1,13 @@
+<script>
+  function renderCommentForm() {
+    var x = document.getElementById("commentForm");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
 <div id="post_content">
   <%= link_to "Back to forum", post_index_path, class: "button" %>
   <h1>
@@ -15,10 +25,14 @@
       <%= @post.comments.count %>
       Comments
     </h2>
-    <%= render @post.comments %>
+    <div style="overflow: auto; height: auto; max-height: 420px">
+      <%= render @post.comments %>
+    </div>
   <% if user_signed_in? %>
-    <h3>Reply to thread</h3>
-    <%= render "comments/form" %>
+    <button onclick="renderCommentForm()">Reply to Post</button>
+    <div id="commentForm" style="display: none">
+      <%= render "comments/form" %>
+    </div>
   </div>
   <br/>
   <hr/>

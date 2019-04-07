@@ -140,6 +140,15 @@ form{
 		line-height: 1.5;
 		font-size: 100;
 	}
+	button {
+		color: #E5E5E5;
+		background-color: #37AD4E;
+		border: none;
+		padding: .5em 1em;
+		border-radius: 0.2em;
+		text-decoration: none;
+		margin-right: 2%;
+	}
 	#comments {
 		.comment {
 			border-bottom: 1px solid #d1d1d1;
@@ -208,6 +217,15 @@ form{
 		font-size: 0.9em;
 		line-height: 1.5;
 		font-size: 100;
+	}
+	button {
+		color: #E5E5E5;
+		background-color: #37AD4E;
+		border: none;
+		padding: .5em 1em;
+		border-radius: 0.2em;
+		text-decoration: none;
+		margin-right: 2%;
 	}
 }
 

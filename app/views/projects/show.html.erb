@@ -9,7 +9,16 @@
       width: 100%;
     }
 </style>
-
+<script>
+  function renderTaskForm() {
+    var x = document.getElementById("taskForm");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
 <div id="project_content">
   <%= link_to "Back to Games", project_index_path, class: "button" %>
   <h1>
@@ -47,14 +56,17 @@
       Tasks
     </h2>
   <% end %>
-  <div style="overflow: auto; height: auto; max-height: 225px">
+  <div style="overflow: auto; height: auto; max-height: 230px">
     <% @project.tasks.each do |task| %>
       <%= render task %>
     <% end %>
   </div>
     <br/>
       <% if current_user.id == @project.user_id %>
+      <button onclick="renderTaskForm()">Create new task</button>
+      <div id="taskForm" style="display: none">
         <%= render 'tasks/form' %>
+      </div>
       <% end %>
       <br/>
       <hr/>
