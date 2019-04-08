@@ -5,13 +5,6 @@ class TasksController < ApplicationController
     @task.user_id = current_user.id if current_user
     @task.accepted = false
     @task.status = "todo"
-    @task.programming_rating = 0;
-    @task.art_rating = 0;
-    @task.music_rating = 0;
-    @task.level_design_rating = 0;
-    @task.story_rating = 0;
-    @task.puzzles_rating = 0;
-    @task.misc_rating = 0;
     @task.save
 
     if @task.save
@@ -142,25 +135,25 @@ class TasksController < ApplicationController
   def review_task
     @task = Task.find(params[:taskid])
     if(:category == "programming")
-      @task.programming_rating = :rating;
+      @task.user.programming_rating = :rating;
     end
     if(:category == "art")
-      @task.art_rating = :rating;
+      @task.user.art_rating = :rating;
     end
     if(:category == "music")
-      @task.music_rating = :rating;
+      @task.user.music_rating = :rating;
     end
     if(:category == "level design")
-      @task.level_design_rating = :rating;
+      @task.user.level_design_rating = :rating;
     end
     if(:category == "story")
-      @task.story_rating = :rating;
+      @task.user.story_rating = :rating;
     end
     if(:category == "puzzles")
-      @task.puzzles_rating = :rating;
+      @task.user.puzzles_rating = :rating;
     end
     if(:category == "misc")
-      @task.misc_rating = :rating;
+      @task.user.misc_rating = :rating;
     end
     @task.update_attribute(:reviewed, true);
     redirect_to @task.project
