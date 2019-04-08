@@ -52,6 +52,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
               <% @total_task_rating = 1 %>
             <% end %>
             <% @percent = ((rating_cat.to_f/@total_task_rating.to_f)*100).ceil %>
+            <% if @percent == 0 %>
+              <% @percent = "[No projects completed]" %>
+            <% end %>
+            <% @percent %>
           <% end %>
 
           <% @prog_percent = find_percent("Programming", @user.programming_rating) %>
