@@ -147,26 +147,25 @@ class TasksController < ApplicationController
 
   def review_task
     @task = Task.find(params[:taskid])
+    @user = @task.user
+    puts "hello"
+    @num = params[:rating].to_s
+    # {"5"=>"5"}
+    puts @num[7].to_i
     if(@task.job_type == "Programming")
-      @task.user.programming_rating = :rating;
-    end
-    if(@task.job_type == "Art")
-      @task.user.art_rating = :rating;
-    end
-    if(@task.job_type == "Music")
-      @task.user.music_rating = :rating;
-    end
-    if(@task.job_type == "Level Design")
-      @task.user.level_design_rating = :rating;
-    end
-    if(@task.job_type == "Story")
-      @task.user.story_rating = :rating;
-    end
-    if(@task.job_type == "Puzzles")
-      @task.user.puzzles_rating = :rating;
-    end
-    if(@task.job_type == "Misc")
-      @task.user.misc_rating = :rating;
+      @user.update_attribute(:programming_rating, @num[7].to_i)
+    elsif(@task.job_type == "Art")
+      @task.user.art_rating = :rating
+    elsif(@task.job_type == "Music")
+      @task.user.music_rating = :rating
+    elsif(@task.job_type == "Level Design")
+      @task.user.level_design_rating = :rating
+    elsif(@task.job_type == "Story")
+      @task.user.story_rating = :rating
+    elsif(@task.job_type == "Puzzles")
+      @task.user.puzzles_rating = :rating
+    elsif(@task.job_type == "Misc")
+      @task.user.misc_rating = :rating
     end
     @task.update_attribute(:reviewed, true);
     redirect_to @task.project
