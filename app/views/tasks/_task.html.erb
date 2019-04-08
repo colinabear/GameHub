@@ -28,7 +28,8 @@
         [Still Available]
       <% end %>
     </p>
-    <p>
+    <p style="display: inline-block; margin: 0;">|</p>
+    <p style="display: inline-block; margin: 0;">
     <% if current_user == task.user %>
       <% if task.status == "inProg" %>
         <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
@@ -38,7 +39,16 @@
         |
       <% end %>
     <% end %>
-    <% if current_user == task.project.user %>
+    <% if current_user == task.project.user && task.reviewed == false && task.status == "recent"%>
+      <%= form_tag(task_review_task_path(task), method: :post) do %>
+        <%= hidden_field_tag :taskid, task.id %>
+        <label>Rate this user's work (1-5):</label>
+        <%= number_field_tag :rating, 5, min: 1, max: 5 %>
+        <%= select_tag 'Category:', options_for_select(["programming","art","music","story","puzzles","misc","level design"]) %>
+        <%= submit_tag "Submit" %>
+      <% end %>
+
+    <% elsif current_user == task.project.user %>
       <%= link_to "Edit", edit_project_task_path(task.project, task) %>
       |
       <%= link_to "Delete", [task.project, task], method: :delete, data: { confirm: "Are you sure?" } %>
