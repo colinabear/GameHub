@@ -1,6 +1,7 @@
 class Resume < ApplicationRecord
+  validates :name, presence: true
+  validates :location, presence: true
+  validates :phone_number, presence: true
+  validates :biography, presence: true
   belongs_to :user
-  has_one :name
-  has_one :phone_number
-  has_one :location
 end

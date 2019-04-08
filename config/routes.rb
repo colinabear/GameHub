@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     get 'resume_search', to: 'users#resume_search'
   end
 
+  resources :resumes
+
   root 'pages#home'
 
   get 'post_index' => 'posts#index', as: 'post_index'

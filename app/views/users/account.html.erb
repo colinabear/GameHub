@@ -33,12 +33,33 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <div class="w3-display-bottomleft w3-container w3-text-black">
           </div>
         </div>
-        <h2><b><font color="#E5E5E5">Grant Williams</font></b></h2>
+        <h2><b><font color="#E5E5E5">
+          <% if @user.resume != nil %>
+            <%= @user.resume.name %>
+          <% end %>
+        </font></b></h2>
         <div class="w3-container">
 
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>London, UK</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>
+            <% if @user.resume != nil %>
+              <%= @user.resume.location %>
+            <% end %>
+          </p>
           <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><%= @user.email %></p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>
+            <% if @user.resume != nil %>
+              <%= @user.resume.phone_number %>
+            <% end %>
+          </p>
+            <% if @user == current_user %>
+              <p><i class="fa fa-bars fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              <% if current_user.resume == nil %>
+                <%= link_to "Create your resume", new_resume_path %>
+              <% else %>
+                <%= link_to "Edit Resume", edit_resume_path(current_user.resume) %>
+              <% end %>
+              </p>
+            <% end %>
           <hr>
 
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
@@ -139,7 +160,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
           <p>Bachelor Degree</p><br>
         </div>
-        
+
       </div>
 
 <br>

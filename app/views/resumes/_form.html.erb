@@ -1,0 +1,9 @@
+<%= simple_form_for @resume do |f| %>
+
+  <%= f.text_field :name %>
+  <%= f.text_field :location %>
+  <%= f.text_field :phone_number %>
+  <%= f.text_area :biography %>
+  <br/>
+  <%= f.submit %>
+<% end %>
