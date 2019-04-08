@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :tasks
     put 'progress_task', to: 'tasks#progress_task'
     put 'regress_task', to: 'tasks#regress_task'
+    post 'review_task', to: 'tasks#review_task'
     member do
       put "like", to: "projects#upvote"
     end
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
     put 'drop_task', to: 'tasks#drop_task'
     put 'progress_task', to: 'tasks#progress_task'
     put 'regress_task', to: 'tasks#regress_task'
+    post 'review_task', to: 'tasks#review_task'
   end
 
   resources :user do

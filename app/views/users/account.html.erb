@@ -31,9 +31,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <div class="w3-display-container">
           <img src="http://seel.cse.lsu.edu/images/people/grant.png" style="width:100%">
           <div class="w3-display-bottomleft w3-container w3-text-black">
-            <h2><b><font color="black">Grant Williams</font></b></h2>
           </div>
         </div>
+        <h2><b><font color="#E5E5E5">Grant Williams</font></b></h2>
         <div class="w3-container">
 
           <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>London, UK</p>
@@ -45,39 +45,51 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
           <p>Programming</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.programming_rating%>%">
+              <div class="w3-center w3-text-white"><%=@user.programming_rating%>%</div>
+            </div>
           </div>
 
           <p>Music</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">
-              <div class="w3-center w3-text-white">80%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.music_rating%>%">
+              <div class="w3-center w3-text-white"><%=@user.music_rating%>%</div>
             </div>
           </div>
 
           <p>Art</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:75%">75%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.art_rating%>%">
+              <div class="w3-center w3-text-white"><%=@user.art_rating%>%</div>
+            </div>
           </div>
 
           <p>Story</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.story_rating%>%">
+              <div class="w3-center w3-text-white"><%=@user.story_rating%>%</div>
+            </div>
           </div>
 
-		  <p>Level Design</p>
+    		  <p>Level Design</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.level_design_rating%>%">
+              <div class="w3-center w3-text-white"><%=@user.level_design_rating%>%</div>
+            </div>
           </div>
 
-		  <p>Puzzels</p>
+    		  <p>Puzzels</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.puzzles_rating%>%">
+              <div class="w3-center w3-text-white"><%=@user.puzzles_rating%>%</div>
+            </div>
           </div>
 
-		  <p>Miscellaneous</p>
+		      <p>Miscellaneous</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.misc_rating%>%">
+              <div class="w3-center w3-text-white"><%=@user.misc_rating%>%</div>
+            </div>
           </div>
 			<br>
         </div>
@@ -107,23 +119,27 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
       <div id="posts">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+
         <div class="w3-container">
           <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
           <p>Web Development! All I need to know in one place</p>
           <hr>
         </div>
+
         <div class="w3-container">
           <h5 class="w3-opacity"><b>London Business School</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
           <p>Master Degree</p>
           <hr>
         </div>
+
         <div class="w3-container">
           <h5 class="w3-opacity"><b>School of Coding</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
           <p>Bachelor Degree</p><br>
         </div>
+        
       </div>
 
 <br>

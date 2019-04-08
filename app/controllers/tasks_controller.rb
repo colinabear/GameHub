@@ -145,6 +145,33 @@ class TasksController < ApplicationController
     redirect_to @task.project
   end
 
+  def review_task
+    @task = Task.find(params[:taskid])
+    if(:category == "programming")
+      @task.user.programming_rating = :rating;
+    end
+    if(:category == "art")
+      @task.user.art_rating = :rating;
+    end
+    if(:category == "music")
+      @task.user.music_rating = :rating;
+    end
+    if(:category == "level design")
+      @task.user.level_design_rating = :rating;
+    end
+    if(:category == "story")
+      @task.user.story_rating = :rating;
+    end
+    if(:category == "puzzles")
+      @task.user.puzzles_rating = :rating;
+    end
+    if(:category == "misc")
+      @task.user.misc_rating = :rating;
+    end
+    @task.update_attribute(:reviewed, true);
+    redirect_to @task.project
+  end
+
   def regress_task
     @task = Task.find(params[:task_id])
     @task.update_attribute(:status, "inProg")
