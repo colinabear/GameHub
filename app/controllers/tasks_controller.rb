@@ -134,25 +134,25 @@ class TasksController < ApplicationController
 
   def review_task
     @task = Task.find(params[:taskid])
-    if(:category == "programming")
+    if(@task.job_type == "Programming")
       @task.user.programming_rating = :rating;
     end
-    if(:category == "art")
+    if(@task.job_type == "Art")
       @task.user.art_rating = :rating;
     end
-    if(:category == "music")
+    if(@task.job_type == "Music")
       @task.user.music_rating = :rating;
     end
-    if(:category == "level design")
+    if(@task.job_type == "Level Design")
       @task.user.level_design_rating = :rating;
     end
-    if(:category == "story")
+    if(@task.job_type == "Story")
       @task.user.story_rating = :rating;
     end
-    if(:category == "puzzles")
+    if(@task.job_type == "Puzzles")
       @task.user.puzzles_rating = :rating;
     end
-    if(:category == "misc")
+    if(@task.job_type == "Misc")
       @task.user.misc_rating = :rating;
     end
     @task.update_attribute(:reviewed, true);
