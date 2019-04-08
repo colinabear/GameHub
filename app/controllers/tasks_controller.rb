@@ -150,22 +150,28 @@ class TasksController < ApplicationController
     @user = @task.user
     puts "hello"
     @num = params[:rating].to_s
-    # {"5"=>"5"}
-    puts @num[7].to_i
+    @num = @num[7].to_i
     if(@task.job_type == "Programming")
-      @user.update_attribute(:programming_rating, @num[7].to_i)
+      @num = @num.to_i + @user.programming_rating.to_i
+      @user.update_attribute(:programming_rating, @num)
     elsif(@task.job_type == "Art")
-      @task.user.art_rating = :rating
+      @num = @num.to_i + @user.art_rating.to_i
+      @user.update_attribute(:art_rating, @num)
     elsif(@task.job_type == "Music")
-      @task.user.music_rating = :rating
+      @num = @num.to_i + @user.music_rating.to_i
+      @user.update_attribute(:music_rating, @num)
     elsif(@task.job_type == "Level Design")
-      @task.user.level_design_rating = :rating
+      @num = @num.to_i + @user.level_design_rating.to_i
+      @user.update_attribute(:level_design_rating, @num)
     elsif(@task.job_type == "Story")
-      @task.user.story_rating = :rating
+      @num = @num.to_i + @user.story_rating.to_i
+      @user.update_attribute(:story_rating, @num)
     elsif(@task.job_type == "Puzzles")
-      @task.user.puzzles_rating = :rating
-    elsif(@task.job_type == "Misc")
-      @task.user.misc_rating = :rating
+      @num = @num.to_i + @user.puzzles_rating.to_i
+      @user.update_attribute(:puzzles_rating, @num)
+    elsif(@task.job_type == "Miscellaneous")
+      @num = @num.to_i + @user.misc_rating.to_i
+      @user.update_attribute(:misc_rating, @num)
     end
     @task.update_attribute(:reviewed, true);
     redirect_to @task.project
