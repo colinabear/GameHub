@@ -77,26 +77,29 @@
       <br/>
       <br/>
       <p style="display: inline-block; font-size: 0px;" id="username"><%= current_user.email %></p>
+      <% on_team = false %>
       <% @project.tasks.each do |task| %>
         <% if task.user == current_user || @project.user == current_user %>
-          <button style="inline-block; color:white;" onclick="initializeKanban()">Show only:</button>
-          <select style="inline-block" selected="All" id="category">
-              <option value="All">All</option>
-              <option value="MyTasks">My Tasks</option>
-              <option value="Programming">Programming</option>
-              <option value="Music">Music</option>
-              <option value="Art">Art</option>
-              <option value="Story">Story</option>
-              <option value="Level Design">Level Design</option>
-              <option value="Puzzles">Puzzles</option>
-              <option value="Miscellaneous">Miscellaneous</option>
-            </select>
-          <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
-            <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
-          </div>
-          <!-- Put tasks in a dummy HTML element. -->
-
+          <% on_team = true %>
         <% end %>
+      <% end %>
+      <% if on_team %>
+        <button style="inline-block; color:white;" onclick="initializeKanban()">Show only:</button>
+        <select style="inline-block" id="category">
+            <option value="All" selected>All</option>
+            <option value="MyTasks">My Tasks</option>
+            <option value="Programming">Programming</option>
+            <option value="Music">Music</option>
+            <option value="Art">Art</option>
+            <option value="Story">Story</option>
+            <option value="Level Design">Level Design</option>
+            <option value="Puzzles">Puzzles</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+          </select>
+        <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
+          <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
+        </div>
+            <!-- Put tasks in a dummy HTML element. -->
       <% end %>
       <script>
           var rects = [];
@@ -135,6 +138,7 @@
               count = 0;
               var e = document.getElementById("category");
               var category = e.options[e.selectedIndex].value;
+              alert(category);
               ctx.clearRect(0, 0, c.width, c.height);
               checkHeight();
               buildBackGround();
