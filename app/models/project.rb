@@ -8,4 +8,5 @@ class Project < ApplicationRecord
   has_many :tasks
   acts_as_votable
   paginates_per 10
+  serialize :team_members, Array
 end

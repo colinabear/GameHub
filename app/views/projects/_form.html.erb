@@ -1,7 +1,7 @@
 <%= simple_form_for @project do |f| %>
   <%= render 'shared/projects_error_messages' %>
 <label>Name of your project</label>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, autocomplete: "off" %>
 <!-- <label>Description</label> -->
   <%= f.input :description %>
   <style>
@@ -17,9 +17,11 @@
     resize: none;
   }
   </style>
+  <%= f.label :progress %>
   <br/>
-
   <%= f.select :progress, options_for_select(["Idea", "In Progress", "Completed"], @project.progress), prompt: "-select-"  %>
+  <br/>
+  <br/>
 
   <%= f.submit %>
 <% end %>

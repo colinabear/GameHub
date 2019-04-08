@@ -1,3 +1,47 @@
+<script>
+  function renderInfo() {
+    var x = document.getElementById("info");
+    var y = document.getElementById("tasks");
+    var z = document.getElementById("hub");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    }
+    if (y.style.display === "block") {
+      y.style.display = "none";
+    }
+    if (z.style.display === "block") {
+      z.style.display = "none";
+    }
+  }
+  function renderTasks() {
+    var x = document.getElementById("info");
+    var y = document.getElementById("tasks");
+    var z = document.getElementById("hub");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    }
+    if (y.style.display === "none") {
+      y.style.display = "block";
+    }
+    if (z.style.display === "block") {
+      z.style.display = "none";
+    }
+  }
+  function renderHub() {
+    var x = document.getElementById("info");
+    var y = document.getElementById("tasks");
+    var z = document.getElementById("hub");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    }
+    if (y.style.display === "block") {
+      y.style.display = "none";
+    }
+    if (z.style.display === "none") {
+      z.style.display = "block";
+    }
+  }
+</script>
 <style>
   .sidenav {
   height: 100%; /* Full-height: remove this if you want "auto" height */
@@ -13,9 +57,24 @@
   .sidenav a {
     padding: 6px 8px 6px 16px;
     background-color: #192231;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 2%;
+    margin-left: 2%;
     border-radius: 5px;
+    width: 95%;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+  }
+
+  .sidenav button {
+    padding: 6px 8px 6px 16px;
+    background-color: #192231;
+    border-radius: 5px;
+    border: none;
+    margin-left: 2%;
+    width: 95%;
+    text-align: left;
     text-decoration: none;
     font-size: 20px;
     color: white;
@@ -26,13 +85,23 @@
   .sidenav a:hover {
     color: #59a86a;
   }
+
+  .sidenav button:hover {
+    color: #59a86a;
+  }
+
+  .sidenav button:focus {
+    outline: 0;
+  }
 </style>
 <div class="sidenav">
-  <%= link_to "Back to Games", project_index_path %>
+  <%= link_to "Back to Games", project_index_path  %>
   <br/>
-  <%= link_to "Info", '#' %>
+  <button onclick="renderInfo()">Info</button>
   <br/>
-  <%= link_to "Available Tasks", '#' %>
+  <button onclick="renderTasks()">Available Tasks</button>
   <br/>
-  <%= link_to "#{@project.name}'s Hub", '#' %>
+  <% if @project.team_members.include? current_user.email %>
+    <button onclick="renderHub()"><%= "#{@project.name}'s Hub" %></button>
+  <% end %>
 </div>

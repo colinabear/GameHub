@@ -43,6 +43,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)
+    @project.team_members << current_user.email
 
     if @project.save
       redirect_to @project
