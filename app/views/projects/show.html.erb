@@ -125,7 +125,6 @@
           var recentCompletedY = startingHeight;
           var grd = ctx.createLinearGradient(0,0,0,300);
           var count = 0;
-          initializeKanban();
 
 
           function initializeKanban() {
@@ -138,7 +137,6 @@
               count = 0;
               var e = document.getElementById("category");
               var category = e.options[e.selectedIndex].value;
-              alert(category);
               ctx.clearRect(0, 0, c.width, c.height);
               checkHeight();
               buildBackGround();
