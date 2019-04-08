@@ -33,6 +33,19 @@ class TasksController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
+    @included = false
+    @task.project.tasks.each do |task|
+      if task.id != @task.id
+        if task.user_id == @task.user_id
+          @included = true
+        end
+      end
+    end
+    if !@included
+      @array = @task.project.team_members
+      @array.delete(User.find(@task.user_id).email)
+      @task.project.update_attribute(:team_members, @array)
+    end
     @task.destroy
     redirect_to project_path(@project)
   end
