@@ -147,31 +147,26 @@ class TasksController < ApplicationController
 
   def review_task
     @task = Task.find(params[:taskid])
-    @user = @task.user
-    puts "hello"
-    @num = params[:rating].to_s
-    @num = @num[7].to_i
-    if(@task.job_type == "Programming")
-      @num = @num.to_i + @user.programming_rating.to_i
-      @user.update_attribute(:programming_rating, @num)
-    elsif(@task.job_type == "Art")
-      @num = @num.to_i + @user.art_rating.to_i
-      @user.update_attribute(:art_rating, @num)
-    elsif(@task.job_type == "Music")
-      @num = @num.to_i + @user.music_rating.to_i
-      @user.update_attribute(:music_rating, @num)
-    elsif(@task.job_type == "Level Design")
-      @num = @num.to_i + @user.level_design_rating.to_i
-      @user.update_attribute(:level_design_rating, @num)
-    elsif(@task.job_type == "Story")
-      @num = @num.to_i + @user.story_rating.to_i
-      @user.update_attribute(:story_rating, @num)
-    elsif(@task.job_type == "Puzzles")
-      @num = @num.to_i + @user.puzzles_rating.to_i
-      @user.update_attribute(:puzzles_rating, @num)
-    elsif(@task.job_type == "Miscellaneous")
-      @num = @num.to_i + @user.misc_rating.to_i
-      @user.update_attribute(:misc_rating, @num)
+    if(:category == "programming")
+      @task.user.programming_rating = :rating;
+    end
+    if(:category == "art")
+      @task.user.art_rating = :rating;
+    end
+    if(:category == "music")
+      @task.user.music_rating = :rating;
+    end
+    if(:category == "level design")
+      @task.user.level_design_rating = :rating;
+    end
+    if(:category == "story")
+      @task.user.story_rating = :rating;
+    end
+    if(:category == "puzzles")
+      @task.user.puzzles_rating = :rating;
+    end
+    if(:category == "misc")
+      @task.user.misc_rating = :rating;
     end
     @task.update_attribute(:reviewed, true);
     redirect_to @task.project
