@@ -148,9 +148,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
         <div class="w3-container">
           <p>
-            <% if @user.resume != nil %>
-              <%= @user.resume.biography %>
-            <% end %>
+<!-- Leave this aligned to far left.  It needs to be like this for the formatting to work. -->
+<pre><% if @user.resume != nil %>
+<%= @user.resume.biography %>
+<% end %></pre>
           </p>
           <hr>
         </div>
@@ -225,3 +226,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <br>
 </body>
 </html>
+<style>
+   pre {
+      overflow-x: auto;
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+   }
+</style>
