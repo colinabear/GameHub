@@ -20,10 +20,6 @@ body {
 	background: #131c29;
 }
 
-abbr[title="required"] {
-  display: none;
-}
-
 header {
 	img{
 		width: 100%;
@@ -38,13 +34,6 @@ a:link, a:visited {
 a:hover {
 	color: #3e764a;
 	text-decoration: none;
-}
-
-#profile_pic {
-	img {
-		height: 100%;
-		width: 100%;
-	}
 }
 
 .header_wrapper {

@@ -28,10 +28,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-third">
       <div id="posts">
 
-        <div class="w3-display-container" id="profile_pic">
-          <% if @user.resume != nil %>
-            <%= image_tag @user.resume.avatar %>
-          <% end %>
+        <div class="w3-display-container">
+          <img src="http://seel.cse.lsu.edu/images/people/grant.png" style="width:100%">
           <div class="w3-display-bottomleft w3-container w3-text-black">
           </div>
         </div>
