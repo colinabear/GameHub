@@ -25,7 +25,7 @@
             <%= link_to "Forum", post_index_path %>
             <%= link_to "Games", project_index_path %>
             <%= link_to "Jobs", task_index_path %>
-            <%= link_to "Log Out", destroy_user_session_path, method: :get %>
+            <%= link_to "Log Out", destroy_user_session_path, method: :GET %>
           <% else %>
             <%= link_to "Sign Up", new_user_registration_path %>
             <%= link_to "Sign In", new_user_session_path %>
