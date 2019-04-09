@@ -148,9 +148,11 @@ class TasksController < ApplicationController
   def review_task
     @task = Task.find(params[:taskid])
     @user = @task.user
-    puts "hello"
     @num = params[:rating].to_s
     @num = @num[7].to_i
+    if @num == 0
+        @num = 1
+    end
     if(@task.job_type == "Programming")
       @num = @num.to_i + @user.programming_rating.to_i
       @user.update_attribute(:programming_rating, @num)
