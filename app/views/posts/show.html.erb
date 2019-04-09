@@ -19,7 +19,7 @@
   </h4>
 
   <div id="rcorners2">
-  <p>Author:<b><%= @post.author %></b></p>
+  <p>Author: <b><%= link_to @post.author, user_resume_search_path(@post.author) %></b></p>
   </div>
 
   <div id="comments">

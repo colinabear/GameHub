@@ -58,6 +58,20 @@ ActiveRecord::Schema.define(version: 20190408043314) do
     t.string "team_members"
     t.integer "user_id"
     t.string "progress"
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.index ["cached_votes_down"], name: "index_projects_on_cached_votes_down"
+    t.index ["cached_votes_score"], name: "index_projects_on_cached_votes_score"
+    t.index ["cached_votes_total"], name: "index_projects_on_cached_votes_total"
+    t.index ["cached_votes_up"], name: "index_projects_on_cached_votes_up"
+    t.index ["cached_weighted_average"], name: "index_projects_on_cached_weighted_average"
+    t.index ["cached_weighted_score"], name: "index_projects_on_cached_weighted_score"
+    t.index ["cached_weighted_total"], name: "index_projects_on_cached_weighted_total"
   end
 
   create_table "resumes", force: :cascade do |t|
@@ -78,6 +92,7 @@ ActiveRecord::Schema.define(version: 20190408043314) do
     t.integer "project_id"
     t.integer "user_id"
     t.boolean "accepted"
+    t.string "type"
     t.text "pending_users"
     t.boolean "reviewed", default: false
   end
@@ -102,6 +117,10 @@ ActiveRecord::Schema.define(version: 20190408043314) do
     t.integer "story_rating", default: 0
     t.integer "puzzles_rating", default: 0
     t.integer "misc_rating", default: 0
+    t.string "name"
+    t.string "location"
+    t.string "phone_number"
+    t.text "biography"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
