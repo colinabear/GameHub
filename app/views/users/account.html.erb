@@ -63,53 +63,75 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <hr>
 
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+          <% def find_percent(category, rating_cat) %>
+            <% if rating_cat == nil %>
+              <% rating_cat = 0 %>
+            <% end %>
+            <% @tasks = Task.where(:reviewed => true).where(:job_type => category).where(:user => @user) %>
+            <% @total_task_rating = @tasks.length*5 %>
+            <% if @total_task_rating == 0 %>
+              <% @total_task_rating = 1 %>
+            <% end %>
+            <% @percent = ((rating_cat.to_f/@total_task_rating.to_f)*100).ceil %>
+            <% if @percent == 0 %>
+              <% @percent = "[No projects completed]" %>
+            <% end %>
+            <% @percent %>
+          <% end %>
 
+          <% @prog_percent = find_percent("Programming", @user.programming_rating) %>
           <p>Programming</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.programming_rating%>%">
-              <div class="w3-center w3-text-white"><%=@user.programming_rating%>%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@prog_percent%>%">
+              <div class="w3-center w3-text-white"><%=@prog_percent%>%</div>
             </div>
           </div>
 
+          <% @music_percent = find_percent("Music", @user.music_rating) %>
           <p>Music</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.music_rating%>%">
-              <div class="w3-center w3-text-white"><%=@user.music_rating%>%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@music_percent%>%">
+              <div class="w3-center w3-text-white"><%=@music_percent%>%</div>
             </div>
           </div>
 
+          <% @art_percent = find_percent("Art", @user.art_rating) %>
           <p>Art</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.art_rating%>%">
-              <div class="w3-center w3-text-white"><%=@user.art_rating%>%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@art_percent%>%">
+              <div class="w3-center w3-text-white"><%=@art_percent%>%</div>
             </div>
           </div>
 
+          <% @story_percent = find_percent("Story", @user.story_rating) %>
           <p>Story</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.story_rating%>%">
-              <div class="w3-center w3-text-white"><%=@user.story_rating%>%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@story_percent%>%">
+              <div class="w3-center w3-text-white"><%=@story_percent%>%</div>
             </div>
           </div>
 
+          <% @l_d_percent = find_percent("Level_Design", @user.level_design_rating) %>
     		  <p>Level Design</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.level_design_rating%>%">
-              <div class="w3-center w3-text-white"><%=@user.level_design_rating%>%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@l_d_percent%>%">
+              <div class="w3-center w3-text-white"><%=@l_d_percent%>%</div>
             </div>
           </div>
 
-    		  <p>Puzzels</p>
+          <% @puzzles_percent = find_percent("Puzzles", @user.puzzles_rating) %>
+    		  <p>Puzzles</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.puzzles_rating%>%">
-              <div class="w3-center w3-text-white"><%=@user.puzzles_rating%>%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@puzzles_percent%>%">
+              <div class="w3-center w3-text-white"><%=@puzzles_percent%>%</div>
             </div>
           </div>
 
+          <% @misc_percent = find_percent("Miscellaneous", @user.misc_rating) %>
 		      <p>Miscellaneous</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@user.misc_rating%>%">
-              <div class="w3-center w3-text-white"><%=@user.misc_rating%>%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@misc_percent%>%">
+              <div class="w3-center w3-text-white"><%=@misc_percent%>%</div>
             </div>
           </div>
 			<br>

@@ -3,27 +3,27 @@ Rails.application.routes.draw do
   resources :posts do
   	resources :comments
     member do
-      get "like", to: "posts#upvote"
-      get "dislike", to: "posts#downvote"
+      put "like", to: "posts#upvote"
+      put "dislike", to: "posts#downvote"
     end
   end
 
   resources :projects do
     resources :tasks
-    get 'progress_task', to: 'tasks#progress_task'
-    get 'regress_task', to: 'tasks#regress_task'
+    put 'progress_task', to: 'tasks#progress_task'
+    put 'regress_task', to: 'tasks#regress_task'
     post 'review_task', to: 'tasks#review_task'
     member do
-      get "like", to: "projects#upvote"
+      put "like", to: "projects#upvote"
     end
   end
 
   resources :tasks do
-    get 'request_task', to: 'tasks#request_task'
-    get 'accept_user', to: 'tasks#accept_user'
-    get 'drop_task', to: 'tasks#drop_task'
-    get 'progress_task', to: 'tasks#progress_task'
-    get 'regress_task', to: 'tasks#regress_task'
+    put 'request_task', to: 'tasks#request_task'
+    put 'accept_user', to: 'tasks#accept_user'
+    put 'drop_task', to: 'tasks#drop_task'
+    put 'progress_task', to: 'tasks#progress_task'
+    put 'regress_task', to: 'tasks#regress_task'
     post 'review_task', to: 'tasks#review_task'
   end
 
