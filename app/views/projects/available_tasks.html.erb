@@ -31,31 +31,15 @@
 <%= render 'sidebar' %>
 <div id="project_content">
   <h1>
-    <%= @project.name %>
+    <%= "#{@project.name}'s Available Tasks" %>
   </h1>
-  <div id="info">
-    <h4>
-      <%= @project.description %>
-    </h4>
-
-    <div id="rcorners2">
-      <label>Author:</label>
-      <h5><%= @project.user.email %></h5>
-    </div>
-  <p></p>
-
-    <div id="rcorners2">
-      <label>Team:</label>
-        <% @project.team_members.each do |member| %>
-          <h5><%= member %></h5>
+  <div id="tasks">
+    <div style="overflow: auto; height: auto; max-height: 230px">
+      <% @project.tasks.each do |task| %>
+        <% if task.status == "todo" %>
+          <%= render task %>
         <% end %>
+      <% end %>
     </div>
-    <p></p>
-
-    <div id="rcorners2">
-      <label>Progress:<label>
-      <h5><%= @project.progress %></h5>
-    </div>
-    <p></p>
   </div>
 </div>
