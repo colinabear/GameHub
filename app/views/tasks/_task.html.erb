@@ -54,7 +54,8 @@
       <%= form_tag(task_review_task_path(task), method: :post) do %>
         <%= hidden_field_tag :taskid, task.id %>
         <label>Rate this user's work (1-5):</label>
-        <%= number_field :rating, 5, min: 1, max: 5 %>
+        <%= number_field_tag :rating, 5, min: 1, max: 5 %>
+        <%= select_tag 'Category:', options_for_select(["programming","art","music","story","puzzles","misc","level design"]) %>
         <%= submit_tag "Submit" %>
       <% end %>
 

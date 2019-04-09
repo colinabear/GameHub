@@ -102,6 +102,6 @@
   <button onclick="renderTasks()">Available Tasks</button>
   <br/>
   <% if @project.team_members.include? current_user.email %>
-    <button onclick="renderHub();initializeKanban();"><%= "#{@project.name}'s Hub" %></button>
+    <button onclick="renderHub()"><%= "#{@project.name}'s Hub" %></button>
   <% end %>
 </div>
