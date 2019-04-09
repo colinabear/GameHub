@@ -37,6 +37,16 @@ class ProjectsController < ApplicationController
   def show
   end
 
+  def available_tasks
+    @project = Project.find(params[:project_id])
+    render 'available_tasks'
+  end
+
+  def hub
+    @project = Project.find(params[:project_id])
+    render 'hub'
+  end
+
   def new
     @project = current_user.projects.build
   end
