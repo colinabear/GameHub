@@ -1,7 +1,14 @@
 <div id="comments">
   <div class="content">
     <p class="task">
-      <b><%= link_to task.title, task %></b>
+      <b>
+        <%= link_to task.title, task %>
+        <% if current_user == task.project.user %>
+          <% if !task.pending_users.empty? && !task.accepted %>
+            (Requests Pending)
+          <% end %>
+        <% end %>
+      </b>
     </p>
     <p style="display: inline-block; margin: 0;">Description:</p>
     <p style="display: inline-block; margin: 0;" class="desc">
@@ -28,8 +35,12 @@
         [Still Available]
       <% end %>
     </p>
-    <p style="display: inline-block; margin: 0;">|</p>
-    <p style="display: inline-block; margin: 0;">
+    <p>
+    <% if task.status == "todo" && current_user != task.user %>
+      <% if !task.pending_users.include? current_user.id %>
+        <%= link_to "Request Task", task_request_task_path(task), method: :put %>
+      <% end %>
+    <% end %>
     <% if current_user == task.user %>
       <% if task.status == "inProg" %>
         <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
