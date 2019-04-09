@@ -46,7 +46,9 @@
             <%= link_to "Undo completed", task_regress_task_path(@task), method: :put, class: "button" %>
           <% end %>
         <% end %>
-          <%= link_to "Drop", task_drop_task_path(@task), method: :put, class: "button" %>
+          <% if task.status != "recent" %>
+            <%= link_to "Drop", task_drop_task_path(@task), method: :put, class: "button" %>
+          <% end %>
         <% end %>
     <% end %>
   </h5>

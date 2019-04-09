@@ -36,6 +36,13 @@ a:hover {
 	text-decoration: none;
 }
 
+#profile_pic {
+	img {
+		height: 100%;
+		width: 100%;
+	}
+}
+
 .header_wrapper {
 	width: 100%;
 	margin: 0 auto;
