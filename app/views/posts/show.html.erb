@@ -8,20 +8,28 @@
     }
   }
 </script>
+<br>
+<br>
+
+<%= link_to "Back to forum", post_index_path, class: "button" %>
+<br>
+<br>
+<br>
+
 <div id="post_content">
-  <%= link_to "Back to forum", post_index_path, class: "button" %>
+
   <h1>
     <%= @post.title %>
   </h1>
-
   <h4>
     <%= @post.content %>
   </h4>
-
-  <div id="rcorners2">
-  <p>Author: <b><%= link_to @post.author, user_resume_search_path(@post.author) %></b></p>
+  <p>Author: <b><%= link_to @post.author, user_resume_search_path(@post.user_id) %></b></p>
   </div>
 
+  <br>
+
+<div id="post_content">
   <div id="comments">
     <h2>
         <font color="#E5E5E5">
@@ -40,12 +48,12 @@
       </div>
     </div>
   </div>
-  <br/>
-  <hr/>
-  <br/>
+
     <% if current_user.id == @post.user_id %>
       <%= link_to "Edit", edit_post_path(@post), class: "button" %>
       <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
     <% end %>
   <% end %>
+  <br>
+  <br>
 </div>

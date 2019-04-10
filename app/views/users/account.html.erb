@@ -80,7 +80,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <% @percent = find_percent(cat, @cats2[@count]) %>
             <% @count += 1 %>
             <div style="display:<%=@percent%>;">
-              <p><%=cat%></p>
+              <p><%=cat%> (<%= Task.where(:reviewed => true).where(:job_type => cat).where(:user => @user).length%>)</p>
               <div class="w3-light-grey w3-round-xlarge w3-small">
                 <% if @percent.to_i < 30 %>
                   <% @color = 'red'%>
@@ -110,17 +110,17 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <div class="w3-container">
           <p>
 <!-- Leave this aligned to far left.  It needs to be like this for the formatting to work. -->
-<pre><% if @user.resume != nil %>
+<pre>
+<% if @user.resume != nil %>
 <%= @user.resume.biography %>
-<% end %></pre>
-          </p>
-          <hr>
+<% end %>
+</pre>
         </div>
       </div>
       <br>
       <div id="posts">
         <% @count = 0 %>
-        <% @user.tasks.each do |task| %>
+        <% @user.tasks.reverse_each do |task| %>
           <% if task.status == "recent" %>
             <% @count = @count + 1 %>
           <% end %>
@@ -128,7 +128,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
               <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge "></i>Completed Tasks (<%= @count %>)</h2>
                  <div style="overflow: auto; height: auto; max-height: 420px">
-                  <% @user.tasks.each do |task| %>
+                  <% @user.tasks.reverse_each do |task| %>
                     <% if task.status == "recent" %>
                       <div class="w3-container">
                         <h5 class="w3-opacity"><b><%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> ) - <%= task.job_type %></b></h5>
@@ -140,54 +140,59 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                   </div>
       </div>
       <br>
+      <% if @user == current_user %>
+      <div id="project_content">
+          <div style="background:#192231; border-radius:5px; padding:10px;">
+          <h5> Liked Posts: </h5>
+          <div style="overflow: auto; height: auto; max-height: 420px">
+            <% Post.all.each do |post| %>
+              <% if current_user.voted_up_for? post %>
+              <div class="post">
+                <div style="display: inline-block; padding-left: 20px">
+                <h4 class="title">
+                  <%= link_to post.title, post %>
+                </h4>
+                <p class="date">
+                  Published
+                  <%= time_ago_in_words(post.created_at) %>
+                  ago by
+                  <%= link_to post.user.email, user_resume_search_path(post.user) %>
+                </p>
+                </div>
+                <hr>
+              </div>
+              <% end %>
+            <% end %>
+            </div>
+           </div>
+           </div>
+          <br>
+          <div id="project_content">
+            <div style="background:#192231; border-radius:5px; padding:10px;">
+              <h5> Current Tasks (<%= Task.where(:status => "inProg").where(:user => current_user).length %>): </h5>
+               <% current_user.tasks.reverse_each do |task| %>
+                 <% if task.status == "inProg" %>
+                  <h5>
+                   <%= link_to task.title, task %> for <%= link_to task.project.name, task.project %> (<b><%= task.job_type %></b>)
+                  </h5>
+                  <p>
+                    Description: <%= task.description %>
+                  </p>
+                  <p>
+                    <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
+                  </p>
+                <hr>
+                 <% end %>
+               <% end %>
+            </div>
+            </div>
+        <% end %>
+      <br>
 <br>
     <!-- End Right Column -->
     </div>
   <!-- End Grid -->
   </div>
-  <% if @user == current_user %>
-      <div style="background:#192231; border-radius:5px; padding:10px;">
-      <h5> Liked Posts: </h5>
-        <br>
-      <div style="overflow: auto; height: auto; max-height: 420px">
-        <% Post.all.each do |post| %>
-          <% if current_user.voted_up_for? post %>
-          <div class="post">
-            <div style="display: inline-block; padding-left: 20px">
-            <h3 class="title">
-              <%= link_to post.title, post %>
-            </h3>
-            <p class="date">
-              Published
-              <%= time_ago_in_words(post.created_at) %>
-              ago by
-              <%= link_to post.user.email, user_resume_search_path(post.user) %>
-            </p>
-            </div>
-          </div>
-          <% end %>
-        <% end %>
-        </div>
-       </div>
-      <br>
-        <div style="background:#192231; border-radius:5px; padding:10px;">
-          <h5> Current Tasks (<%= Task.where(:status => "inProg").where(:user => current_user).length %>): </h5>
-           <% current_user.tasks.each do |task| %>
-             <% if task.status == "inProg" %>
-              <h5>
-               <%= link_to task.title, task %> for <%= link_to task.project.name, task.project %> (<b><%= task.job_type %></b>)
-              </h5>
-              <p>
-                Description: <%= task.description %>
-              </p>
-              <p>
-                <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
-              </p>
-            <hr>
-             <% end %>
-           <% end %>
-        </div>
-    <% end %>
     <br>
     <br>
     <br>
@@ -201,6 +206,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </html>
 <style>
    pre {
+      font-family: Roboto;
       overflow-x: auto;
       white-space: pre-wrap;
       white-space: -moz-pre-wrap;

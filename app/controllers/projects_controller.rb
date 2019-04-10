@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
 				end
 		else
 				if params[:sort] == 'updated_at'
-					@projects = Project.order("updated_at DESC").page params[:page]
+					@projects = Project.all.order("updated_at DESC").page params[:page]
 				elsif params[:sort] == 'created_at'
 					@projects = Project.all.order("created_at DESC").page params[:page]
 				elsif params[:sort] == 'name'
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
 				elsif params[:sort] == 'popularity'
 					@projects = Project.all.order(cached_votes_score: :desc).page params[:page]
 				else
-					@projects = Project.all.page params[:page]
+					@projects = Project.all.order("created_at DESC").page params[:page]
 				end
 		end
   end
@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.tasks.each do |task|
+    @project.tasks.reverse_each do |task|
       task.destroy
     end
     @project.destroy

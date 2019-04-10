@@ -14,7 +14,7 @@ Description: <input type="text" id="desc">
 </div>
 <!-- Put tasks in a dummy HTML element. -->
 <div hidden>
-<% current_user.tasks.each do |task| %>
+<% current_user.tasks.reverse_each do |task| %>
   <p class="task">
     <%= task.title %>
   </p>
