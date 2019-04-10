@@ -195,6 +195,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <!-- End Grid -->
   </div>
     <br>
+    <% if @user == current_user && @user.messages_received != nil %>
+    <div style="background:#192231; border-radius:5px; padding:10px;">
+      <% @user.messages_received.each do |message| %>
+        <%= message %>
+        <br>
+      <% end %>
+    </div>
+    <% end %>
     <br>
     <br>
     <br>

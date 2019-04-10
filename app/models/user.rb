@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_one :resume
   acts_as_voter
   paginates_per 10
+  serialize :messages_received, Array
+  serialize :messages_sent, Array
 end

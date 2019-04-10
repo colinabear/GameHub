@@ -2,9 +2,8 @@
 <% if @user != nil %>
   <%= form_tag(user_message_path(@user),  method: :post) do %>
     <label>Write a message:</label>
-    <%= text_area :message, "Hello" %>
+    <%= text_area_tag :message, "Hello" %>
     <%= hidden_field_tag :userid, @user.id %>
-    <%= hidden_field_tag :user_id, @user.user_id %>
     <%= submit_tag "Submit" %>
   <% end %>
 <% end %>
