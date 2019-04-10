@@ -110,9 +110,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <div class="w3-container">
           <p>
 <!-- Leave this aligned to far left.  It needs to be like this for the formatting to work. -->
+<pre>
 <% if @user.resume != nil %>
 <%= @user.resume.biography %>
 <% end %>
+</pre>
           </p>
         </div>
       </div>
@@ -201,6 +203,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </html>
 <style>
    pre {
+      font-family: Roboto;
       overflow-x: auto;
       white-space: pre-wrap;
       white-space: -moz-pre-wrap;
