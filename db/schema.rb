@@ -81,8 +81,6 @@ ActiveRecord::Schema.define(version: 20190410050539) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.string "location"
-    t.string "phone_number"
     t.text "biography"
     t.integer "user_id"
     t.string "avatar"
