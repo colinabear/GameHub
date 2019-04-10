@@ -56,14 +56,14 @@
 
     <div id="rcorners2">
       <label>Author:</label>
-      <h5><%= @project.user.email %></h5>
+      <h5><%= link_to @project.user.email, user_resume_search_path(@project.user) %></h5>
     </div>
   <p></p>
 
     <div id="rcorners2">
       <label>Team:</label>
         <% @project.team_members.each do |member| %>
-          <h5><%= member %></h5>
+          <h5><%= link_to member, user_resume_search_path(User.where(:email => member).ids) %></h5>
         <% end %>
     </div>
     <p></p>
