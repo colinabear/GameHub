@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :projects do
     get 'available_tasks', to: 'projects#available_tasks'
     get 'hub', to: 'projects#hub'
+    get 'discussion', to: 'projects#discussion'
     resources :tasks
     put 'progress_task', to: 'tasks#progress_task'
     put 'regress_task', to: 'tasks#regress_task'

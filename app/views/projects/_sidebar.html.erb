@@ -7,5 +7,7 @@
   <br/>
   <% if @project.team_members.include? current_user.email %>
     <%= link_to "#{@project.name}'s Hub", project_hub_path(@project), method: :get, class: "hub_link" %>
+    <br/>
+    <%= link_to "Discussion", project_discussion_path(@project), method: :get, class: "discussion_link" %>
   <% end %>
 </div>
