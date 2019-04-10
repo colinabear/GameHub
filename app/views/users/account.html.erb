@@ -40,19 +40,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </font></b></h2>
         <div class="w3-container">
 
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large "></i>
             <% if @user.resume != nil %>
               <%= @user.resume.location %>
             <% end %>
           </p>
-          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><%= @user.email %></p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large "></i><%= @user.email %></p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large "></i>
             <% if @user.resume != nil %>
               <%= @user.resume.phone_number %>
             <% end %>
           </p>
             <% if @user == current_user %>
-              <p><i class="fa fa-bars fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              <p><i class="fa fa-bars fa-fw w3-margin-right w3-large "></i>
               <% if current_user.resume == nil %>
                 <%= link_to "Create your resume", new_resume_path %>
               <% else %>
@@ -62,7 +62,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <% end %>
           <hr>
 
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right "></i>Skills</b></p>
           <% def find_percent(category, rating_cat) %>
             <% if rating_cat == nil %>
               <% rating_cat = 0 %>
@@ -88,8 +88,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <div style="display:<%=@percent%>;">
               <p><%=cat%></p>
               <div class="w3-light-grey w3-round-xlarge w3-small">
-                <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:<%=@percent%>%;">
-                  <div class="w3-center w3-text-white"><%=@percent%>%</div>
+                <% if @percent.to_i < 30 %>
+                  <% @color = 'red'%>
+                <% elsif @percent.to_i > 30 && @percent.to_i < 70 %>
+                  <% @color = 'yellow' %>
+                <% else %>
+                  <% @color = 'green' %>
+                <% end %>
+                <div class="w3-container w3-center w3-round-xlarge w3-<%=@color%>" style="width:<%=@percent%>%;">
+                  <div class="w3-center w3-text-black"><%=@percent%>%</div>
                 </div>
               </div>
             </div>
@@ -104,7 +111,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird">
 
       <div id="posts">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Bio</h2>
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge"></i>Bio</h2>
 
         <div class="w3-container">
           <p>
@@ -118,17 +125,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
       <br>
       <div id="posts">
-              <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Completed Tasks (<%= @count %>)</h2>
+              <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge "></i>Completed Tasks (<%= @count %>)</h2>
                  <div style="overflow: auto; height: auto; max-height: 420px">
-                  <br>
                   <% @user.tasks.each do |task| %>
                     <% if task.status == "recent" %>
                       <div class="w3-container">
                         <h5 class="w3-opacity"><b><%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> ) - <%= task.job_type %></b></h5>
-                        <p><%= task.description %></p>
+                        <p><b>Description:</b> <%= task.description %></p>
                         <hr>
                       </div>
-                      <br>
                     <% end %>
                   <% end %>
                   </div>
