@@ -14,19 +14,19 @@ class UsersController < ApplicationController
   end
 
   def message
-    puts params[:message]
+    @message = params[:message]
     @user = User.find(params[:userid])
     if @user.messages_received == nil
       @user.messages_received = []
     end
     @array = @user.messages_received
-    @array << :message
+    @array << @message
     @user.update_attribute(:messages_received, @array)
     if current_user.messages_sent == nil
       current_user.messages_sent= []
     end
     @array = current_user.messages_sent
-    @array << :message
+    @array << @message
     current_user.update_attribute(:messages_sent, @array)
     # Need to redirect back to account that you sent message to.
   end
