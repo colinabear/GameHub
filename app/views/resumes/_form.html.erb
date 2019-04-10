@@ -1,4 +1,9 @@
 <%= simple_form_for @resume do |f| %>
+  <label>Profile Picture:</label>
+  <br>
+  <%= f.file_field :avatar %>
+  <br>
+  <br>
   <label>Name:</label>
   <%= f.text_field :name %>
   <label>Location:</label>
