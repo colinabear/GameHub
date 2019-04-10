@@ -58,10 +58,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
               <% end %>
               </p>
             <% end %>
-            <% if @user != current_user %>
-              <p><i class="fa fa-bars fa-fw w3-margin-right w3-large "></i>
-                <%= link_to "Send Message", user_new_message_path(@user, current_user) %>
-            <% end %>
           <hr>
 
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right "></i>Skills</b></p>
@@ -195,14 +191,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <!-- End Grid -->
   </div>
     <br>
-    <% if @user == current_user && @user.messages_received != nil %>
-    <div style="background:#192231; border-radius:5px; padding:10px;">
-      <% @user.messages_received.each do |message| %>
-        <%= message %>
-        <br>
-      <% end %>
-    </div>
-    <% end %>
     <br>
     <br>
     <br>

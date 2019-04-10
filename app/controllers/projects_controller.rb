@@ -47,11 +47,6 @@ class ProjectsController < ApplicationController
     render 'hub'
   end
 
-  def discussion
-    @project = Project.find(params[:project_id])
-    render 'discussion'
-  end
-  
   def new
     @project = current_user.projects.build
   end

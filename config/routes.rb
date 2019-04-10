@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :projects do
     get 'available_tasks', to: 'projects#available_tasks'
     get 'hub', to: 'projects#hub'
-    get 'discussion', to: 'projects#discussion'
     resources :tasks
     put 'progress_task', to: 'tasks#progress_task'
     put 'regress_task', to: 'tasks#regress_task'
@@ -32,8 +31,6 @@ Rails.application.routes.draw do
 
   resources :user do
     get 'resume_search', to: 'users#resume_search'
-    get 'new_message', to: 'users#new_message'
-    post 'message', to: 'users#message'
   end
 
   resources :resumes
