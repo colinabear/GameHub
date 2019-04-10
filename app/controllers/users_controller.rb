@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def message
     @message = params[:message]
+    @message = @message + " - " + current_user.email 
     @user = User.find(params[:userid])
     if @user.messages_received == nil
       @user.messages_received = []
