@@ -25,6 +25,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <div class="w3-display-container">
           <% if @user.resume  != nil %>
             <%= image_tag @user.resume.avatar.standard.url %>
+          <% else %>
+            <%= image_tag('no_avatar.jpg', draggable: false) %>
           <% end %>
           <div class="w3-display-bottomleft w3-container w3-text-black">
           </div>

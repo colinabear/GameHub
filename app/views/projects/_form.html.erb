@@ -20,6 +20,11 @@
   <%= f.label :progress %>
   <br/>
   <%= f.select :progress, options_for_select(["Idea", "In Progress", "Completed"], @project.progress), prompt: "-select-"  %>
+  <br>
+  <br>
+  <label>Add Project Image:</label>
+  <br>
+  <%= f.file_field :avatar %>
   <br/>
   <br/>
 

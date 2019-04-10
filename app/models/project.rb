@@ -9,4 +9,5 @@ class Project < ApplicationRecord
   acts_as_votable
   paginates_per 10
   serialize :team_members, Array
+  mount_uploader :avatar, AvatarUploader
 end
