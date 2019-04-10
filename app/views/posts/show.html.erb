@@ -25,6 +25,11 @@
     <%= @post.content %>
   </h4>
   <p>Author: <b><%= link_to @post.author, user_resume_search_path(@post.user_id) %></b></p>
+  <br>
+  <% if current_user.id == @post.user_id %>
+    <%= link_to "Edit", edit_post_path(@post), class: "button" %>
+    <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+  <% end %>
   </div>
 
   <br>
@@ -48,11 +53,6 @@
       </div>
     </div>
   </div>
-
-    <% if current_user.id == @post.user_id %>
-      <%= link_to "Edit", edit_post_path(@post), class: "button" %>
-      <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
-    <% end %>
   <% end %>
   <br>
   <br>
