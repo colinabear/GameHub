@@ -1,107 +1,11 @@
-<script>
-  function renderInfo() {
-    var x = document.getElementById("info");
-    var y = document.getElementById("tasks");
-    var z = document.getElementById("hub");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    }
-    if (y.style.display === "block") {
-      y.style.display = "none";
-    }
-    if (z.style.display === "block") {
-      z.style.display = "none";
-    }
-  }
-  function renderTasks() {
-    var x = document.getElementById("info");
-    var y = document.getElementById("tasks");
-    var z = document.getElementById("hub");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    }
-    if (y.style.display === "none") {
-      y.style.display = "block";
-    }
-    if (z.style.display === "block") {
-      z.style.display = "none";
-    }
-  }
-  function renderHub() {
-    var x = document.getElementById("info");
-    var y = document.getElementById("tasks");
-    var z = document.getElementById("hub");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    }
-    if (y.style.display === "block") {
-      y.style.display = "none";
-    }
-    if (z.style.display === "none") {
-      z.style.display = "block";
-    }
-  }
-</script>
-<style>
-  .sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 10%; /* Set the width of the sidebar */
-  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
-  top: 1;
-  left: 0;
-  background-color: #131c29; /* Black */
-  padding-top: 10px;
-  }
-
-  /* The navigation menu links */
-  .sidenav a {
-    padding: 6px 8px 6px 16px;
-    background-color: #192231;
-    margin-right: 2%;
-    margin-left: 2%;
-    border-radius: 5px;
-    width: 95%;
-    text-decoration: none;
-    font-size: 20px;
-    color: white;
-    display: block;
-  }
-
-  .sidenav button {
-    padding: 6px 8px 6px 16px;
-    background-color: #192231;
-    border-radius: 5px;
-    border: none;
-    margin-left: 2%;
-    width: 95%;
-    text-align: left;
-    text-decoration: none;
-    font-size: 20px;
-    color: white;
-    display: block;
-  }
-
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
-    color: #59a86a;
-  }
-
-  .sidenav button:hover {
-    color: #59a86a;
-  }
-
-  .sidenav button:focus {
-    outline: 0;
-  }
-</style>
 <div class="sidenav">
   <%= link_to "Back to Games", project_index_path  %>
   <br/>
-  <button onclick="renderInfo()">Info</button>
+  <%= link_to "Info", @project, class: "info_link" %>
   <br/>
-  <button onclick="renderTasks()">Available Tasks</button>
+  <%= link_to "Available Tasks", project_available_tasks_path(@project), method: :get, class: "available_tasks_link" %>
   <br/>
   <% if @project.team_members.include? current_user.email %>
-    <button onclick="renderHub();initializeKanban();"><%= "#{@project.name}'s Hub" %></button>
+    <%= link_to "#{@project.name}'s Hub", project_hub_path(@project), method: :get, class: "hub_link" %>
   <% end %>
 </div>

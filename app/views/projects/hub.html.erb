@@ -28,46 +28,23 @@
     color: #59a86a;
   }
 </style>
+<script>
+  function renderTaskForm() {
+    var x = document.getElementById("taskForm");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+
 <%= render 'sidebar' %>
 <div id="project_content">
   <h1>
-    <%= @project.name %>
+    <%= "#{@project.name}'s Hub" %>
   </h1>
-  <div id="info">
-    <h4>
-      <%= @project.description %>
-    </h4>
-
-    <div id="rcorners2">
-      <label>Author:</label>
-      <h5><%= @project.user.email %></h5>
-    </div>
-  <p></p>
-
-    <div id="rcorners2">
-      <label>Team:</label>
-        <% @project.team_members.each do |member| %>
-          <h5><%= member %></h5>
-        <% end %>
-    </div>
-    <p></p>
-
-    <div id="rcorners2">
-      <label>Progress:<label>
-      <h5><%= @project.progress %></h5>
-    </div>
-    <p></p>
-  </div>
-  <div id="tasks" style="display: none">
-    <div style="overflow: auto; height: auto; max-height: 230px">
-      <% @project.tasks.each do |task| %>
-        <% if task.status == "todo" %>
-          <%= render task %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-  <div id="hub" style="display: none">
+  <div id="hub">
     <% if user_signed_in? %>
     <% if @project.tasks.count != 0 %>
       <h2>
@@ -116,11 +93,10 @@
             <option value="Puzzles">Puzzles</option>
             <option value="Miscellaneous">Miscellaneous</option>
           </select>
-          <br>
-          <br>
         <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
           <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
         </div>
+            <!-- Put tasks in a dummy HTML element. -->
       <% end %>
       <script>
           var rects = [];
@@ -145,6 +121,7 @@
           var recentCompletedY = startingHeight;
           var grd = ctx.createLinearGradient(0,0,0,300);
           var count = 0;
+          initializeKanban();
 
 
           function initializeKanban() {
@@ -216,21 +193,29 @@
           function createRect(x,y,choice, title, desc) {
               ctx.beginPath();
               ctx.rect(x+5,y,canvasWidth/3-10,40);
+              grd = ctx.createLinearGradient(x,y,x,y+40);
               var color1 = "";
+              var color2 = "";
               if(choice === "todo"){
                 color1 = "#397CAC";
+                color2 = "#397CAC";
               }
               if(choice === "inProg"){
                 color1 = "#60BDA3";
+                color2 = "#60BDA3";
               }
               if(choice === "recent"){
                 color1 = "#59A86A";
+                color2 = "#59A86A";
               }
-              ctx.fillStyle = color1;
+
+              grd.addColorStop(0,color1);
+              grd.addColorStop(1,color2);
+              ctx.fillStyle = grd;
               ctx.fill();
               ctx.beginPath();
               ctx.rect(x+5,y+40,canvasWidth/3-10,120);
-              ctx.fillStyle = color1;
+              ctx.fillStyle = color2;
               ctx.fill();
               ctx.font = "24px Arial";
               ctx.fillStyle = "white";

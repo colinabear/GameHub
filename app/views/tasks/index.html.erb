@@ -1,3 +1,20 @@
+<br>
+
+<div id="projects">
+
+  <h1> Current Tasks (<%= Task.where(:status => "inProg").where(:user => current_user).length %>) </h1>
+   <br>
+   <% current_user.tasks.each do |task| %>
+     <% if task.status == "inProg" %>
+        <%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> ) - <%= task.job_type %>
+        <br>
+       <br>
+     <% end %>
+   <% end %>
+</div>
+
+<br>
+
 <div id="projects">
   <h1> Tasks </h1>
   Sort By:

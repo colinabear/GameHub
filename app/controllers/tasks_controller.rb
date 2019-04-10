@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     @task.save
 
     if @task.save
-      redirect_to project_path(@project)
+      redirect_to project_hub_path(@project)
     else
 
     end

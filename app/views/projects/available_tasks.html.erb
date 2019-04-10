@@ -1,0 +1,45 @@
+<style>
+  .sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 10%; /* Set the width of the sidebar */
+  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
+  top: 1;
+  left: 0;
+  background-color: #131c29; /* Black */
+  padding-top: 10px;
+  }
+
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    background-color: #192231;
+    margin-right: 2%;
+    margin-left: 2%;
+    border-radius: 5px;
+    width: 95%;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+  }
+
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #59a86a;
+  }
+</style>
+<%= render 'sidebar' %>
+<div id="project_content">
+  <h1>
+    <%= "#{@project.name}'s Available Tasks" %>
+  </h1>
+  <div id="tasks">
+    <div style="overflow: auto; height: auto; max-height: 230px">
+      <% @project.tasks.each do |task| %>
+        <% if task.status == "todo" %>
+          <%= render task %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
