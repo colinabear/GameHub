@@ -37,7 +37,7 @@
         <% end %>
       <% end %>
     <% else %>
-        <%= @task.user.email %>
+        <%= link_to @task.user.email, user_resume_search_path(@task.user) %>
         <% if @task.user == current_user || @task.project.user == current_user %>
           <% if @task.user == current_user %>
           <% if @task.status == "inProg" %>
