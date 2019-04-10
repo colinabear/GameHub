@@ -121,7 +121,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <br>
       <div id="posts">
         <% @count = 0 %>
-        <% @user.tasks.each do |task| %>
+        <% @user.tasks.reverse_each do |task| %>
           <% if task.status == "recent" %>
             <% @count = @count + 1 %>
           <% end %>
@@ -129,7 +129,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
               <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge "></i>Completed Tasks (<%= @count %>)</h2>
                  <div style="overflow: auto; height: auto; max-height: 420px">
-                  <% @user.tasks.each do |task| %>
+                  <% @user.tasks.reverse_each do |task| %>
                     <% if task.status == "recent" %>
                       <div class="w3-container">
                         <h5 class="w3-opacity"><b><%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> ) - <%= task.job_type %></b></h5>
@@ -168,7 +168,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <br>
             <div style="background:#192231; border-radius:5px; padding:10px;">
               <h5> Current Tasks (<%= Task.where(:status => "inProg").where(:user => current_user).length %>): </h5>
-               <% current_user.tasks.each do |task| %>
+               <% current_user.tasks.reverse_each do |task| %>
                  <% if task.status == "inProg" %>
                   <h5>
                    <%= link_to task.title, task %> for <%= link_to task.project.name, task.project %> (<b><%= task.job_type %></b>)

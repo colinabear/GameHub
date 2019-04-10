@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.tasks.each do |task|
+    @project.tasks.reverse_each do |task|
       task.destroy
     end
     @project.destroy

@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
     @included = false
-    @task.project.tasks.each do |task|
+    @task.project.tasks.reverse_each do |task|
       if task.id != @task.id
         if task.user_id == @task.user_id
           @included = true
@@ -214,7 +214,7 @@ class TasksController < ApplicationController
     @array.delete(@task.user.id)
     @task.update_attribute(:pending_users, @array)
     @included = false
-    @task.project.tasks.each do |task|
+    @task.project.tasks.reverse_each do |task|
       if task.id != @task.id
         if task.user_id == @task.user_id
           @included = true
