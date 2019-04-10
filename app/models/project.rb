@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-  validates :name, presence: true
-  validates :description, presence: true
+  validates :name, presence: true, length: {maximum: 60}
+  validates :description, presence: true, length: {maximum: 800}
   validates :author, presence: false
   validates :progress, presence: true
   belongs_to :user
