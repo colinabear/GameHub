@@ -26,6 +26,10 @@ header {
 	}
 }
 
+abbr[title="required"] {
+  display: none;
+}
+
 i {
 	color: #59a86a;
 }
