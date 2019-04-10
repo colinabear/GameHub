@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   resources :user do
     get 'resume_search', to: 'users#resume_search'
+    get 'new_message', to: 'users#new_message'
+    post 'message', to: 'users#message'
   end
 
   resources :resumes
