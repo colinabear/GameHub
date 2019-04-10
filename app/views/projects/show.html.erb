@@ -74,4 +74,221 @@
     </div>
     <p></p>
   </div>
+  <div id="tasks" style="display: none">
+    <div style="overflow: auto; height: auto; max-height: 230px">
+      <% @project.tasks.each do |task| %>
+        <% if task.status == "todo" %>
+          <%= render task %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div id="hub" style="display: none">
+    <% if user_signed_in? %>
+    <% if @project.tasks.count != 0 %>
+      <h2>
+        <font color="#E5E5E5">Tasks</font>
+      </h2>
+    <% end %>
+    <div style="overflow: auto; height: auto; max-height: 350px">
+      <% @project.tasks.each do |task| %>
+        <%= render task %>
+      <% end %>
+    </div>
+      <br/>
+        <% if current_user.id == @project.user_id %>
+        <button onclick="renderTaskForm()">Create new task</button>
+        <div id="taskForm" style="display: none">
+          <%= render 'tasks/form' %>
+        </div>
+        <% end %>
+        <br/>
+        <hr/>
+        <br/>
+        <% if current_user.id == @project.user_id %>
+          <%= link_to "Edit", edit_project_path(@project), class: "button" %>
+          <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+        <% end %>
+      <% end %>
+      <br/>
+      <br/>
+      <p style="display: inline-block; font-size: 0px;" id="username"><%= current_user.email %></p>
+      <% on_team = false %>
+      <% @project.tasks.each do |task| %>
+        <% if task.user == current_user || @project.user == current_user %>
+          <% on_team = true %>
+        <% end %>
+      <% end %>
+      <% if on_team %>
+        <button style="inline-block; color:white;" onclick="initializeKanban()">Show only:</button>
+        <select style="inline-block" id="category">
+            <option value="All" selected>All</option>
+            <option value="MyTasks">My Tasks</option>
+            <option value="Programming">Programming</option>
+            <option value="Music">Music</option>
+            <option value="Art">Art</option>
+            <option value="Story">Story</option>
+            <option value="Level Design">Level Design</option>
+            <option value="Puzzles">Puzzles</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+          </select>
+          <br>
+          <br>
+        <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
+          <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
+        </div>
+      <% end %>
+      <script>
+          var rects = [];
+          var tasks = document.getElementsByClassName("task");
+          var tasksStatus = document.getElementsByClassName("status");
+          var tasksDesc = document.getElementsByClassName("desc");
+          var tasksUsers = document.getElementsByClassName("user");
+          var tasksCategories = document.getElementsByClassName("job_type");
+          var c = document.getElementById("myCanvas");
+          var ctx = c.getContext("2d");
+          ctx.font = "24px Arial";
+          c.width = window.innerWidth;
+          c.height = window.innerHeight;
+          var canvasWidth = c.width;
+          var canvasHeight = c.height;
+          var startingHeight = 50;
+          var toDoX = 0;
+          var toDoY = startingHeight;
+          var inProgX = canvasWidth/3;
+          var inProgY = startingHeight;
+          var recentCompletedX = 2*canvasWidth/3;
+          var recentCompletedY = startingHeight;
+          var grd = ctx.createLinearGradient(0,0,0,300);
+          var count = 0;
+
+
+          function initializeKanban() {
+              toDoX = 0;
+              toDoY = startingHeight;
+              inProgX = canvasWidth/3;
+              inProgY = startingHeight;
+              recentCompletedX = 2*canvasWidth/3;
+              recentCompletedY = startingHeight;
+              count = 0;
+              var e = document.getElementById("category");
+              var category = e.options[e.selectedIndex].value;
+              ctx.clearRect(0, 0, c.width, c.height);
+              checkHeight();
+              buildBackGround();
+              ctx.rect(0,0,canvasWidth/3,40);
+              ctx.fillStyle = "#397CAC";
+              ctx.fill();
+              ctx.font = "30px Arial";
+              ctx.fillStyle = "#E5E5E5";
+              ctx.fillText("To Do", 10, 30);
+              ctx.beginPath();
+              ctx.rect(canvasWidth/3,0,2*canvasWidth/3,40);
+              ctx.fillStyle = "#60BDA3";
+              ctx.fill();
+              ctx.font = "30px Arial";
+              ctx.fillStyle = "#E5E5E5";
+              ctx.fillText("In Progress", canvasWidth/3+10, 30);
+              ctx.beginPath();
+              ctx.rect(2*canvasWidth/3,0,3*canvasWidth/3,40);
+              ctx.fillStyle = "#59A86A";
+              ctx.fill();
+              ctx.font = "30px Arial";
+              ctx.fillStyle = "#E5E5E5";
+              ctx.fillText("Completed", 2*canvasWidth/3+10, 30);
+              for(var i = 0; i<tasks.length; i++) {
+                  if(category === tasksCategories[count].innerText || category==="All"){
+                    addSquare(tasksStatus[count].innerText);
+                  }
+                  if(category === "MyTasks" && tasksUsers[count].innerText === document.getElementById("username").innerText){
+                    addSquare(tasksStatus[count].innerText);
+                  }
+                  count++;
+              }
+              count = 0;
+          }
+
+
+          function addSquare(choice) {
+              var title = tasks[count].innerText;
+              title = title.substring(0,40);
+              var desc = tasksDesc[count].innerText;
+              rects.push(title+" "+desc+" "+toDoX+" "+toDoY+" "+choice);
+              if(choice == "todo"){
+                  createRect(toDoX,toDoY,choice, title, desc);
+                  toDoY+=170;
+              }
+              else if(choice == "inProg") {
+                  createRect(inProgX,inProgY,choice, title, desc);
+                  inProgY+=170;
+              }
+              else if(choice == "recent") {
+                  createRect(recentCompletedX,recentCompletedY,choice, title, desc);
+                  recentCompletedY+=170;
+              }
+          }
+
+
+          function createRect(x,y,choice, title, desc) {
+              ctx.beginPath();
+              ctx.rect(x+5,y,canvasWidth/3-10,40);
+              var color1 = "";
+              if(choice === "todo"){
+                color1 = "#397CAC";
+              }
+              if(choice === "inProg"){
+                color1 = "#60BDA3";
+              }
+              if(choice === "recent"){
+                color1 = "#59A86A";
+              }
+              ctx.fillStyle = color1;
+              ctx.fill();
+              ctx.beginPath();
+              ctx.rect(x+5,y+40,canvasWidth/3-10,120);
+              ctx.fillStyle = color1;
+              ctx.fill();
+              ctx.font = "24px Arial";
+              ctx.fillStyle = "white";
+              ctx.fillText(title, x+10, y+30);
+              ctx.font = "24px Arial";
+              ctx.fillStyle = "black";
+              var lineMove = 0;
+              for(var i = 0; i<desc.length; i+=40) {
+                var line = desc.substring(i,i+40);
+                ctx.fillText(line, x+10, y+60+lineMove);
+                lineMove+=25;
+              }
+              ctx.font = "20px Arial";
+              ctx.fillStyle = "black";
+              ctx.fillText(tasksUsers[count].innerText, x+10, y+150);
+          }
+
+          function checkHeight() {
+              if(tasks.length>4) {
+                document.getElementById("myCanvas").height = tasks.length*200;
+              }
+          }
+
+          function buildBackGround() {
+              ctx.beginPath();
+              var bgGrd = ctx.createLinearGradient(0,0,0,300);
+              bgGrd.addColorStop(0,"#3F516B");
+              bgGrd.addColorStop(1,"#3F516B");
+              ctx.fillStyle = bgGrd;
+              ctx.fillRect(0,0,c.width,c.height);
+              for(var i = 1; i<=2; i++) {
+                  ctx.beginPath();
+                  ctx.moveTo(i*c.width/3, 0);
+                  ctx.lineTo(i*c.width/3, c.height);
+                  ctx.stroke();
+              }
+          }
+
+
+
+
+
+      </script>
+  </div>
 </div>
