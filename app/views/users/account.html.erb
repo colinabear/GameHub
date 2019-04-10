@@ -180,7 +180,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   </div>
   <% if @user == current_user %>
       <div style="background:#192231; border-radius:5px; padding:10px;">
-       Liked Posts:
+      <h5> Liked Posts: </h5>
         <br>
       <div style="overflow: auto; height: auto; max-height: 420px">
         <% Post.all.each do |post| %>
@@ -204,14 +204,21 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
        </div>
       <br>
         <div style="background:#192231; border-radius:5px; padding:10px;">
-         Current Tasks:
-          <br>
-          <% current_user.tasks.each do |task| %>
-            <% if task.status == "inProg" %>
-              > <%= link_to task.title, task %> ( <%= link_to task.project.name, task.project %> ) - <%= task.job_type %>
-              <br>
-            <% end %>
-          <% end %>
+          <h5> Current Tasks (<%= Task.where(:status => "inProg").where(:user => current_user).length %>): </h5>
+           <% current_user.tasks.each do |task| %>
+             <% if task.status == "inProg" %>
+              <h5>
+               <%= link_to task.title, task %> for <%= link_to task.project.name, task.project %> (<b><%= task.job_type %></b>)
+              </h5>
+              <p>
+                Description: <%= task.description %>
+              </p>
+              <p>
+                <%= link_to "Mark as complete", task_progress_task_path(task), method: :put %>
+              </p>
+            <hr>
+             <% end %>
+           <% end %>
         </div>
     <% end %>
     <br>
