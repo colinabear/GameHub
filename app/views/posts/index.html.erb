@@ -22,19 +22,19 @@
   <% @posts.each do |post| %>
     <div class="post">
       <div style="display: inline-block;">
-        <span style="border-radius:5px; background:green; color:white; display: block; width:40px; text-align: center;">
+        <span style="border-radius:5px; color:white; display: block; width:40px; text-align: center;">
         <%= link_to like_post_path(post), method: :put do %>
-        <%= image_tag('upvote.png', draggable:"false", id:"drag1") %></span>
+        	▲</span>
         <% end %>
-        <span style="border-radius: 5px; display: inline-block; width:40px; background: lightgray; text-align: center;">
+        <span style="border-radius: 5px; color:#131c29; display: inline-block; width:40px; background: #59a86a; text-align: center;">
           <%= post.cached_votes_score %>
         </span>
-        <span style="border-radius:5px; background:red; color:white; display: block; width:40px; text-align: center;">
+        <span style="border-radius:5px; color:white; display: block; width:40px; text-align: center;">
         <%= link_to dislike_post_path(post), method: :put do %>
-        <%= image_tag('downvote.png', draggable:"false", id:"drag1") %></span>
+        	▼</span>
         <% end %>
       </div>
-      <div style="display: inline-block;">
+      <div style="display: inline-block; padding-left: 1%;">
       <h2 class="title">
         <%= link_to post.title, post %>
       </h2>

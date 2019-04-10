@@ -24,12 +24,12 @@
     <div class="project">
       <div style="display: inline-block;">
         <%= link_to like_project_path(project), method: :put do %>
-          <span style="border-radius:5px; background:green; color:white; display: inline-block; height:27px;">
-          <%= image_tag('upvote.png', draggable:"false", id:"drag1") %>
-          <%= project.get_upvotes.size  %>&nbsp;</span>
+          <span style="border-radius:5px; background:#59a86a; color:#131c29; display: inline-block; width:40px; text-align:left">
+            &nbsp;▲&nbsp;
+          <%=  project.get_upvotes.size  %></span>
         <% end %>
       </div>
-      <div style="display: inline-block;">
+      <div style="display: inline-block; padding-left: 1%;">
         <h2 class="title">
           <%= link_to project.name, project %>
         </h2>

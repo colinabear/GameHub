@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 				elsif params[:sort] == 'popularity'
 					@posts = Post.all.order(cached_votes_score: :desc).page params[:page]
 				else
-					@posts = Post.all.page params[:page]
+					@posts = Post.all.order("created_at DESC").page params[:page]
 				end
 		end
 	end
