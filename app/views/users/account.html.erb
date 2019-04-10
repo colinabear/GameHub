@@ -120,13 +120,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
       <br>
       <div id="posts">
-        <% @count = 0 %>
-        <% @user.tasks.reverse_each do |task| %>
-          <% if task.status == "recent" %>
-            <% @count = @count + 1 %>
-          <% end %>
-        <% end %>
-
               <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge "></i>Completed Tasks (<%= @count %>)</h2>
                  <div style="overflow: auto; height: auto; max-height: 420px">
                   <% @user.tasks.reverse_each do |task| %>
@@ -143,7 +136,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <br>
       <% if @user == current_user %>
           <div style="background:#192231; border-radius:5px; padding:10px;">
-          <h5> Liked Posts: </h5>
+          <h5> Liked Posts (<%= current_user.votes.up.for_type(Post).length %>): </h5>
           <div style="overflow: auto; height: auto; max-height: 420px">
             <% Post.all.each do |post| %>
               <% if current_user.voted_up_for? post %>
