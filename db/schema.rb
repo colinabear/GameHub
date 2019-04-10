@@ -18,10 +18,7 @@ ActiveRecord::Schema.define(version: 20190408043314) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "project_id"
-    t.integer "parent_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["project_id"], name: "index_comments_on_project_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -75,6 +72,8 @@ ActiveRecord::Schema.define(version: 20190408043314) do
   end
 
   create_table "resumes", force: :cascade do |t|
+    t.string "phone_number"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -85,14 +84,13 @@ ActiveRecord::Schema.define(version: 20190408043314) do
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.text "description"
+    t.integer "user_id"
     t.string "job_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
     t.integer "project_id"
-    t.integer "user_id"
     t.boolean "accepted"
-    t.string "type"
     t.text "pending_users"
     t.boolean "reviewed", default: false
   end
@@ -117,10 +115,6 @@ ActiveRecord::Schema.define(version: 20190408043314) do
     t.integer "story_rating", default: 0
     t.integer "puzzles_rating", default: 0
     t.integer "misc_rating", default: 0
-    t.string "name"
-    t.string "location"
-    t.string "phone_number"
-    t.text "biography"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

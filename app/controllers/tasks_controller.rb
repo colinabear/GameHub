@@ -41,7 +41,7 @@ class TasksController < ApplicationController
         end
       end
     end
-    if !@included
+    if !@included && @project.user_id != current_user.id
       @array = @task.project.team_members
       @array.delete(User.find(@task.user_id).email)
       @task.project.update_attribute(:team_members, @array)
