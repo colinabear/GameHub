@@ -30,6 +30,19 @@ abbr[title="required"] {
   display: none;
 }
 
+select{
+	margin: 10px;
+	border: none;
+	background: #3F516B;
+}
+input[type=submit]{
+	background: #59a86a;
+}
+
+form{
+	border: none;
+}
+
 img {
 	width: 100%;
 	height: auto;
@@ -100,10 +113,6 @@ padding-right:10%;
 			font-weight: 100;
 		}
 	}
-}
-
-form{
-	border: none;
 }
 
 #posts {
@@ -288,19 +297,10 @@ a.button {
 				}
 }
 
-select{
-	margin: 10px;
-	border: none;
-	background: #3F516B;
+#rcorners2 {
+	box-sizing: border-box;
+	border-radius: 25px;
+  border: 1px solid #397CAC;
+  padding: 20px;
+  width: 100%;
 }
-input[type=submit]{
-	background: #59a86a;
-}
-
-    #rcorners2 {
-			box-sizing: border-box;
-      border-radius: 25px;
-      border: 1px solid #397CAC;
-      padding: 20px;
-      width: 100%;
-    }
