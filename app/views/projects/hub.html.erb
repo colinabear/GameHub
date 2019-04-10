@@ -52,7 +52,7 @@
     }
   }
 </script>
-
+<br>
 <%= render 'sidebar' %>
 <div id="project_content">
   <h1>
@@ -65,6 +65,7 @@
         <font color="#E5E5E5">Tasks</font>
       </h2>
     <% end %>
+    <br>
     <div style="overflow: auto; height: auto; max-height: 350px">
       <% @project.tasks.reverse_each do |task| %>
         <%= render task %>
@@ -78,14 +79,12 @@
         </div>
         <% end %>
         <br/>
-        <hr/>
-        <br/>
-        <% if current_user.id == @project.user_id %>
-          <%= link_to "Edit", edit_project_path(@project), class: "button" %>
-          <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
-        <% end %>
       <% end %>
-      <br/>
+      </div>
+      </div>
+      <br>
+
+      <div id="project_content">
       <br/>
       <p style="display: inline-block; font-size: 0px;" id="username"><%= current_user.email %></p>
       <% on_team = false %>
@@ -107,6 +106,8 @@
             <option value="Puzzles">Puzzles</option>
             <option value="Miscellaneous">Miscellaneous</option>
           </select>
+        <br>
+        <br>
         <div id="canvasContainer" style="position: relative; width: full; overflow: auto; height: 600px;">
           <canvas id="myCanvas" style="position: absolute; z-index: 1; width:100%;"></canvas>
         </div>
@@ -183,7 +184,6 @@
               count = 0;
           }
 
-
           function addSquare(choice) {
               var title = tasks[count].innerText;
               title = title.substring(0,40);
@@ -202,7 +202,6 @@
                   recentCompletedY+=170;
               }
           }
-
 
           function createRect(x,y,choice, title, desc) {
               ctx.beginPath();
@@ -268,10 +267,10 @@
               }
           }
 
-
-
-
-
       </script>
   </div>
 </div>
+</div>
+<br>
+<br>
+<br>
