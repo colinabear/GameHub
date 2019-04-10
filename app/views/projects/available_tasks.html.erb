@@ -49,7 +49,7 @@
   </h1>
   <div id="tasks">
     <div style="overflow: auto; height: auto; max-height: 230px">
-      <% @project.tasks.each do |task| %>
+      <% @project.tasks.reverse_each do |task| %>
         <% if task.status == "todo" %>
           <%= render task %>
         <% end %>

@@ -26,6 +26,14 @@ header {
 	}
 }
 
+abbr[title="required"] {
+  display: none;
+}
+
+i {
+	color: #59a86a;
+}
+
 a:link, a:visited {
 	color: #59a86a;
 	text-decoration: none;
@@ -144,14 +152,15 @@ a.button {
 
 #post_content {
 	background: #192231;
-	padding: 10px;
+	padding: 3%;
+	padding-left: 5%;
+	padding-right: 5%;
 	border-radius: 1em;
 	width: 100%;
 	min-height: 200px;
 	textarea {
 		width: 100%;
 		min-height: 200px;
-		border: 1px solid #d1d1d1;
 		border-radius: .2em;
 		margin: 1em 0;
 	}
@@ -183,7 +192,7 @@ a.button {
 			border-bottom: 1px solid #E5E5E5;
 			padding-bottom: 1em;
 			margin-bottom: 1em;
-			border-bottom: .5px solid #D1d1d1;
+		  border-bottom: .5px solid #D1d1d1;
 			.content {
 			width: 75%;
 			float: left;
@@ -211,7 +220,6 @@ a.button {
 		textarea {
 			width: 100%;
 			min-height: 200px;
-			border: 1px solid #d1d1d1;
 			border-radius: .2em;
 			margin: 1em 0;
 		}
@@ -221,7 +229,6 @@ a.button {
 	background: #192231;
 	padding: 2em 5%;
 	border-radius: .5em;
-
 
 	h1 {
 		font-weight: 100;
