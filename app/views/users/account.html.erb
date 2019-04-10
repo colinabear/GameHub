@@ -115,7 +115,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <%= @user.resume.biography %>
 <% end %>
 </pre>
-          </p>
         </div>
       </div>
       <br>
@@ -142,6 +141,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
       <br>
       <% if @user == current_user %>
+      <div id="project_content">
           <div style="background:#192231; border-radius:5px; padding:10px;">
           <h5> Liked Posts: </h5>
           <div style="overflow: auto; height: auto; max-height: 420px">
@@ -165,7 +165,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <% end %>
             </div>
            </div>
+           </div>
           <br>
+          <div id="project_content">
             <div style="background:#192231; border-radius:5px; padding:10px;">
               <h5> Current Tasks (<%= Task.where(:status => "inProg").where(:user => current_user).length %>): </h5>
                <% current_user.tasks.reverse_each do |task| %>
@@ -182,6 +184,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <hr>
                  <% end %>
                <% end %>
+            </div>
             </div>
         <% end %>
       <br>
