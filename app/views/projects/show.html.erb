@@ -70,21 +70,18 @@
     <%= image_tag @project.avatar %>
   </div>
   <div id="info">
-    <h4>
-      <%= @project.description %>
-    </h4>
   <p></p>
-
-    <div id="rcorners2">
+  <div style="display: flex">
+    <div id="rcorners2-team">
       <label>Team:</label>
         <% @project.team_members.each do |member| %>
-          <div id="thumbnail">
+          <div id="thumbnail" style="padding-left: 12%; padding-top: 4px;">
             <% if User.find(member).resume  != nil %>
               <%= image_tag User.find(member).resume.avatar.standard.url %>
             <% else %>
               <%= image_tag('no_avatar.jpg', draggable: false) %>
             <% end %>
-            <h5  style="display: inline">
+            <h5  style="display: inline; padding-left: 3%">
               <% if User.find(member).resume == nil %>
                 <%= link_to User.find(member).email, user_resume_search_path(member) %>
               <% else %>
@@ -95,10 +92,13 @@
         <% end %>
     </div>
     <p></p>
-    <div id="rcorners2">
-      <label>Progress:<label>
-      <h5><%= @project.progress %></h5>
+    <div id="rcorners2-default">
+      <label>Description:<label>
+      <h5><%= @project.description %></h5>
+      <br>
+      <p><label>Progress:&nbsp;</label><b><%= @project.progress %> </b></p>
     </div>
+  </div>
     <p></p>
   <div style="height: 1px; width: 100%; background: #2a3953; margin-bottom: 1%"></div>
   <% if current_user.id == @project.user_id %>
