@@ -99,7 +99,7 @@
       <p><label>Progress:&nbsp;</label><b><%= @project.progress %> </b></p>
     </div>
   </div>
-    <p></p>
+  <br>
   <div style="height: 1px; width: 100%; background: #2a3953; margin-bottom: 1%"></div>
   <% if current_user.id == @project.user_id %>
     <%= link_to "Edit", edit_project_path(@project) %>

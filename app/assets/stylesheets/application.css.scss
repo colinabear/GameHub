@@ -167,6 +167,7 @@ a.button {
 
 #post_content {
 	background: #192231;
+	margin-top: .5%;
 	padding: 3%;
 	padding-left: 5%;
 	padding-right: 5%;
@@ -242,6 +243,7 @@ a.button {
 }
 #project_content {
 	background: #192231;
+	margin-top: .5%;
 	padding: 2em 5%;
 	border-radius: .5em;
 
@@ -330,7 +332,6 @@ a.button {
   width: 70%;
 	flex: 1;
 	background: #131c29;
-
 }
 #rcorners2-team {
 	box-sizing: border-box;
@@ -339,5 +340,32 @@ a.button {
 	padding: 20px;
   width: 20%;
 	background: #131c29;
+}
 
+#rcorners2-taskinfo {
+	box-sizing: border-box;
+	border-radius: 25px;
+	margin-right: 1%;
+	padding: 20px;
+  width: 100%;
+	background: #131c29;
+}
+
+#rcorners2-pendingusers {
+	box-sizing: border-box;
+	border-radius: 25px;
+	margin-right: 1%;
+	padding: 20px;
+  width: 100%;
+	background: #131c29;
+}
+
+#rcorners2-taskdescription {
+	box-sizing: border-box;
+	margin-right: 1.5%;
+	border-radius: 25px;
+	padding: 20px;
+  width: 60%;
+	flex: 1;
+	background: #131c29;
 }

@@ -1,9 +1,15 @@
-<br>
-  <%= link_to "New Post", new_post_path, class: "button" %>
-  <br>
   <br>
 <div id="posts">
-  <h1> <font color=#E5E5E5>Posts</font> </h1>
+  <div style="display: flex; width: 100%">
+    <div style="width: 50%; flex: 1">
+    <h1><font color=#E5E5E5>Posts</font></h1>
+    </div>
+    <div style="width: 50%; text-align: end">
+      <br>
+      <br>
+      <%= link_to "New Post", new_post_path, class: "button" %>
+    </div>
+  </div>
   <font color=#E5E5E5>Sort By: </font>
   <%= link_to 'Newest', :sort => "created_at" %>
   <font color=#E5E5E5> | </font>
