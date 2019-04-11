@@ -52,8 +52,12 @@
   <div style="display: inline">
     by &nbsp;
     <div id="thumbnail" style="display: inline;">
-      <% if @project.user.resume.avatar != nil %>
-        <%= image_tag @project.user.resume.avatar.standard.url %>
+      <% if @project.user.resume != nil %>
+        <% if @project.user.resume.avatar != nil %>
+          <%= image_tag @project.user.resume.avatar.standard.url %>
+        <% else %>
+          <%= image_tag('no_avatar.jpg', draggable: false) %>
+        <% end %>
       <% else %>
         <%= image_tag('no_avatar.jpg', draggable: false) %>
       <% end %>
@@ -76,8 +80,12 @@
       <label>Team:</label>
         <% @project.team_members.each do |member| %>
           <div id="thumbnail" style="padding-left: 12%; padding-top: 4px;">
-            <% if User.find(member).resume.avatar  != nil %>
-              <%= image_tag User.find(member).resume.avatar.standard.url %>
+            <% if User.find(member).resume != nil %>
+              <% if User.find(member).resume.avatar  != nil %>
+                <%= image_tag User.find(member).resume.avatar.standard.url %>
+              <% else %>
+                <%= image_tag('no_avatar.jpg', draggable: false) %>
+              <% end %>
             <% else %>
               <%= image_tag('no_avatar.jpg', draggable: false) %>
             <% end %>

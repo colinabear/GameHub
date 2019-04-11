@@ -49,8 +49,12 @@
           ago by
         </p>
         <div id="thumbnail" style="display: inline;">
-          <% if project.user.resume  != nil %>
-            <%= image_tag project.user.resume.avatar.standard.url %>
+          <% if project.user.resume != nil %>
+            <% if project.user.resume.avatar  != nil %>
+              <%= image_tag project.user.resume.avatar.standard.url %>
+            <% else %>
+              <%= image_tag('no_avatar.jpg', draggable: false) %>
+            <% end %>
           <% else %>
             <%= image_tag('no_avatar.jpg', draggable: false) %>
           <% end %>

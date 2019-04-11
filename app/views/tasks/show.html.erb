@@ -73,10 +73,14 @@
     </p>
     <div id="thumbnail">
       <h5  style="margin-bottom: 0;">
-        <% if @task.user.resume.avatar == nil %>
-          <%= image_tag('no_avatar.jpg', draggable: false) %>
+        <% if @task.user.resume != nil %>
+          <% if @task.user.resume.avatar == nil %>
+            <%= image_tag('no_avatar.jpg', draggable: false) %>
+          <% else %>
+            <%= image_tag @task.user.resume.avatar.standard.url %>
+          <% end %>
         <% else %>
-          <%= image_tag @task.user.resume.avatar.standard.url %>
+          <%= image_tag('no_avatar.jpg', draggable: false) %>
         <% end %>
         <% if @task.user.resume == nil %>
           <%= link_to @task.user.email, user_resume_search_path(@task.user) %>
