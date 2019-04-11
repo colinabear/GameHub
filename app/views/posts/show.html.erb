@@ -18,17 +18,32 @@
 
 <div id="post_content">
 
-  <h1>
-    <%= @post.title %>
-  </h1>
+  <h1 style="display: inline; margin-right: .5%"><%= @post.title %></h1>
+  <div style="display: inline">
+    by &nbsp;
+    <div id="thumbnail" style="display: inline;">
+      <% if @post.user.resume  != nil %>
+        <%= image_tag @post.user.resume.avatar.standard.url %>
+      <% else %>
+        <%= image_tag('no_avatar.jpg', draggable: false) %>
+      <% end %>
+      <h5 style="display: inline">
+        <% if @post.user.resume == nil %>
+          <%= link_to @post.user.email, user_resume_search_path(@post.user) %>
+        <% else %>
+          <%= link_to @post.user.resume.name, user_resume_search_path(@post.user) %>
+        <% end %>
+      </h5>
+    </div>
+  </div>
   <h4>
     <%= @post.content %>
   </h4>
-  <p>Author: <b><%= link_to @post.author, user_resume_search_path(@post.user_id) %></b></p>
-  <br>
+  <div style="height: 1px; width: 100%; background: #2a3953; margin-bottom: 1%"></div>
   <% if current_user.id == @post.user_id %>
-    <%= link_to "Edit", edit_post_path(@post), class: "button" %>
-    <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+    <%= link_to "Edit", edit_post_path(@post) %>
+    &nbsp;
+    <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this ?" } %>
   <% end %>
   </div>
 
@@ -46,12 +61,13 @@
       <%= render @post.comments %>
     </div>
   <% if user_signed_in? %>
-    <button onclick="renderCommentForm()">Reply to Post</button>
-    <div id="commentForm" style="display: none">
+    <div id="commentForm" style="display: none;">
       <div id="postForm">
       <%= render "comments/form" %>
       </div>
+      <br>
     </div>
+    <button onclick="renderCommentForm()">Reply to Post</button>
   </div>
   <% end %>
   <br>
