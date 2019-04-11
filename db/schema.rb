@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20190411010614) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.text "comment"
     t.integer "post_id"
@@ -117,6 +120,8 @@ ActiveRecord::Schema.define(version: 20190411010614) do
     t.integer "story_rating", default: 0
     t.integer "puzzles_rating", default: 0
     t.integer "misc_rating", default: 0
+    t.string "messages_received", array: true
+    t.string "messages_sent", array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
