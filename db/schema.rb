@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410050539) do
+ActiveRecord::Schema.define(version: 20190411010614) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20190410050539) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "author"
-    t.string "team_members"
     t.integer "user_id"
     t.string "progress"
     t.integer "cached_votes_total", default: 0
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(version: 20190410050539) do
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
     t.string "avatar"
+    t.text "team_members"
     t.index ["cached_votes_down"], name: "index_projects_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_projects_on_cached_votes_score"
     t.index ["cached_votes_total"], name: "index_projects_on_cached_votes_total"

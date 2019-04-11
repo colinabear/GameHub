@@ -43,7 +43,7 @@ class TasksController < ApplicationController
     end
     if !@included && @project.user_id != current_user.id
       @array = @task.project.team_members
-      @array.delete(User.find(@task.user_id).email)
+      @array.delete(@task.user_id)
       @task.project.update_attribute(:team_members, @array)
     end
     @task.destroy
@@ -202,7 +202,7 @@ class TasksController < ApplicationController
     @user.tasks << @task
     @array = @task.project.team_members
     if !@array.include? @user.email
-      @array << @user.email
+      @array << @user.id
       @task.project.update_attribute(:team_members, @array)
     end
     redirect_to @task
@@ -223,7 +223,7 @@ class TasksController < ApplicationController
     end
     if !@included
       @array = @task.project.team_members
-      @array.delete(User.find(@task.user_id).email)
+      @array.delete(@task.user_id)
       @task.project.update_attribute(:team_members, @array)
     end
     @task.user_id = @task.project.user_id

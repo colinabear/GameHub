@@ -46,37 +46,64 @@
 </style>
 <%= render 'sidebar' %>
 <div id="project_content">
-  <h1>
+  <h1 style="display: inline">
     <%= @project.name %>
   </h1>
-  <%= image_tag @project.avatar %>
+  <div style="display: inline">
+    by &nbsp;
+    <div id="thumbnail" style="display: inline;">
+      <% if @project.user.resume  != nil %>
+        <%= image_tag @project.user.resume.avatar.standard.url %>
+      <% else %>
+        <%= image_tag('no_avatar.jpg', draggable: false) %>
+      <% end %>
+      <h5 style="display: inline">
+        <% if @project.user.resume == nil %>
+          <%= link_to @project.user.email, user_resume_search_path(@project.user) %>
+        <% else %>
+          <%= link_to @project.user.resume.name, user_resume_search_path(@project.user) %>
+        <% end %>
+      </h5>
+    </div>
+  </div>
+  <div id="project-image">
+    <%= image_tag @project.avatar %>
+  </div>
   <div id="info">
     <h4>
       <%= @project.description %>
     </h4>
-
-    <div id="rcorners2">
-      <label>Author:</label>
-      <h5><%= link_to @project.user.email, user_resume_search_path(@project.user) %></h5>
-    </div>
   <p></p>
 
     <div id="rcorners2">
       <label>Team:</label>
         <% @project.team_members.each do |member| %>
-          <h5><%= link_to member, user_resume_search_path(User.where(:email => member).ids) %></h5>
+          <div id="thumbnail">
+            <% if User.find(member).resume  != nil %>
+              <%= image_tag User.find(member).resume.avatar.standard.url %>
+            <% else %>
+              <%= image_tag('no_avatar.jpg', draggable: false) %>
+            <% end %>
+            <h5  style="display: inline">
+              <% if User.find(member).resume == nil %>
+                <%= link_to User.find(member).email, user_resume_search_path(member) %>
+              <% else %>
+                <%= link_to User.find(member).resume.name, user_resume_search_path(member) %>
+              <% end %>
+            </h5>
+          </div>
         <% end %>
     </div>
     <p></p>
-
     <div id="rcorners2">
       <label>Progress:<label>
       <h5><%= @project.progress %></h5>
     </div>
     <p></p>
-  </div>
+  <div style="height: 1px; width: 100%; background: #2a3953; margin-bottom: 1%"></div>
   <% if current_user.id == @project.user_id %>
-    <%= link_to "Edit", edit_project_path(@project), class: "button" %>
-    <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" }, class: "button" %>
+    <%= link_to "Edit", edit_project_path(@project) %>
+    &nbsp;
+    <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure you want to do this ?" } %>
   <% end %>
 </div>
