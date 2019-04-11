@@ -24,6 +24,7 @@
 
 <div id="projects">
   <h1> Tasks </h1>
+  <p style="display: inline">
   Sort By:
   <%= link_to 'Newest', :sort => "created_at", :sorttype => params[:sorttype] %>
   |
@@ -32,8 +33,8 @@
   <%= link_to 'Z-A', :sort => "name_reverse", :sorttype => params[:sorttype] %>
   |
   <%= link_to 'Recently Updated', :sort => "updated_at", :sorttype => params[:sorttype] %>
-  <br>
-  <br>
+  </p>
+  <span style="float:right;">
   Type:
   <%= link_to 'All', task_index_path %>
   |
@@ -50,6 +51,7 @@
   <%= link_to 'Puzzles', :sorttype => "puzzles", :sort => params[:sort] %>
   |
   <%= link_to 'Miscellaneous', :sorttype => "misc", :sort => params[:sort] %>
+  </span>
   <br>
   <br>
   <%= paginate @tasks %>
