@@ -1,28 +1,59 @@
-<div id="projects">
-  <%= link_to "Back to Jobs", task_index_path, class: "button" %>
-  <%= link_to "See game for this job", @task.project, class: "button" %>
+<style>
+  .sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 10%; /* Set the width of the sidebar */
+  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
+  top: 1;
+  left: 0;
+  background-color: #131c29; /* Black */
+  padding-top: 10px;
+  }
+
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    margin-right: 2%;
+    margin-left: 2%;
+    border-radius: 5px;
+    width: 95%;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+  }
+
+  .sidenav a:hover {
+    color: #3e764a;
+  }
+
+  .back_link {
+    background-color: #3F516B
+  }
+</style>
+<div class="sidenav">
+  <%= link_to "Back to Jobs", task_index_path, class: "back_link" %>
+  <br>
+  <%= link_to "See #{@task.project.name}", @task.project, class: "back_link" %>
+</div>
+<div id="project_content">
   <h1>
     <%= @task.title %>
   </h1>
-  <h4>
+<div style="display: flex">
+  <div id="rcorners2-taskdescription">
+    Description:
+  <h5>
     <%= @task.description %>
-  </h4>
-
-  <div id="rcorners2">
-  Progress:
-  <h5>
-    <%= @task.status %>
   </h5>
   </div>
 <br>
-  <div id="rcorners2">
-  Job Type:
-  <h5>
-    <%= @task.job_type %>
-  </h5>
+  <div style="width: 20%">
+  <div id="rcorners2-taskinfo">
+    <p><label>Job Type:&nbsp;</label><b><%= @task.job_type %> </b></p>
+    <p><label>Progress:&nbsp;</label><b><%= @task.status %> </b></p>
   </div>
 <br>
-  <div id="rcorners2">
+  <div id="rcorners2-taskinfo">
   Assigned to:
   <h5>
     <% if !@task.accepted %>
@@ -51,11 +82,13 @@
     <% end %>
   </h5>
   </div>
-  <br>
-  <br>
+  </div>
+</div>
 
   <% if @task.project.user == current_user %>
     <% if !@task.accepted %>
+      <div id="rcorners2-pendingusers">
+        Pending Users:
       <% @task.pending_users.each do |id| %>
         <% @user = User.find(id) %>
         <%= link_to "Accept", task_accept_user_path(:task_id => @task.id, :user_id => id), method: :put, class: "button" %>
@@ -65,8 +98,10 @@
         <br>
       <% end %>
     <% end %>
-    <hr>
-    <%= link_to "Edit", edit_project_task_path(@task.project, @task), class: "button" %>
-    <%= link_to "Delete", [@task.project, @task], method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
+    <div style="height: 1px; width: 100%; background: #2a3953; margin-bottom: 1%"></div>
+    <%= link_to "Edit", edit_task_path(@task) %>
+    &nbsp;
+    <%= link_to "Delete", task_path(@task), method: :delete, data: { confirm: "Are you sure you want to do this ?" } %>
   <% end %>
+    </div>
 </div>

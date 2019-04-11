@@ -8,13 +8,41 @@
     }
   }
 </script>
-<br>
-<br>
+<style>
+  .sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 10%; /* Set the width of the sidebar */
+  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
+  top: 1;
+  left: 0;
+  background-color: #131c29; /* Black */
+  padding-top: 10px;
+  }
 
-<%= link_to "Back to forum", post_index_path, class: "button" %>
-<br>
-<br>
-<br>
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    margin-right: 2%;
+    margin-left: 2%;
+    border-radius: 5px;
+    width: 95%;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+  }
+
+  .sidenav a:hover {
+    color: #3e764a;
+  }
+
+  .back_link {
+    background-color: #3F516B
+  }
+</style>
+<div class="sidenav">
+<%= link_to "Back to Forum", post_index_path, class: "back_link" %>
+</div>
 
 <div id="post_content">
 
