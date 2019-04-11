@@ -30,6 +30,11 @@ abbr[title="required"] {
   display: none;
 }
 
+input[type="number"] {
+	background: #3F516B;
+	border: none;
+}
+
 select{
 	margin: 10px;
 	border: none;
