@@ -73,7 +73,7 @@
     </p>
     <div id="thumbnail">
       <h5  style="margin-bottom: 0;">
-        <% if @task.user.resume == nil %>
+        <% if @task.user.resume.avatar == nil %>
           <%= image_tag('no_avatar.jpg', draggable: false) %>
         <% else %>
           <%= image_tag @task.user.resume.avatar.standard.url %>
@@ -112,7 +112,7 @@
       <% @task.pending_users.each do |id| %>
         <% @user = User.find(id) %>
         <div id="thumbnail">
-          <% if @user.resume == nil %>
+          <% if @user.resume.avatar == nil %>
             <%= image_tag('no_avatar.jpg', draggable: false) %>
           <% else %>
             <%= image_tag @user.resume.avatar.standard.url %>

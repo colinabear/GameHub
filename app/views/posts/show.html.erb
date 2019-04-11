@@ -50,7 +50,7 @@
   <div style="display: inline">
     by &nbsp;
     <div id="thumbnail" style="display: inline;">
-      <% if @post.user.resume  != nil %>
+      <% if @post.user.resume.avatar  != nil %>
         <%= image_tag @post.user.resume.avatar.standard.url %>
       <% else %>
         <%= image_tag('no_avatar.jpg', draggable: false) %>

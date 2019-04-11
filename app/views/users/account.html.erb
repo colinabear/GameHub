@@ -23,7 +23,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <div id="posts">
 
         <div class="w3-display-container">
-          <% if @user.resume  != nil %>
+          <% if @user.resume.avatar != nil %>
             <%= image_tag @user.resume.avatar.standard.url %>
           <% else %>
             <%= image_tag('no_avatar.jpg', draggable: false) %>
@@ -118,7 +118,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <!-- Leave this aligned to far left.  It needs to be like this for the formatting to work. -->
 <pre>
 <% if @user.resume != nil %>
-<%= @user.resume.biography %>
+  <%= @user.resume.biography %>
 <% end %>
 </pre>
         </div>
