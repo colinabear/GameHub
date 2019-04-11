@@ -129,7 +129,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
       <br>
       <div id="posts">
-              <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge "></i>Completed Tasks (<%= Task.where(:status => "recent").where(:user => current_user).length %>)</h2>
+              <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge "></i>Completed Tasks (<%= Task.where(:status => "recent").where(:user => @user).length %>)</h2>
                  <div style="overflow: auto; height: auto; max-height: 420px">
                   <% @user.tasks.reverse_each do |task| %>
                     <% if task.status == "recent" %>
@@ -145,7 +145,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <br>
       <div id="project_content">
         <div style="background:#192231; border-radius:5px; padding:10px;">
-          <h5> Projects Owned (<%= Project.where(:user => current_user).length %>): </h5>
+          <h5> Projects Owned (<%= Project.where(:user => @user).length %>): </h5>
             <div style="overflow: auto; height: auto; max-height: 390px">
            <% current_user.projects.reverse_each do |project| %>
                <%= link_to project.name, project %> (<b><%= project.progress %></b>)
