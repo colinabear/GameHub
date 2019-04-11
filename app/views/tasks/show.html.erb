@@ -55,53 +55,81 @@
 <br>
   <div id="rcorners2-taskinfo">
   Assigned to:
-  <h5>
+  <h5 style="margin-bottom: 0;">
     <% if !@task.accepted %>
       <% if @task.pending_users.include? current_user.id %>
         Still Available (Requested)
       <% else %>
         Still Available
       <% end %>
+    </h5>
+    <p>
       <% if !@task.pending_users.include? current_user.id %>
         <% if @task.project.user != current_user %>
-          <%= link_to "Request Task", task_request_task_path(@task), method: :put, class: "button" %>
+          <%= link_to "Request Task", task_request_task_path(@task), method: :put %>
         <% end %>
       <% end %>
     <% else %>
-        <%= link_to @task.user.email, user_resume_search_path(@task.user) %>
+    </p>
+    <div id="thumbnail">
+      <h5  style="margin-bottom: 0;">
+        <% if @task.user.resume == nil %>
+          <%= image_tag('no_avatar.jpg', draggable: false) %>
+        <% else %>
+          <%= image_tag @task.user.resume.avatar.standard.url %>
+        <% end %>
+        <% if @task.user.resume == nil %>
+          <%= link_to @task.user.email, user_resume_search_path(@task.user) %>
+        <% else %>
+          <%= link_to @task.user.resume.name, user_resume_search_path(@task.user) %>
+        <% end %>
+      </h5>
+    </div>
+    <p>
         <% if @task.user == current_user || @task.project.user == current_user %>
           <% if @task.user == current_user %>
           <% if @task.status == "inProg" %>
-            <%= link_to "Mark as complete", task_progress_task_path(@task), method: :put, class: "button" %>
+            <%= link_to "Mark as complete", task_progress_task_path(@task), method: :put %>
+            <br>
           <% elsif @task.status == "recent" %>
-            <%= link_to "Undo completed", task_regress_task_path(@task), method: :put, class: "button" %>
+            <%= link_to "Undo completed", task_regress_task_path(@task), method: :put %>
+            <br>
           <% end %>
         <% end %>
-          <%= link_to "Drop", task_drop_task_path(@task), method: :put, class: "button" %>
+          <%= link_to "Drop", task_drop_task_path(@task), method: :put %>
         <% end %>
     <% end %>
-  </h5>
+  </p>
   </div>
   </div>
 </div>
 
   <% if @task.project.user == current_user %>
     <% if !@task.accepted %>
+      <br>
       <div id="rcorners2-pendingusers">
         Pending Users:
       <% @task.pending_users.each do |id| %>
         <% @user = User.find(id) %>
-        <%= link_to "Accept", task_accept_user_path(:task_id => @task.id, :user_id => id), method: :put, class: "button" %>
-        <%= link_to @user.email, user_resume_search_path(@user) %>
+        <div id="thumbnail">
+          <% if @user.resume == nil %>
+            <%= image_tag('no_avatar.jpg', draggable: false) %>
+          <% else %>
+            <%= image_tag @user.resume.avatar.standard.url %>
+          <% end %>
+          <%= link_to @user.email, user_resume_search_path(@user) %>
+          <%= link_to "Accept", task_accept_user_path(:task_id => @task.id, :user_id => id), method: :put, class: "button" %>
+        </div>
         <br>
         <br>
         <br>
       <% end %>
     <% end %>
+    </div>
+    <br>
     <div style="height: 1px; width: 100%; background: #2a3953; margin-bottom: 1%"></div>
     <%= link_to "Edit", edit_task_path(@task) %>
     &nbsp;
     <%= link_to "Delete", task_path(@task), method: :delete, data: { confirm: "Are you sure you want to do this ?" } %>
   <% end %>
-    </div>
 </div>

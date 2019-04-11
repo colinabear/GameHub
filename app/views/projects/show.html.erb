@@ -81,7 +81,7 @@
             <% else %>
               <%= image_tag('no_avatar.jpg', draggable: false) %>
             <% end %>
-            <h5  style="display: inline; padding-left: 3%">
+            <h5 style="display: inline; padding-left: 3%">
               <% if User.find(member).resume == nil %>
                 <%= link_to User.find(member).email, user_resume_search_path(member) %>
               <% else %>
