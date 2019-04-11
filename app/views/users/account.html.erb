@@ -58,6 +58,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
               <% end %>
               </p>
             <% end %>
+              Member since
+            <%= @user.created_at.strftime("%m/%d/%Y") %>
           <hr>
 
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right "></i>Skills</b></p>
@@ -137,36 +139,26 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                   </div>
       </div>
       <br>
-      <% if @user == current_user %>
       <div id="project_content">
-          <div style="background:#192231; border-radius:5px; padding:10px;">
-          <h5> Liked Posts (<%= current_user.votes.up.for_type(Post).length %>): </h5>
-          <div style="overflow: auto; height: auto; max-height: 420px">
-            <% Post.all.each do |post| %>
-              <% if current_user.voted_up_for? post %>
-              <div class="post">
-                <div style="display: inline-block; padding-left: 20px">
-                <h4 class="title">
-                  <%= link_to post.title, post %>
-                </h4>
-                <p class="date">
-                  Published
-                  <%= time_ago_in_words(post.created_at) %>
-                  ago by
-                  <%= link_to post.user.email, user_resume_search_path(post.user) %>
-                </p>
-                </div>
-                <hr>
-              </div>
-              <% end %>
-            <% end %>
-            </div>
+        <div style="background:#192231; border-radius:5px; padding:10px;">
+          <h5> Projects Owned (<%= Project.where(:user => current_user).length %>): </h5>
+            <div style="overflow: auto; height: auto; max-height: 390px">
+           <% current_user.projects.reverse_each do |project| %>
+               <%= link_to project.name, project %> (<b><%= project.progress %></b>)
+              <p>
+                Description: <%= project.description %>
+              </p>
+            <hr>
+             <% end %>
+             </div>
            </div>
-           </div>
-          <br>
+         </div>
+         <br>
+      <% if @user == current_user %>
           <div id="project_content">
             <div style="background:#192231; border-radius:5px; padding:10px;">
               <h5> Current Tasks (<%= Task.where(:status => "inProg").where(:user => current_user).length %>): </h5>
+                <div style="overflow: auto; height: auto; max-height: 420px">
                <% current_user.tasks.reverse_each do |task| %>
                  <% if task.status == "inProg" %>
                   <h5>
@@ -181,8 +173,36 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <hr>
                  <% end %>
                <% end %>
+               </div>
             </div>
             </div>
+            <br>
+            <div id="project_content">
+                <div style="background:#192231; border-radius:5px; padding:10px;">
+                <h5> Liked Posts (<%= current_user.votes.up.for_type(Post).length %>): </h5>
+                <div style="overflow: auto; height: auto; max-height: 420px">
+                  <% Post.all.each do |post| %>
+                    <% if current_user.voted_up_for? post %>
+                    <div class="post">
+                      <div style="display: inline-block; padding-left: 20px">
+                      <h4 class="title">
+                        <%= link_to post.title, post %>
+                      </h4>
+                      <p class="date">
+                        Published
+                        <%= time_ago_in_words(post.created_at) %>
+                        ago by
+                        <%= link_to post.user.email, user_resume_search_path(post.user) %>
+                      </p>
+                      </div>
+                      <hr>
+                    </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+                 </div>
+                 </div>
+                <br>
         <% end %>
       <br>
 <br>
