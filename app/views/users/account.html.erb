@@ -122,7 +122,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <!-- Leave this aligned to far left.  It needs to be like this for the formatting to work. -->
 <pre>
 <% if @user.resume != nil %>
-  <%= @user.resume.biography %>
+<%= @user.resume.biography %>
 <% end %>
 </pre>
         </div>
@@ -147,7 +147,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <div style="background:#192231; border-radius:5px; padding:10px;">
           <h5> Projects Owned (<%= Project.where(:user => @user).length %>): </h5>
             <div style="overflow: auto; height: auto; max-height: 390px">
-           <% current_user.projects.reverse_each do |project| %>
+           <% @user.projects.reverse_each do |project| %>
                <%= link_to project.name, project %> (<b><%= project.progress %></b>)
               <p>
                 Description: <%= project.description %>
