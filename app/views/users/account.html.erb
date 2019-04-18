@@ -93,8 +93,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
               <p><%=cat%> (<%= Task.where(:reviewed => true).where(:job_type => cat).where(:user => @user).length%>)</p>
               <div class="w3-light-grey w3-round-xlarge w3-small">
                 <% if @percent.to_i < 30 %>
-                  <% @color = 'red'%>
-                <% elsif @percent.to_i > 30 && @percent.to_i < 70 %>
+                  <% @color = 'red' %>
+                <% elsif @percent.to_i >= 30 && @percent.to_i < 70 %>
                   <% @color = 'yellow' %>
                 <% else %>
                   <% @color = 'green' %>
