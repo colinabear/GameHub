@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   has_many :comments
   has_many :tasks
   acts_as_votable
-  paginates_per 10
+  paginates_per 12
   serialize :team_members, Array
   mount_uploader :avatar, AvatarUploader
 end

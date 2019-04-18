@@ -5,5 +5,5 @@ class Post < ApplicationRecord
 	belongs_to :user
 	has_many :comments
 	acts_as_votable
-	paginates_per 12
+	paginates_per 10
 end
