@@ -10,17 +10,24 @@
       <%= link_to "New Project", new_project_path, class: "button" %>
     </div>
   </div>
-  <font color=#E5E5E5>Sort By: </font>
-  <%= link_to 'Newest', :sort => "created_at", :search => params[:search] %>
-  <font color=#E5E5E5> | </font>
-  <%= link_to 'Most Popular', :sort => "popularity", :search => params[:search] %>
-  <font color=#E5E5E5> | </font>
-  <%= link_to 'A-Z', :sort => "name", :search => params[:search] %>
-  <font color=#E5E5E5> | </font>
-  <%= link_to 'Z-A', :sort => "name_reverse", :search => params[:search] %>
-  <font color=#E5E5E5> | </font>
-  <%= link_to 'Recently Updated', :sort => "updated_at", :search => params[:search] %>
+  <div style="display:inline; float: left;">
+    <a onclick="changeDisplayType('block')"> Block Display </a>
+    <font color=#E5E5E5> | </font>
+    <a onclick="changeDisplayType('list')"> List Display </a>
+  </div>
 
+  <div style="display:inline; float: right;">
+    <font color=#E5E5E5>Sort By: </font>
+    <%= link_to 'Newest', :sort => "created_at", :search => params[:search] %>
+    <font color=#E5E5E5> | </font>
+    <%= link_to 'Most Popular', :sort => "popularity", :search => params[:search] %>
+    <font color=#E5E5E5> | </font>
+    <%= link_to 'A-Z', :sort => "name", :search => params[:search] %>
+    <font color=#E5E5E5> | </font>
+    <%= link_to 'Z-A', :sort => "name_reverse", :search => params[:search] %>
+    <font color=#E5E5E5> | </font>
+    <%= link_to 'Recently Updated', :sort => "updated_at", :search => params[:search] %>
+  </div>
   <br>
   <br>
     <%= form_tag project_index_path, :method => 'get' do %>
@@ -28,6 +35,7 @@
     <% end %>
   <br>
   <%= paginate @projects %>
+  <div id="listDisplay" style="display:none;">
   <% @projects.each do |project| %>
     <div class="project">
       <div style="display: inline-block;">
@@ -70,4 +78,74 @@
     </div>
 
   <% end %>
+  </div>
+  <div id="blockDisplay" style="display:block; font-size: 0">
+    <% @projects.each do |project| %>
+      <% if project.avatar != nil %>
+        <% @image_url = project.avatar %>
+      <% else %>
+        <% @image_url = 'no_avatar.jpg' %>
+      <% end %>
+      <div class="project" style="display:inline-block; width:33%;
+      height:300px; background-image:linear-gradient(to top, rgba(0,0,0,0),
+      rgba(0,0,0,1)), url(<%=@image_url%>); background-position: center;
+      border-radius: 10px;">
+        <div style="display: inline-block; margin: 10px; font-size:16px;">
+          <%= link_to like_project_path(project), method: :put do %>
+            <span style="border-radius:5px; background:#59a86a; color:#131c29; display: inline-block; width:40px; text-align:left">
+              &nbsp;▲&nbsp;
+            <%=  project.get_upvotes.size  %></span>
+          <% end %>
+          <span style="border-radius:5px; display: block; width:40px;">
+            &nbsp;</span>
+        </div>
+        <div style="display: inline-block; padding-left: 1%; width: 50%">
+          <h2 class="title">
+            <%= link_to project.name, project %>
+          </h2>
+          <p class="date" style="display: inline">
+            Published
+            <%= time_ago_in_words(project.created_at) %>
+            ago by
+          </p>
+          <div id="thumbnail" style="display: inline;">
+            <% if project.user.resume != nil %>
+              <% if project.user.resume.avatar  != nil %>
+                <%= image_tag project.user.resume.avatar.standard.url %>
+              <% else %>
+                <%= image_tag('no_avatar.jpg', draggable: false) %>
+              <% end %>
+            <% else %>
+              <%= image_tag('no_avatar.jpg', draggable: false) %>
+            <% end %>
+            <h5 style="display: inline; font-size:16px;">
+              <% if project.user.resume == nil %>
+                <%= link_to project.user.email, user_resume_search_path(project.user) %>
+              <% else %>
+                <%= link_to project.user.resume.name, user_resume_search_path(project.user) %>
+              <% end %>
+            </h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<script>
+  var listDisplay = "none";
+  var blockDisplay = "none";
+  function changeDisplayType(message) {
+
+    if(message==="block"){
+      blockDisplay = "block";
+      listDisplay = "none";
+    }
+    else {
+      blockDisplay = "none";
+      listDisplay = "block";
+    }
+    document.getElementById("listDisplay").style.display = listDisplay;
+    document.getElementById("blockDisplay").style.display = blockDisplay;
+  }
+</script>
