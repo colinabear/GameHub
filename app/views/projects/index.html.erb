@@ -36,6 +36,7 @@
   <br>
   <%= paginate @projects %>
   <br>
+  <div></div>
   <div id="listDisplay" style="display:none;">
   <% @projects.each do |project| %>
     <div class="project">
@@ -80,7 +81,7 @@
 
   <% end %>
   </div>
-  <div id="blockDisplay" style="display:block; font-size: 0">
+  <div id="blockDisplay" style="display:block; font-size: 0px;">
     <% @projects.each do |project| %>
       <% if project.avatar != nil %>
         <% @image_url = project.avatar %>
