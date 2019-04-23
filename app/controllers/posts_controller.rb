@@ -11,9 +11,9 @@ class PostsController < ApplicationController
 		    elsif params[:sort] == 'created_at'
 		      @posts = @posts.order("created_at DESC")
 				elsif params[:sort] == 'name'
-					@posts = @posts.order("title ASC")
+					@posts = @posts.order("LOWER(title) ASC")
 				elsif params[:sort] == 'name_reverse'
-					@posts = @posts.order("title DESC")
+					@posts = @posts.order("LOWER(title) DESC")
 				elsif params[:sort] == 'popularity'
 					@posts = @posts.order(cached_votes_score: :desc)
 				else
@@ -26,9 +26,9 @@ class PostsController < ApplicationController
 				elsif params[:sort] == 'created_at'
 					@posts = @posts.all.order("created_at DESC")
 				elsif params[:sort] == 'name'
-					@posts = @posts.all.order("title ASC")
+					@posts = @posts.all.order("LOWER(title) ASC")
 				elsif params[:sort] == 'name_reverse'
-					@posts = @posts.all.order("title DESC")
+					@posts = @posts.all.order("LOWER(title) DESC")
 				elsif params[:sort] == 'popularity'
 					@posts = @posts.all.order(cached_votes_score: :desc)
 				else
