@@ -50,6 +50,7 @@ class TasksController < ApplicationController
     redirect_to project_path(@project)
   end
 
+# Task sorting and searching
   def index
     if params[:sorttype] == 'programming'
       @tasks = Task.where(:status => "todo").where(:job_type => "Programming").page params[:page]

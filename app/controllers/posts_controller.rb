@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 	helper_method :sort_direction
 
+# Post sorting and searching
 	def index
 		if params[:search]
 				@posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").page params[:page]
