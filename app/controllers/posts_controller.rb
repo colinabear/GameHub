@@ -5,32 +5,34 @@ class PostsController < ApplicationController
 
 	def index
 		if params[:search]
+				@posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").page params[:page]
   			if params[:sort] == 'updated_at'
-		      @posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("updated_at DESC").page params[:page]
+		      @posts = @posts.order("updated_at DESC")
 		    elsif params[:sort] == 'created_at'
-		      @posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("created_at DESC").page params[:page]
+		      @posts = @posts.order("created_at DESC")
 				elsif params[:sort] == 'name'
-					@posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("title ASC").page params[:page]
+					@posts = @posts.order("title ASC")
 				elsif params[:sort] == 'name_reverse'
-					@posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("title DESC").page params[:page]
+					@posts = @posts.order("title DESC")
 				elsif params[:sort] == 'popularity'
-					@posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order(cached_votes_score: :desc).page params[:page]
+					@posts = @posts.order(cached_votes_score: :desc)
 				else
-					@posts = Post.where('title LIKE ? OR content LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("created_at DESC").page params[:page]
+					@posts = @posts
 				end
 		else
+				@posts = Post.page params[:page]
 				if params[:sort] == 'updated_at'
-					@posts = Post.order("updated_at DESC").page params[:page]
+					@posts = @posts.all.order("updated_at DESC")
 				elsif params[:sort] == 'created_at'
-					@posts = Post.all.order("created_at DESC").page params[:page]
+					@posts = @posts.all.order("created_at DESC")
 				elsif params[:sort] == 'name'
-					@posts = Post.all.order("title ASC").page params[:page]
+					@posts = @posts.all.order("title ASC")
 				elsif params[:sort] == 'name_reverse'
-					@posts = Post.all.order("title DESC").page params[:page]
+					@posts = @posts.all.order("title DESC")
 				elsif params[:sort] == 'popularity'
-					@posts = Post.all.order(cached_votes_score: :desc).page params[:page]
+					@posts = @posts.all.order(cached_votes_score: :desc)
 				else
-					@posts = Post.all.order("created_at DESC").page params[:page]
+					@posts = @posts.all.order("created_at DESC")
 				end
 		end
 	end
