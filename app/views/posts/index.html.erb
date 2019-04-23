@@ -11,15 +11,15 @@
     </div>
   </div>
   <font color=#E5E5E5>Sort By: </font>
-  <%= link_to 'Newest', :sort => "created_at" %>
+  <%= link_to 'Newest', :sort => "created_at", :search => params[:search] %>
   <font color=#E5E5E5> | </font>
-  <%= link_to 'Most Popular', :sort => "popularity" %>
+  <%= link_to 'Most Popular', :sort => "popularity", :search => params[:search] %>
   <font color=#E5E5E5> | </font>
-  <%= link_to 'A-Z', :sort => "name" %>
+  <%= link_to 'A-Z', :sort => "name", :search => params[:search] %>
   <font color=#E5E5E5> | </font>
-  <%= link_to 'Z-A', :sort => "name_reverse" %>
+  <%= link_to 'Z-A', :sort => "name_reverse", :search => params[:search] %>
   <font color=#E5E5E5> | </font>
-  <%= link_to 'Recently Updated', :sort => "updated_at" %>
+  <%= link_to 'Recently Updated', :sort => "updated_at", :search => params[:search] %>
 <br>
 <br>
   <%= form_tag post_index_path, :method => 'get' do %>

@@ -33,6 +33,7 @@ class TasksController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
+    #check to see if task owner has any other tasks assigned
     @included = false
     @task.project.tasks.reverse_each do |task|
       if task.id != @task.id
@@ -41,6 +42,8 @@ class TasksController < ApplicationController
         end
       end
     end
+    #remove user from project team if they aren't the owner and their only task
+    #is being deleted
     if !@included && @project.user_id != current_user.id
       @array = @task.project.team_members
       @array.delete(@task.user_id)
@@ -50,86 +53,95 @@ class TasksController < ApplicationController
     redirect_to project_path(@project)
   end
 
+# Task sorting and searching
   def index
     if params[:sorttype] == 'programming'
+      @tasks = Task.where(:status => "todo").where(:job_type => "Programming").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Programming").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     elsif params[:sorttype] == 'music'
+      @tasks = Task.where(:status => "todo").where(:job_type => "Music").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Music").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     elsif params[:sorttype] == 'art'
+      @tasks = Task.where(:status => "todo").where(:job_type => "Art").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Art").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     elsif params[:sorttype] == 'story'
+      @tasks = Task.where(:status => "todo").where(:job_type => "Story").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Story").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     elsif params[:sorttype] == 'level'
+      @tasks = Task.where(:status => "todo").where(:job_type => "Level").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Level Design").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     elsif params[:sorttype] == 'puzzles'
+      @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Puzzles").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     elsif params[:sorttype] == 'misc'
+      @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").where(:job_type => "Miscellaneous").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     else
+      @tasks = Task.where(:status => "todo").page params[:page]
       if params[:sort] == 'updated_at'
-        @tasks = Task.where(:status => "todo").order("updated_at DESC").page params[:page]
+        @tasks = @tasks.order("updated_at ASC")
       elsif params[:sort] == 'name'
-        @tasks = Task.where(:status => "todo").order("title ASC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) DESC")
       elsif params[:sort] == 'name_reverse'
-        @tasks = Task.where(:status => "todo").order("title DESC").page params[:page]
+        @tasks = @tasks.order("LOWER(title) ASC")
       else
-        @tasks = Task.where(:status => "todo").order("created_at DESC").page params[:page]
+        @tasks = @tasks.order("created_at ASC")
       end
     end
   end
@@ -187,6 +199,7 @@ class TasksController < ApplicationController
 
   def request_task
     @task = Task.find(params[:task_id])
+    # add the current user to pending users array
     @array = @task.pending_users
     @array << current_user.id
     @task.update_attribute(:pending_users, @array)
@@ -196,12 +209,15 @@ class TasksController < ApplicationController
   def accept_user
     @task = Task.find(params[:task_id])
     @user = User.find(params[:user_id])
+    #give ownership of task to accepted user
     @task.user_id = @user.id
+    #update fields
     @task.accepted = true
     @task.status = "inProg"
     @user.tasks << @task
+    #check if accepted user is already in team members
     @array = @task.project.team_members
-    if !@array.include? @user.email
+    if !@array.include? @user.id
       @array << @user.id
       @task.project.update_attribute(:team_members, @array)
     end
@@ -214,6 +230,7 @@ class TasksController < ApplicationController
     @array.delete(@task.user.id)
     @task.update_attribute(:pending_users, @array)
     @included = false
+    #check to see if user is assigned to any other tasks in the project
     @task.project.tasks.reverse_each do |task|
       if task.id != @task.id
         if task.user_id == @task.user_id
@@ -221,11 +238,13 @@ class TasksController < ApplicationController
         end
       end
     end
+    #if the user has no other tasks, remove them from the team members
     if !@included
       @array = @task.project.team_members
       @array.delete(@task.user_id)
       @task.project.update_attribute(:team_members, @array)
     end
+    #give ownership of the task back to the project owner and reset fields
     @task.user_id = @task.project.user_id
     @task.update_attribute(:accepted, false)
     @task.update_attribute(:status, "todo")

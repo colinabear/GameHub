@@ -14,67 +14,68 @@
  *= require_self
  */
 
+// overall background styling for the site
 body {
 	font-family: 'Lato', sans-serif;
 	color:#E5E5E5;
 	background: #131c29;
 }
-
+// styling for the homepage
 header {
 	img{
 		width: 100%;
 	}
 }
-
+// remove asterisk from simple form labels
 abbr[title="required"] {
   display: none;
 }
-
+// style for the review number selection
 input[type="number"] {
 	background: #3F516B;
 	border: none;
 }
-
+// style for dropdown menus
 select{
 	margin: 10px;
 	border: none;
 	background: #3F516B;
 }
+// style for simple form submit button
 input[type=submit]{
 	background: #59a86a;
 }
-
+// general styling for simple form
 form{
 	border: none;
 }
-
+// styling for homepage image
 img {
 	width: 100%;
 	height: auto;
 	border-radius: 5px;
 }
-
+// style for icons
 i {
 	color: #59a86a;
 }
-
+// styling for links
 a:link, a:visited {
 	color: #59a86a;
 	text-decoration: none;
 }
-
 a:hover {
 	color: #3e764a;
 	text-decoration: none;
 }
-
+// styling for top navbar
 .header_wrapper {
 	width: 100%;
 	margin: 0 auto;
 	padding-left: 5%;
 	padding-right: 5%;
 }
-
+// styling for page wrapper
 .wrapper {
 	width: 100%;
 padding-left: 10%;
@@ -90,7 +91,7 @@ padding-right:10%;
 .clearfix:after {
 	clear: both;
 }
-
+// topnavbar styling
 .main_header {
 	font-family: 'Lato', sans-serif;
 	width: 100%;
@@ -119,7 +120,7 @@ padding-right:10%;
 		}
 	}
 }
-
+// styling for post index page
 #posts {
 	background: #192231;
 	padding: 2em 5%;
@@ -145,7 +146,7 @@ padding-right:10%;
 		}
 	}
 }
-
+// styling for post creation form
 #postForm{
 	textarea {
 	  width: 100%;
@@ -159,7 +160,7 @@ padding-right:10%;
 	  resize: none;
 	}
 }
-
+// general button styling
 a.button {
 	color: white;
 	border: none;
@@ -169,7 +170,7 @@ a.button {
 	text-decoration: none;
 	margin-right: 2%;
 }
-
+// styling for post show page
 #post_content {
 	background: #192231;
 	margin-top: .5%;
@@ -207,7 +208,7 @@ a.button {
 		text-decoration: none;
 		margin-right: 2%;
 	}
-
+	// styling for the comments
 	#comments {
 		.comment {
 			border-bottom: 1px solid #E5E5E5;
@@ -246,6 +247,7 @@ a.button {
 		}
 	}
 }
+//styling for project show page
 #project_content {
 	background: #192231;
 	margin-top: .5%;
@@ -278,7 +280,7 @@ a.button {
 		margin-right: 2%;
 	}
 }
-
+// styling for project index page
 #projects {
 				background: #192231;
 				padding: 2em 5%;
@@ -303,7 +305,7 @@ a.button {
 					}
 				}
 }
-
+// styling for project image
 #project-image {
 	margin-top: .5%;
 	text-align: center;
@@ -317,7 +319,7 @@ a.button {
 		box-shadow: 4px 4px 5px 0 #0b1018;
 	}
 }
-
+// styling for avatar on non-account pages
 #thumbnail {
 	margin-top: 1%;
 	img {
@@ -329,7 +331,7 @@ a.button {
 		vertical-align: middle;
 	}
 }
-
+// all rcorners are styles for the boxes on each pages
 #rcorners2-default {
 	box-sizing: border-box;
 	border-radius: 25px;

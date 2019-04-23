@@ -2,34 +2,37 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
+# Project sorting and searching
   def index
     if params[:search]
+        @projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").page params[:page]
   			if params[:sort] == 'updated_at'
-		      @projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("updated_at DESC").page params[:page]
+		      @projects = @projects.order("updated_at DESC")
 		    elsif params[:sort] == 'created_at'
-		      @projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("created_at DESC").page params[:page]
+		      @projects = @projects.order("created_at DESC")
 				elsif params[:sort] == 'name'
-					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("name ASC").page params[:page]
+					@projects = @projects.order("LOWER(name) ASC")
 				elsif params[:sort] == 'name_reverse'
-					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("name DESC").page params[:page]
+					@projects = @projects.order("LOWER(name) DESC")
 				elsif params[:sort] == 'popularity'
-					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order(cached_votes_score: :desc).page params[:page]
+					@projects = @projects.order(cached_votes_score: :desc)
 				else
-					@projects = Project.where('name LIKE ? OR description LIKE ? OR author LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%").order("created_at DESC").page params[:page]
+					@projects = @projects.order("created_at DESC")
 				end
 		else
+        @projects =  Project.all.page params[:page]
 				if params[:sort] == 'updated_at'
-					@projects = Project.all.order("updated_at DESC").page params[:page]
+					@projects = @projects.order("updated_at DESC")
 				elsif params[:sort] == 'created_at'
-					@projects = Project.all.order("created_at DESC").page params[:page]
+					@projects = @projects.order("created_at DESC")
 				elsif params[:sort] == 'name'
-					@projects = Project.all.order("name ASC").page params[:page]
+					@projects = @projects.order("LOWER(name) ASC")
 				elsif params[:sort] == 'name_reverse'
-					@projects = Project.all.order("name DESC").page params[:page]
+					@projects = @projects.order("LOWER(name) DESC")
 				elsif params[:sort] == 'popularity'
-					@projects = Project.all.order(cached_votes_score: :desc).page params[:page]
+					@projects = @projects.order(cached_votes_score: :desc)
 				else
-					@projects = Project.all.order("created_at DESC").page params[:page]
+					@projects = @projects.order("created_at DESC")
 				end
 		end
   end
@@ -74,6 +77,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    #before deleting project, destroy all tasks belonging to that project
     @project.tasks.reverse_each do |task|
       task.destroy
     end
