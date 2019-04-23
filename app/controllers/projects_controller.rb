@@ -77,6 +77,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    #before deleting project, destroy all tasks belonging to that project
     @project.tasks.reverse_each do |task|
       task.destroy
     end

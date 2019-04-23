@@ -33,6 +33,7 @@ class TasksController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
+    #check to see if task owner has any other tasks assigned
     @included = false
     @task.project.tasks.reverse_each do |task|
       if task.id != @task.id
@@ -41,6 +42,8 @@ class TasksController < ApplicationController
         end
       end
     end
+    #remove user from project team if they aren't the owner and their only task
+    #is being deleted
     if !@included && @project.user_id != current_user.id
       @array = @task.project.team_members
       @array.delete(@task.user_id)
@@ -196,6 +199,7 @@ class TasksController < ApplicationController
 
   def request_task
     @task = Task.find(params[:task_id])
+    # add the current user to pending users array
     @array = @task.pending_users
     @array << current_user.id
     @task.update_attribute(:pending_users, @array)
@@ -205,12 +209,15 @@ class TasksController < ApplicationController
   def accept_user
     @task = Task.find(params[:task_id])
     @user = User.find(params[:user_id])
+    #give ownership of task to accepted user
     @task.user_id = @user.id
+    #update fields
     @task.accepted = true
     @task.status = "inProg"
     @user.tasks << @task
+    #check if accepted user is already in team members
     @array = @task.project.team_members
-    if !@array.include? @user.email
+    if !@array.include? @user.id
       @array << @user.id
       @task.project.update_attribute(:team_members, @array)
     end
@@ -223,6 +230,7 @@ class TasksController < ApplicationController
     @array.delete(@task.user.id)
     @task.update_attribute(:pending_users, @array)
     @included = false
+    #check to see if user is assigned to any other tasks in the project
     @task.project.tasks.reverse_each do |task|
       if task.id != @task.id
         if task.user_id == @task.user_id
@@ -230,11 +238,13 @@ class TasksController < ApplicationController
         end
       end
     end
+    #if the user has no other tasks, remove them from the team members
     if !@included
       @array = @task.project.team_members
       @array.delete(@task.user_id)
       @task.project.update_attribute(:team_members, @array)
     end
+    #give ownership of the task back to the project owner and reset fields
     @task.user_id = @task.project.user_id
     @task.update_attribute(:accepted, false)
     @task.update_attribute(:status, "todo")

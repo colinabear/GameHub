@@ -68,6 +68,7 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
+		#before deleting post, delete all comments belonging to the post
 		@post.comments.each do |comment|
 			comment.destroy
 		end
