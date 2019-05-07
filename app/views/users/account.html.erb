@@ -91,17 +91,21 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <% @count += 1 %>
             <div style="display:<%=@percent%>;">
               <p><%=cat%> (<%= Task.where(:reviewed => true).where(:job_type => cat).where(:user => @user).length%>)</p>
-              <div class="w3-light-grey w3-round-xlarge w3-small">
-                <% if @percent.to_i < 30 %>
-                  <% @color = 'red' %>
-                <% elsif @percent.to_i >= 30 && @percent.to_i < 70 %>
-                  <% @color = 'yellow' %>
-                <% else %>
-                  <% @color = 'green' %>
-                <% end %>
-                <div class="w3-container w3-center w3-round-xlarge w3-<%=@color%>" style="width:<%=@percent%>%;">
-                  <div class="w3-center w3-text-black"><%=@percent%>%</div>
+              <div class="w3-light-grey w3-round-xlarge w3-small" style="position:relative;">
+                <% @gcolor = 1-(1-(@percent.to_f/100))*2 %>
+                <% @ycolor = 1-(1-2*(@percent.to_f/100)).abs %>
+                <% @rcolor = (1-(@percent.to_f/100)*2) %>
+                <div class="w3-light-grey w3-round-xlarge w3-small" style="position:absolute; width:100%;">&nbsp;</div>
+                <div class="w3-container w3-center w3-round-xlarge w3-green" style="width:<%=@percent%>%; opacity:<%=@gcolor%>; position: absolute;">
+                  &nbsp;
                 </div>
+                <div class="w3-container w3-center w3-round-xlarge w3-yellow" style="width:<%=@percent%>%; opacity:<%=@ycolor%>; position: absolute;">
+                  &nbsp;
+                </div>
+                <div class="w3-container w3-center w3-round-xlarge w3-red" style="width:<%=@percent%>%; opacity:<%=@rcolor%>; position: absolute;">
+                  &nbsp;
+                </div>
+                <div class="w3-center w3-text-black" style="position: absolute;">&nbsp;&nbsp;<%=@percent%>%</div>
               </div>
             </div>
           <% end %>
