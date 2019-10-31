@@ -1,24 +1,5 @@
-# README
+# GameHub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Project for LSU's CSC 3380 course, Object Oriented Design
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Built in Ruby on Rails using a PostgreSQL database, this website is meant to act as a forum where people can discuss indie game development, as well as a job board and project management site where people can collaborate with other small developers or free-lance developers and manage all the different people working on their project all in one place.
